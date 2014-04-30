@@ -11,7 +11,9 @@
 	<version>1.0</version>
 
 	<name>books-java-wrappers</name>
-	<url>http://git/zoho/books-java-wrappers.git</url>
+	<description>Java client library for Zoho Books API</description>
+	
+	<url>https://github.com/zoho/books-java-wrappers.git</url>
 
 	<organization>
 		<name>Zoho</name>
@@ -19,9 +21,9 @@
 	</organization>
 	
 	<scm>
-		<connection>scm:git@git:zoho/books-java-wrappers.git</connection>
-		<developerConnection>scm:git@git:zoho/books-java-wrappers.git</developerConnection>
-		<url>http://git/zoho/books-java-wrappers.git</url>
+		<connection>scm:git@github.com:zoho/books-java-wrappers.git</connection>
+		<developerConnection>scm:git@github.com:zoho/books-java-wrappers.git</developerConnection>
+		<url>https://github.com/zoho/books-java-wrappers.git</url>
 	</scm>
 
 	<dependencies>
