@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.CreditNoteParser;
 
@@ -97,15 +96,13 @@ import org.json.JSONArray;
 
 */
 
-public class CreditNotesApi
+public class CreditNotesApi extends API
 {
 	
 	
-	private static String url = BooksUtil.baseURL+"/creditnotes"; //No I18N
+	private static String url = baseURL+"/creditnotes"; //No I18N
 
-	private String authToken;
-	private String organizationId;
-	
+
 	/**
 	
 	* Construct a new CreditNotesApi using user's authtoken and organizationid.
@@ -118,8 +115,9 @@ public class CreditNotesApi
 
 	public CreditNotesApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -151,11 +149,7 @@ public class CreditNotesApi
 	public CreditNote create(String customerId, String accountId, String itemName)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		CreditNote creditNote = new CreditNote();
 		
@@ -208,19 +202,12 @@ public class CreditNotesApi
 	
 	public CreditNote create(CreditNote creditNote, HashMap paramMap)throws Exception
 	{	
-	
-		if(paramMap == null)
-		{
-			paramMap = new HashMap();
-		}
 		
-		paramMap.put("authtoken", authToken);
-		paramMap.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap(paramMap);
 		
+		requestBody.put("JSONString", creditNote.toJSON().toString());
 		
-		paramMap.put("JSONString", creditNote.toJSON().toString());
-		
-		String response = ZohoHTTPClient.post(url, paramMap);
+		String response = ZohoHTTPClient.post(url, requestBody);
 		
 		return creditNoteParser.getCreditNote(response);
 	} 
@@ -247,12 +234,7 @@ public class CreditNotesApi
 		
 		String urlString = url+"/"+creditNoteId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CreditNote creditNote = creditNoteParser.getCreditNote(response);
 		
@@ -287,18 +269,11 @@ public class CreditNotesApi
 		
 		String urlString = url+"/"+creditNote.getCreditnoteId();
 		
-		if(paramMap == null)
-		{
-			paramMap = new HashMap();
-		}
+		HashMap requestBody = getQueryMap(paramMap);
 		
-		paramMap.put("authtoken", authToken);
-		paramMap.put("organization_id", organizationId);
+		requestBody.put("JSONString", creditNote.toJSON().toString());
 		
-		
-		paramMap.put("JSONString", creditNote.toJSON().toString());
-		
-		String response = ZohoHTTPClient.put(urlString, paramMap);
+		String response = ZohoHTTPClient.put(urlString, requestBody);
 		
 		return creditNoteParser.getCreditNote(response);
 		
@@ -326,12 +301,7 @@ public class CreditNotesApi
 		
 		String urlString = url+"/"+creditNoteId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = creditNoteParser.getMessage(response);
 		
@@ -405,14 +375,8 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 	
 	public CreditNoteList getCreditNotes(HashMap queryMap)throws Exception
 	{
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
 			
-		String response = ZohoHTTPClient.get(url, queryMap);	
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));	
 		
 		CreditNoteList creditNoteList = creditNoteParser.getCreditNotes(response);
 		
@@ -450,11 +414,6 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/email"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
 		
 		if(paramMap == null)
 		{
@@ -470,7 +429,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		fileBody.put("attachments", files);
 		
 		
-		String response = ZohoHTTPClient.post(urlString, queryMap, paramMap, fileBody);	
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);	
 		
 		String success = creditNoteParser.getMessage(response);
 		
@@ -497,12 +456,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/emailhistory"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		EmailHistoryList emailHistory = creditNoteParser.getEmailHistory(response);
 		
@@ -535,15 +489,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/email"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);	
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));	
 		
 		Email email = creditNoteParser.getEmailContent(response);
 		
@@ -572,12 +518,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/status/open"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = creditNoteParser.getMessage(response);
 		
@@ -606,12 +547,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/status/void"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = creditNoteParser.getMessage(response);
 		
@@ -642,11 +578,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/address/billing"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 		
@@ -681,12 +613,8 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/address/shipping"; //No I18N
 		
-		HashMap requestBody = new HashMap();
+		HashMap requestBody = getQueryMap();
 		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-
 		requestBody.put("JSONString", shippingAddress.toJSON().put("is_update_customer", shippingAddress.isUpdateCustomer()).toString());
 		
 		String response = ZohoHTTPClient.put(urlString, requestBody);
@@ -712,12 +640,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/templates"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		TemplateList templateList = creditNoteParser.getTemplates(response);
 		
@@ -748,12 +671,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/templates/"+templateId; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, getQueryMap());
 		
 		String success = creditNoteParser.getMessage(response);
 		
@@ -788,10 +706,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/invoices"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -837,12 +752,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/invoices"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response  = ZohoHTTPClient.get(urlString, queryMap);
+		String response  = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		InvoicesCreditedList invoicesCredited = creditNoteParser.getInvoicesCredited(response);
 		
@@ -874,12 +784,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/invoices/"+creditnoteInvoiceId; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = creditNoteParser.getMessage(response);
 		
@@ -915,10 +820,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/refunds"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", creditnoteRefund.toJSON().toString());
 		
@@ -949,12 +851,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/refunds/"+creditnoteRefundId; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CreditnoteRefund creditnoteRefund = creditNoteParser.getCreditnoteRefund(response);
 		
@@ -986,11 +883,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/refunds/"+creditnoteRefund.getCreditnoteRefundId(); //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", creditnoteRefund.toJSON().toString());
 		
@@ -1023,12 +916,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/refunds/"+creditnoteRefundId; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = creditNoteParser.getMessage(response);
 		
@@ -1055,12 +943,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/refunds"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CreditnoteRefundList creditnoteRefundList = creditNoteParser.getRefunds(response);
 		
@@ -1103,16 +986,7 @@ Allowed Values: <i>refund_mode, reference_number, date, creditnote_number, custo
 		
 		String urlString = url+"/refunds"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
 		CreditnoteRefundList creditnoteRefundList = creditNoteParser.getRefunds(response);
 		
@@ -1146,10 +1020,7 @@ Allowed Values: <i>refund_mode, reference_number, date, creditnote_number, custo
 		
 		String urlString = url+"/"+creditNoteId+"/comments"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("description", description);
@@ -1183,12 +1054,7 @@ Allowed Values: <i>refund_mode, reference_number, date, creditnote_number, custo
 		
 		String urlString = url+"/"+creditNoteId+"/comments"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CommentList commentList = creditNoteParser.getComments(response);
 		
@@ -1220,12 +1086,7 @@ Allowed Values: <i>refund_mode, reference_number, date, creditnote_number, custo
 		
 		String urlString = url+"/"+creditNoteId+"/comments/"+commentId; //No I18N
 		 
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = creditNoteParser.getMessage(response);
 		

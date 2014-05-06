@@ -90,7 +90,10 @@ public class BankTransactionParser
 			{
 				Criteria criteria = new Criteria();
 				
-				criteria.setColumnName(searchCriteria.getJSONObject(i).getString("columnname"));
+				if(searchCriteria.getJSONObject(i).has("columnname"))
+				{
+					criteria.setColumnName(searchCriteria.getJSONObject(i).getString("columnname"));
+				}
 				criteria.setSearchText(searchCriteria.getJSONObject(i).getString("search_text"));
 				criteria.setComparator(searchCriteria.getJSONObject(i).getString("comparator"));
 				

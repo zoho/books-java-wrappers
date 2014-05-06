@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.RecurringInvoiceParser;
 
@@ -41,14 +40,11 @@ import java.util.HashMap;
 
 */
 
-public class RecurringInvoicesApi
+public class RecurringInvoicesApi extends API
 {
 	
-	private static String url = BooksUtil.baseURL+"/recurringinvoices"; //No I18N
+	private static String url = baseURL+"/recurringinvoices"; //No I18N
 
-	private String authToken;
-	private String organizationId;
-	
 	/**
 	
 	* Construct a new RecurringInvoicesApi using user's authtoken and organizationid.
@@ -61,8 +57,9 @@ public class RecurringInvoicesApi
 
 	public RecurringInvoicesApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -90,11 +87,7 @@ public class RecurringInvoicesApi
 	public RecurringInvoice create(RecurringInvoice recurringInvoice)throws Exception
 	{
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", recurringInvoice.toJSON().toString());
 		
@@ -123,12 +116,7 @@ public class RecurringInvoicesApi
 		
 		String urlString = url+"/"+recurringInvoiceId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		RecurringInvoice recurringInvoice = recurringInvoiceParser.getRecurringInvoice(response);
 		
@@ -157,11 +145,7 @@ public class RecurringInvoicesApi
 		
 		String urlString = url+"/"+recurringInvoice.getRecurringInvoiceId();
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", recurringInvoice.toJSON().toString());
 		
@@ -193,12 +177,7 @@ public class RecurringInvoicesApi
 		
 		String urlString = url+"/"+recurringInvoiceId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		String success = recurringInvoiceParser.getMessage(response);
 		
@@ -273,15 +252,7 @@ Allowed Values: <i>customer_name, recurrence_name, total, start_date, end_date, 
 	public RecurringInvoiceList getRecurringInvoices(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		RecurringInvoiceList recurringInvoiceList = recurringInvoiceParser.getRecurringInvoices(response);
 		
@@ -310,12 +281,7 @@ Allowed Values: <i>customer_name, recurrence_name, total, start_date, end_date, 
 		
 		String urlString = url+"/"+recurringInvoiceId+"/status/stop"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = recurringInvoiceParser.getMessage(response);
 		
@@ -344,12 +310,7 @@ Allowed Values: <i>customer_name, recurrence_name, total, start_date, end_date, 
 		
 		String urlString = url+"/"+recurringInvoiceId+"/status/resume"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = recurringInvoiceParser.getMessage(response);
 		
@@ -379,12 +340,7 @@ Allowed Values: <i>customer_name, recurrence_name, total, start_date, end_date, 
 	{
 		String urlString = url+"/"+recurringInvoiceId+"/templates/"+templateId; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, getQueryMap());
 		
 		String success = recurringInvoiceParser.getMessage(response);
 		
@@ -411,12 +367,7 @@ Allowed Values: <i>customer_name, recurrence_name, total, start_date, end_date, 
 		
 		String urlString = url+"/"+recurringInvoiceId+"/comments"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CommentList commentList = recurringInvoiceParser.getComments(response);
 		

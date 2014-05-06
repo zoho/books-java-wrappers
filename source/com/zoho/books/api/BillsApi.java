@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.BillParser;
 
@@ -72,14 +71,11 @@ import org.json.JSONArray;
 
 */
 
-public class BillsApi
+public class BillsApi extends API
 {
 
-	private static String url = BooksUtil.baseURL+"/bills"; //No I18N
+	private static String url = baseURL+"/bills"; //No I18N
 
-	private String authToken;
-	private String organizationId;
-	
 	/**
 	
 	* Construct a new BillsApi using user's authtoken and organizationid.
@@ -92,12 +88,11 @@ public class BillsApi
 
 	public BillsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
-	
-	//private ZohoHTTPClient ZohoHTTPClient = new ZohoHTTPClient();
 	
 	private BillParser billParser = new BillParser();
 	
@@ -125,10 +120,7 @@ public class BillsApi
 	public Bill create(String vendorId, String billNumber, String accountId)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		
 		Bill billObj = new Bill();
@@ -176,10 +168,7 @@ public class BillsApi
 	public Bill create(Bill bill)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", bill.toJSON().toString());
 		
@@ -211,11 +200,6 @@ public class BillsApi
 	public Bill create(Bill bill, File file)throws Exception
 	{
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
 		HashMap requestBody = new HashMap();
 		
 		requestBody.put("JSONString", bill.toJSON().toString());
@@ -223,7 +207,7 @@ public class BillsApi
 		HashMap fileBody = new HashMap();
 		fileBody.put("attachment", file);
 		
-		String response = ZohoHTTPClient.post(url, queryMap, requestBody, fileBody);
+		String response = ZohoHTTPClient.post(url, getQueryMap(), requestBody, fileBody);
 		
 		return billParser.getBill(response);
 		
@@ -249,12 +233,7 @@ public class BillsApi
 		
 		String urlString = url+"/"+billId; 
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Bill bill = billParser.getBill(response);
 		
@@ -283,10 +262,7 @@ public class BillsApi
 		
 		String urlString = url+"/"+bill.getBillId(); 
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", bill.toJSON().toString());
 		
@@ -319,11 +295,6 @@ public class BillsApi
 		
 		String urlString = url+"/"+bill.getBillId(); 
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
 		HashMap requestBody = new HashMap();
 		
 		requestBody.put("JSONString", bill.toJSON().toString());
@@ -332,7 +303,7 @@ public class BillsApi
 		
 		fileBody.put("attachment", file);
 		
-		String response = ZohoHTTPClient.put(urlString, queryMap, requestBody, fileBody);
+		String response = ZohoHTTPClient.put(urlString, getQueryMap(), requestBody, fileBody);
 		
 		return billParser.getBill(response);
 	}
@@ -359,12 +330,7 @@ public class BillsApi
 		
 		String urlString = url+"/"+billId; 
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = billParser.getMessage(response);
 		
@@ -431,15 +397,8 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 	public BillList getBills(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
 		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		BillList billList = billParser.getBills(response);
 		
@@ -468,12 +427,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/status/void";  //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = billParser.getMessage(response);
 		
@@ -502,12 +456,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/status/open";  //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = billParser.getMessage(response);
 		
@@ -538,10 +487,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/address/billing";  //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 	
@@ -577,12 +523,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/payments";  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		PaymentList payments = billParser.getPayments(response);
 		
@@ -615,10 +556,8 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/credits";  //No I18N
 		
-		HashMap requestBody = new HashMap();
+		HashMap requestBody = getQueryMap();
 		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -668,12 +607,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/payments/"+billPaymentId;  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = billParser.getMessage(response);
 		
@@ -704,12 +638,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/attachment";  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		File file = ZohoHTTPClient.getFile(urlString, queryMap);
+		File file = ZohoHTTPClient.getFile(urlString, getQueryMap());
 		
 		return file;
 	}	
@@ -738,18 +667,12 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/attachment";  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		
 		HashMap fileBody = new HashMap();
 		
 		fileBody.put("attachment", file);
 		
 
-		String response = ZohoHTTPClient.post(urlString, queryMap, null, fileBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), null, fileBody);
 
 		String success = billParser.getMessage(response);
 		
@@ -779,12 +702,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/attachment";  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = billParser.getMessage(response);
 		
@@ -816,12 +734,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/comments";  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CommentList commentList = billParser.getComments(response);
 		
@@ -850,10 +763,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/comments";  //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -892,12 +802,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/comments"+commentId;  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = billParser.getMessage(response);
 		

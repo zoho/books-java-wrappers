@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.ExpenseParser;
 
@@ -42,13 +41,11 @@ import java.util.HashMap;
 
 */
 
-public class ExpensesApi
+public class ExpensesApi extends API
 {
 	
-	private static String url = BooksUtil.baseURL+"/expenses"; //No I18N
+	private static String url = baseURL+"/expenses"; //No I18N
 
-	private String authToken;
-	private String organizationId;
 	
 	/**
 	
@@ -62,8 +59,9 @@ public class ExpensesApi
 
 	public ExpensesApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -93,17 +91,13 @@ public class ExpensesApi
 	public Expense create(String accountId, String paidThroughAccountId, double amount)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		Expense expense = new Expense();
 		
 		expense.setAccountId(accountId);
 		expense.setPaidThroughAccountId(paidThroughAccountId);
 		expense.setAmount(amount);
-		
 		
 		requestBody.put("JSONString", expense.toJSON().toString());
 		
@@ -132,10 +126,7 @@ public class ExpensesApi
 	public Expense create(Expense expense)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", expense.toJSON().toString());
 		
@@ -166,12 +157,6 @@ public class ExpensesApi
 	public Expense create(Expense expense, File file)throws Exception
 	{
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		
 		HashMap requestBody = new HashMap();
 		
 		requestBody.put("JSONString", expense.toJSON().toString());
@@ -181,7 +166,7 @@ public class ExpensesApi
 		fileBody.put("receipt", file);
 		
 		
-		String response = ZohoHTTPClient.post(url, queryMap, requestBody, fileBody);
+		String response = ZohoHTTPClient.post(url, getQueryMap(), requestBody, fileBody);
 		
 		return expenseParser.getExpense(response);
 	}
@@ -206,12 +191,7 @@ public class ExpensesApi
 		
 		String urlString = url+"/"+expenseId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Expense expense = expenseParser.getExpense(response);
 		
@@ -240,10 +220,7 @@ public class ExpensesApi
 		
 		String urlString = url+"/"+expense.getExpenseId();
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", expense.toJSON().toString());
 		
@@ -276,12 +253,6 @@ public class ExpensesApi
 		
 		String urlString = url+"/"+expense.getExpenseId();
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		
 		HashMap requestBody = new HashMap();
 		
 		requestBody.put("JSONString", expense.toJSON().toString());
@@ -291,7 +262,7 @@ public class ExpensesApi
 		fileBody.put("receipt", file);
 		
 		
-		String response = ZohoHTTPClient.put(urlString, queryMap, requestBody, fileBody);
+		String response = ZohoHTTPClient.put(urlString, getQueryMap(), requestBody, fileBody);
 		
 		return expenseParser.getExpense(response);
 	}
@@ -318,12 +289,7 @@ public class ExpensesApi
 		
 		String urlString = url+"/"+expenseId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = expenseParser.getMessage(response);
 		
@@ -397,15 +363,7 @@ Allowed Values: <i>date, account_name, paid_through_account_name, total, bcy_tot
 	public ExpenseList getExpesnses(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		ExpenseList expenseList = expenseParser.getExpenses(response);
 		
@@ -432,12 +390,7 @@ Allowed Values: <i>date, account_name, paid_through_account_name, total, bcy_tot
 		
 		String urlString = url+"/"+expenseId+"/comments"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CommentList commentList = expenseParser.getComments(response);
 		
@@ -472,17 +425,11 @@ Allowed Values: <i>date, account_name, paid_through_account_name, total, bcy_tot
 		
 		String urlString = url+"/"+expenseId+"/receipt"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		
 		HashMap fileBody = new HashMap();
 		
 		fileBody.put("receipt", file);
 		
-		String response = ZohoHTTPClient.post(urlString, queryMap, null, fileBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), null, fileBody);
 		
 		String success = expenseParser.getMessage(response);
 		
@@ -510,12 +457,7 @@ Allowed Values: <i>date, account_name, paid_through_account_name, total, bcy_tot
 		
 		String urlString = url+"/"+expenseId+"/receipt"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		File response = ZohoHTTPClient.getFile(urlString, queryMap);
+		File response = ZohoHTTPClient.getFile(urlString, getQueryMap());
 		
 		return response;
 	}
@@ -542,12 +484,7 @@ Allowed Values: <i>date, account_name, paid_through_account_name, total, bcy_tot
 		
 		String urlString = url+"/"+expenseId+"/receipt"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = expenseParser.getMessage(response);
 		

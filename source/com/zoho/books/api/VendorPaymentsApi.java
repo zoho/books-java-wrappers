@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.VendorPaymentParser;
 
@@ -29,12 +28,11 @@ import java.util.HashMap;
 
 */
 
-public class VendorPaymentsApi
+public class VendorPaymentsApi extends API
 {
-	private static String url = BooksUtil.baseURL+"/vendorpayments"; //No I18N
+	
+	private static String url = baseURL+"/vendorpayments"; //No I18N
 
-	private String authToken;
-	private String organizationId;
 	
 	/**
 	
@@ -48,8 +46,9 @@ public class VendorPaymentsApi
 
 	public VendorPaymentsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -76,11 +75,7 @@ public class VendorPaymentsApi
 	public VendorPayment create(VendorPayment vendorPayment)throws Exception
 	{
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", vendorPayment.toJSON().toString());
 		
@@ -109,12 +104,7 @@ public class VendorPaymentsApi
 		
 		String urlString = url+"/"+paymentId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		VendorPayment vendorPayment = vendorPaymentParser.getVendorPayment(response);
 		
@@ -143,11 +133,7 @@ public class VendorPaymentsApi
 		
 		String urlString = url+"/"+vendorPayment.getPaymentId();
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", vendorPayment.toJSON().toString());
 		
@@ -178,12 +164,7 @@ public class VendorPaymentsApi
 		
 		String urlString = url+"/"+paymentId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = vendorPaymentParser.getMessage(response);
 		
@@ -248,15 +229,7 @@ Allowed Values: <i>vendor_name, date, reference_number, amount and balance</i></
 	public VendorPaymentList getVendorPayments(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		VendorPaymentList vendorPaymentList = vendorPaymentParser.getVendorPayments(response);
 		

@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.ProjectParser;
 
@@ -98,12 +97,10 @@ import org.json.JSONArray;
 
 */
 
-public class ProjectsApi
+public class ProjectsApi extends API
 {
-	private static String url = BooksUtil.baseURL+"/projects"; //No I18N
+	private static String url = baseURL+"/projects"; //No I18N
 
-	private String authToken;
-	private String organizationId;
 	
 	/**
 	
@@ -117,8 +114,9 @@ public class ProjectsApi
 
 	public ProjectsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -159,15 +157,8 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 	
 	public ProjectList getProjects(HashMap queryMap)throws Exception
 	{
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
 		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		ProjectList projectList = projectParser.getProjects(response);
 		
@@ -194,12 +185,7 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 	{
 		String urlString = url+"/"+projectId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Project projects = projectParser.getProject(response);
 		
@@ -226,11 +212,7 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 	
 	public Project create(Project project)throws Exception
 	{
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", project.toJSON().toString());
 		
@@ -263,11 +245,7 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 		
 		String urlString = url+"/"+project.getProjectId();
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", project.toJSON().toString());
 		
@@ -299,12 +277,7 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 		
 		String urlString = url+"/"+projectId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = projectParser.getMessage(response);
 		
@@ -334,12 +307,7 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 		
 		String urlString = url+"/"+projectId+"/active"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = projectParser.getMessage(response);
 		
@@ -369,12 +337,7 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 		
 		String urlString = url+"/"+projectId+"/inactive"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = projectParser.getMessage(response);
 		
@@ -406,10 +369,7 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 		
 		String urlString = url+"/"+projectId+"/clone"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -463,15 +423,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/tasks"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
 		TaskList taskList = projectParser.getTasks(response);
 		
@@ -503,11 +455,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/tasks"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", task.toJSON().toString());
 		
@@ -539,12 +487,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/tasks/"+taskId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Task task = projectParser.getTask(response);
 		
@@ -576,11 +519,8 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/tasks/"+task.getTaskId(); //No I18N
 		
-		HashMap	requestBody = new HashMap();
+		HashMap	requestBody = getQueryMap();
 		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-
 		requestBody.put("JSONString", task.toJSON().toString());
 		
 		String response = ZohoHTTPClient.put(urlString, requestBody);
@@ -613,12 +553,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/tasks/"+taskId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = projectParser.getMessage(response);
 		
@@ -651,12 +586,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/users"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		UserList userList = projectParser.getUsers(response);
 		
@@ -686,12 +616,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/users/"+userId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		User user = projectParser.getUser(response);
 		
@@ -723,10 +648,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/users"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -776,11 +698,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/users/invite"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", user.toJSON().toString());
 		
@@ -814,10 +732,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/users/"+user.getUserId(); //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", user.toJSON().toString());
 		
@@ -851,12 +766,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/users/"+userId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = projectParser.getMessage(response);
 		
@@ -910,15 +820,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 		
 		String urlString = url+"/timeentries"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
 		TimeEntryList timeEntryList = projectParser.getTimeEntries(response);
 		
@@ -948,11 +850,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 		
 		String urlString = url+"/timeentries"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", timeEntry.toJSON().toString());
 		
@@ -983,12 +881,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 		
 		String urlString = url+"/timeentries/"+timeEntryId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		TimeEntry timeEntry = projectParser.getTimeEntry(response);
 		
@@ -1018,11 +911,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 		
 		String urlString = url+"/timeentries/"+timeEntry.getTimeEntryId(); //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", timeEntry.toJSON().toString());
 		
@@ -1055,12 +944,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 		
 		String urlString = url+"/timeentries/"+timeEntryId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = projectParser.getMessage(response);
 		
@@ -1094,15 +978,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 		
 		String urlString = url+"/timeentries"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(queryMap));
 		
 		String success = projectParser.getMessage(response);
 		
@@ -1130,12 +1006,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 		
 		String urlString = url+"/timeentries/"+timeEntryId+"/timer/start"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		TimeEntry timeEntry = projectParser.getTimeEntry(response);
 		
@@ -1161,12 +1032,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 		
 		String urlString = url+"/timeentries/timer/stop"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		TimeEntry timeEntry = projectParser.getTimeEntry(response);
 		
@@ -1198,12 +1064,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 		
 		String urlString = url+"/"+projectId+"/comments"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CommentList commentList = projectParser.getComments(response);
 		
@@ -1233,10 +1094,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 	{
 		String urlString = url+"/"+projectId+"/comments"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -1275,12 +1133,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 	{
 		String urlString = url+"/"+projectId+"/comments/"+commentId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = projectParser.getMessage(response);
 		
@@ -1325,15 +1178,7 @@ Allowed Values: <i>invoice_number, date, total, balance</i> and <i>created_time<
 		
 		String urlString = url+"/"+projectId+"/invoices"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
 		InvoiceList invoiceList = projectParser.getInvoices(response);
 		

@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.ContactParser;
 
@@ -27,13 +26,11 @@ import java.util.HashMap;
 
 */
 
-public class ContactPersonsApi
+public class ContactPersonsApi extends API
 {
-	private static String url = BooksUtil.baseURL+"/contacts"; //No I18N
+	private static String url = baseURL+"/contacts"; //No I18N
 
-	private String authToken;
-	private String organizationId;
-	
+
 	/**
 	
 	* Construct a new ContactPersonsApi using user's authtoken and organizationid.
@@ -46,8 +43,9 @@ public class ContactPersonsApi
 
 	public ContactPersonsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -76,11 +74,7 @@ public class ContactPersonsApi
 		
 		String urlString = url+"/contactpersons"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", contactPerson.toJSON().toString());
 		
@@ -109,12 +103,7 @@ public class ContactPersonsApi
 		
 		String urlString = url+"/contactpersons/"+contactPersonId;  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		ContactPerson contactPerson = contactParser.getContactPerson(response);
 		
@@ -143,11 +132,7 @@ public class ContactPersonsApi
 		
 		String urlString = url+"/contactpersons/"+contactPerson.getContactPersonId(); //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", contactPerson.toJSON().toString());
 		
@@ -178,12 +163,7 @@ public class ContactPersonsApi
 		
 		String urlString = url+"/contactpersons/"+contactPersonId; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = contactParser.getMessage(response);
 		
@@ -212,12 +192,7 @@ public class ContactPersonsApi
 		
 		String urlString = url+"/contactpersons/"+contactPersonId+"/primary"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = contactParser.getMessage(response);
 		
@@ -244,12 +219,7 @@ public class ContactPersonsApi
 		
 		String urlString = url+"/"+contactId+"/contactpersons"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		ContactPersonList contactPersonList = contactParser.getContactPersons(response);
 		

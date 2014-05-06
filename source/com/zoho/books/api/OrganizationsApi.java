@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.SettingsParser;
 
@@ -23,11 +22,10 @@ import java.util.HashMap;
 
 */
 
-public class OrganizationsApi
+public class OrganizationsApi extends API
 {
-	private static String url = BooksUtil.baseURL+"/organizations"; //No I18N
+	private static String url = baseURL+"/organizations"; //No I18N
 
-	private String authToken;
 	
 	/**
 	
@@ -39,7 +37,9 @@ public class OrganizationsApi
 
 	public OrganizationsApi(String authToken)
 	{
-		this.authToken = authToken;
+		
+		super(authToken, "");
+		
 	}
 	
 	
@@ -59,11 +59,7 @@ public class OrganizationsApi
 	public OrganizationList getOrganizations()throws Exception
 	{
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap());
 		
 		OrganizationList organizationList = settingsParser.getOrganizations(response);
 		
@@ -90,11 +86,7 @@ public class OrganizationsApi
 		
 		String urlString = url+"/"+organizationid;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Organization organization = settingsParser.getOrganization(response);
 		
@@ -121,10 +113,7 @@ public class OrganizationsApi
 	public Organization create(Organization organization)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", organization.toJSON().toString());
 		
@@ -155,10 +144,7 @@ public class OrganizationsApi
 		
 		String urlString = url+"/"+organization.getOrganizationId();
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", organization.toJSON().toString());
 		

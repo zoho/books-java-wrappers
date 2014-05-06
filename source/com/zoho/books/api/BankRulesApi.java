@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.BankRuleParser;
 
@@ -30,14 +29,10 @@ import java.util.HashMap;
 
 */
 
-public class BankRulesApi
+public class BankRulesApi extends API
 {
 	
-	private static String url = BooksUtil.baseURL+"/bankaccounts/rules"; //No I18N
-	
-	private String authToken;
-	
-	private String organizationId; 
+	private static String url = baseURL+"/bankaccounts/rules"; //No I18N
 	
 	
 	/**
@@ -52,9 +47,9 @@ public class BankRulesApi
 	
 	public BankRulesApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
 		
-		this.organizationId = organizationId;
+		super(authToken, organizationId);
+		
 	}
 	
 	private BankRuleParser bankRuleParser = new BankRuleParser();
@@ -78,15 +73,12 @@ public class BankRulesApi
 	
 	public RuleList getRules(String accountId)throws Exception
 	{
-		HashMap queryMap = new HashMap();
+		HashMap queryMap = getQueryMap();
 		
 		if(accountId != null)
 		{
 			queryMap.put("account_id", accountId);
 		} 
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
 		
 		String response = ZohoHTTPClient.get(url, queryMap);
 		
@@ -114,12 +106,7 @@ public class BankRulesApi
 	{
 		String urlString = url+"/"+ruleId;
 	
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Rule rule = bankRuleParser.getRule(response); 
 		
@@ -145,10 +132,7 @@ public class BankRulesApi
 	
 	public Rule create(Rule rule)throws Exception
 	{
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", rule.toJSON().toString());
 		
@@ -178,10 +162,7 @@ public class BankRulesApi
 	{
 		String urlString = url+"/"+rule.getRuleId();
 	
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", rule.toJSON().toString());
 		
@@ -211,12 +192,7 @@ public class BankRulesApi
 	{
 		String urlString = url+"/"+ruleId;
 	
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String message = bankRuleParser.getMessage(response); 
 		

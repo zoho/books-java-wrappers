@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.CustomerPaymentParser;
 
@@ -30,13 +29,10 @@ import org.json.JSONObject;
 
 */
 
-public class CustomerPaymentsApi
+public class CustomerPaymentsApi extends API
 {
-	private static String url = BooksUtil.baseURL+"/customerpayments"; //No I18N
+	private static String url = baseURL+"/customerpayments"; //No I18N
 
-	private String authToken;
-	private String organizationId;
-	
 	/**
 	
 	* Construct a new CustomerPaymentsApi using user's authtoken and organizationid.
@@ -49,8 +45,9 @@ public class CustomerPaymentsApi
 
 	public CustomerPaymentsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -78,11 +75,7 @@ public class CustomerPaymentsApi
 	public CustomerPayment create(CustomerPayment customerPayment)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", customerPayment.toJSON().toString());
 		
@@ -111,12 +104,7 @@ public class CustomerPaymentsApi
 		
 		String urlString = url+"/"+paymentId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CustomerPayment customerPayment = customerPaymentParser.getCustomerPayment(response);
 		
@@ -144,11 +132,7 @@ public class CustomerPaymentsApi
 	{
 		String urlString = url+"/"+customerPayment.getPaymentId();
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", customerPayment.toJSON().toString());
 		
@@ -179,12 +163,7 @@ public class CustomerPaymentsApi
 		
 		String urlString = url+"/"+paymentId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		JSONObject jsonObject = new JSONObject(response.trim());
 		
@@ -251,15 +230,7 @@ Allowed Values: <i>customer_name, unused_amount, amount, bcy_amount, date, refer
 	public CustomerPaymentList getCustomerPayments(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		CustomerPaymentList customerPaymentList = customerPaymentParser.getCustomerPayments(response);
 		

@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.BaseCurrencyAdjustmentParser;
 
@@ -29,14 +28,11 @@ import java.util.HashMap;
 
 */
 
-public class BaseCurrencyAdjustmentsApi
+public class BaseCurrencyAdjustmentsApi extends API
 {
 	
-	private static String url = BooksUtil.baseURL+"/basecurrencyadjustment"; //No I18N
+	private static String url = baseURL+"/basecurrencyadjustment"; //No I18N
 
-	private String authToken;
-	private String organizationId;
-	
 	/**
 	
 	* Construct a new BaseCurrencyAdjustmentsApi using user's authtoken and organizationid.
@@ -49,8 +45,9 @@ public class BaseCurrencyAdjustmentsApi
 
 	public BaseCurrencyAdjustmentsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -90,10 +87,9 @@ public class BaseCurrencyAdjustmentsApi
 		
 		String urlString = url+"/accounts"; //No I18N
 		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		System.out.print(response);
 		
 		BaseCurrencyAdjustment baseCurrencyAdjustment = baseCurrencyAdjustmentParser.getBaseCurrencyAdjustment(response);
 		
@@ -131,17 +127,11 @@ public class BaseCurrencyAdjustmentsApi
 	public BaseCurrencyAdjustment create(HashMap paramMap, BaseCurrencyAdjustment baseCurrencyAdjustment)throws Exception
 	{
 		
-		if(paramMap == null)
-		{
-			paramMap = new HashMap();
-		}
+		HashMap requestBody = getQueryMap(paramMap);
 		
-		paramMap.put("authtoken", authToken);
-		paramMap.put("organization_id", organizationId);
+		requestBody.put("JSONString", baseCurrencyAdjustment.toJSON().toString());
 		
-		paramMap.put("JSONString", baseCurrencyAdjustment.toJSON().toString());
-		
-		String response = ZohoHTTPClient.post(url, paramMap);
+		String response = ZohoHTTPClient.post(url, requestBody);
 		
 		return baseCurrencyAdjustmentParser.getBaseCurrencyAdjustment(response);
 	}
@@ -166,12 +156,7 @@ public class BaseCurrencyAdjustmentsApi
 		
 		String urlString = url+"/"+baseCurrencyAdjustmentId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		BaseCurrencyAdjustment baseCurrencyAdjustment = baseCurrencyAdjustmentParser.getBaseCurrencyAdjustment(response);
 		
@@ -200,12 +185,7 @@ public class BaseCurrencyAdjustmentsApi
 		
 		String urlString = url+"/"+baseCurrencyAdjustmentId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(url, queryMap);
+		String response = ZohoHTTPClient.delete(url, getQueryMap());
 		
 		String success = baseCurrencyAdjustmentParser.getMessage(response);
 		
@@ -243,15 +223,7 @@ Allowed Values: <i>adjustment_date, exchange_rate, currency_code, debit_or_credi
 	public BaseCurrencyAdjustmentList getBaseCurrencyAdjustments(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		BaseCurrencyAdjustmentList baseCurrencyAdjustmentList = baseCurrencyAdjustmentParser.getBaseCurrencyAdjustments(response);
 		

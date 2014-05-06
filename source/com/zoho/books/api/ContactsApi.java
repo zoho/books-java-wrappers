@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.ContactParser;
 
@@ -60,13 +59,11 @@ import java.io.File;
 */
 
 
-public class ContactsApi
+public class ContactsApi extends API
 {
-	private static String url = BooksUtil.baseURL+"/contacts"; //No I18N
-
-	private String authToken;
-	private String organizationId;
 	
+	private static String url = baseURL+"/contacts"; //No I18N
+
 	/**
 	
 	* Construct a new ContactsApi using user's authtoken and organizationid.
@@ -79,8 +76,9 @@ public class ContactsApi
 
 	public ContactsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+			
+			super(authToken, organizationId);
+			
 	}
 	
 	
@@ -108,16 +106,12 @@ public class ContactsApi
 	public Contact create(String contactName, String currencyId)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		Contact contact = new Contact();
 		
 		contact.setContactName(contactName);
 		contact.setCurrencyId(currencyId);
-		
 		
 		requestBody.put("JSONString", contact.toJSON().toString());
 		
@@ -146,10 +140,7 @@ public class ContactsApi
 	public Contact create(Contact contact)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", contact.toJSON().toString());
 		
@@ -179,12 +170,7 @@ public class ContactsApi
 		
 		String urlString = url+"/"+contactId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Contact contact = contactParser.getContact(response);
 		
@@ -213,10 +199,7 @@ public class ContactsApi
 		
 		String urlString = url+"/"+contact.getContactId();
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", contact.toJSON().toString());
 		
@@ -247,12 +230,7 @@ public class ContactsApi
 		
 		String urlString = url+"/"+contactId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = contactParser.getMessage(response);
 		
@@ -313,15 +291,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 	public ContactList getContacts(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		ContactList contactList = contactParser.getContacts(response);
 		
@@ -350,12 +320,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 		
 		String urlString = url+"/"+contactId+"/active"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = contactParser.getMessage(response);
 		
@@ -384,12 +349,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 		
 		String urlString = url+"/"+contactId+"/inactive"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = contactParser.getMessage(response);
 		
@@ -418,12 +378,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 		
 		String urlString = url+"/"+contactId+"/paymentreminder/enable"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = contactParser.getMessage(response);
 		
@@ -452,12 +407,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 		
 		String urlString = url+"/"+contactId+"/paymentreminder/disable"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = contactParser.getMessage(response);
 		
@@ -497,17 +447,12 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 	{
 		
 		String urlString = url+"/"+contactId+"/statements/email"; //No I18N
+		
 		if(paramMap == null)
 		{
 			paramMap = new HashMap();
 		}
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-
 		paramMap.put("JSONString", email.toJSON().toString());
 		
 		ArrayList<File> files = email.getAttachments();
@@ -515,7 +460,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 		HashMap fileBody = new HashMap(files.size());
 		fileBody.put("attachments", files);
 		
-		String response = ZohoHTTPClient.post(urlString, queryMap, paramMap, fileBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
 		
 		String success = contactParser.getMessage(response);
 		
@@ -554,15 +499,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 		
 		String urlString = url+"/"+contactId+"/statements/email"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
 		Email email = contactParser.getEmailContent(response);
 		
@@ -606,12 +543,6 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 			paramMap = new HashMap();
 		}
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		
 		paramMap.put("JSONString", email.toJSON().toString());
 		
 		ArrayList<File> files = email.getAttachments();
@@ -620,7 +551,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 		
 		fileBody.put("attachments", files);
 		
-		String response = ZohoHTTPClient.post(urlString, queryMap, paramMap, fileBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
 		
 		String success = contactParser.getMessage(response);
 		
@@ -647,12 +578,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 		
 		String urlString = url+"/"+contactId+"/refunds"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CreditnoteRefundList creditnoteRefundList = contactParser.getRefunds(response);
 		
@@ -679,12 +605,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 		
 		String urlString = url+"/"+contactId+"/comments"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CommentList commentList = contactParser.getComments(response);
 		
@@ -713,12 +634,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 	{
 		String urlString = url+"/"+contactId+"/track1099";  //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = contactParser.getMessage(response);
 		
@@ -746,12 +662,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 	{
 		String urlString = url+"/"+contactId+"/untrack1099"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = contactParser.getMessage(response);
 		

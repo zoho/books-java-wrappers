@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.EstimateParser;
 
@@ -71,14 +70,11 @@ import org.json.JSONObject;
 
 */
 
-public class EstimatesApi
+public class EstimatesApi extends API
 {
 	
-	private static String url = BooksUtil.baseURL+"/estimates"; //No I18N
+	private static String url = baseURL+"/estimates"; //No I18N
 
-	private String authToken;
-	private String organizationId;
-	
 	/**
 	
 	* Construct a new EstimatesApi using user's authtoken and organizationid.
@@ -91,8 +87,9 @@ public class EstimatesApi
 
 	public EstimatesApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -119,12 +116,9 @@ public class EstimatesApi
 	public Estimate create(String customerId, String itemName)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
+		HashMap requestBody = getQueryMap();
 		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		
+
 		Estimate estimateObj = new Estimate();
 		
 		estimateObj.setCustomerId(customerId);
@@ -179,18 +173,11 @@ public class EstimatesApi
 	public Estimate create(Estimate estimate, HashMap paramMap)throws Exception
 	{
 		
-		if(paramMap == null)
-		{
-			paramMap = new HashMap();
-		}
+		HashMap requestBody = getQueryMap(paramMap);
 		
-		paramMap.put("authtoken", authToken);
-		paramMap.put("organization_id", organizationId);
+		requestBody.put("JSONString", estimate.toJSON().toString());
 		
-		
-		paramMap.put("JSONString", estimate.toJSON().toString());
-		
-		String response = ZohoHTTPClient.post(url, paramMap);
+		String response = ZohoHTTPClient.post(url, requestBody);
 		
 		return estimateParser.getEstimate(response);
 	}
@@ -215,12 +202,7 @@ public class EstimatesApi
 		
 		String urlString = url+"/"+estimateId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Estimate estimate = estimateParser.getEstimate(response);
 		
@@ -258,18 +240,11 @@ public class EstimatesApi
 		
 		String urlString = url+"/"+estimate.getEstimateId();
 		
-		if(paramMap == null)
-		{
-			paramMap = new HashMap();
-		}
+		HashMap requestBody = getQueryMap(paramMap);
 		
-		paramMap.put("authtoken", authToken);
-		paramMap.put("organization_id", organizationId);
+		requestBody.put("JSONString", estimate.toJSON().toString());
 		
-		
-		paramMap.put("JSONString", estimate.toJSON().toString());
-		
-		String response = ZohoHTTPClient.put(urlString, paramMap);
+		String response = ZohoHTTPClient.put(urlString, requestBody);
 		
 		return estimateParser.getEstimate(response);
 	}
@@ -296,12 +271,7 @@ public class EstimatesApi
 		
 		String urlString = url+"/"+estimateId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = estimateParser.getMessage(response);
 		
@@ -378,15 +348,8 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 	public EstimateList getEstimates(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
 		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		EstimateList estimateList = estimateParser.getEstimates(response);
 		
@@ -418,12 +381,6 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/email"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		
 		HashMap requestBody = new HashMap();
 		
 		requestBody.put("JSONString", email.toJSON().toString());
@@ -435,7 +392,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		fileBody.put("attachments", files);
 		
 		
-		String response = ZohoHTTPClient.post(urlString, queryMap, requestBody, fileBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), requestBody, fileBody);
 		
 		String success = estimateParser.getMessage(response);
 		
@@ -464,15 +421,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/email"; //No I18N
 		
-		if(paramMap == null)
-		{
-			paramMap = new HashMap();
-		}
-		
-		paramMap.put("authtoken", authToken);
-		paramMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, paramMap);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(paramMap));
 		
 		String success = estimateParser.getMessage(response);
 		
@@ -505,15 +454,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/email"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
 		Email email = estimateParser.getEmailContent(response);
 		
@@ -542,12 +483,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/status/sent"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = estimateParser.getMessage(response);
 		
@@ -576,12 +512,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/status/accepted"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = estimateParser.getMessage(response);
 		
@@ -610,12 +541,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/status/declined"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = estimateParser.getMessage(response);
 		
@@ -642,15 +568,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/pdf"; //No I18N
 		
-		if(queryMap == null)
-		{
-		 	queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		File file = ZohoHTTPClient.getFile(urlString, queryMap);
+		File file = ZohoHTTPClient.getFile(urlString, getQueryMap(queryMap));
 		
 		return file;
 	}
@@ -675,15 +593,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/print"; //No I18N
 		
-		if(queryMap == null)
-		{
-		 	queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		File file = ZohoHTTPClient.getFile(urlString, queryMap);
+		File file = ZohoHTTPClient.getFile(urlString, getQueryMap(queryMap));
 		
 		return file; 
 	}
@@ -712,10 +622,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/address/billing"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 	
@@ -750,11 +657,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/address/shipping"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-	
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", shippingAddress.toJSON().put("is_update_customer", shippingAddress.isUpdateCustomer()).toString());
 		
@@ -780,12 +683,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/templates"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		TemplateList templateList = estimateParser.getTemplates(response);
 		
@@ -816,12 +714,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/templates/"+templateId; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, getQueryMap());
 		
 		String success = estimateParser.getMessage(response);
 		
@@ -854,12 +747,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/comments"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CommentList commentList = estimateParser.getComments(response);
 		
@@ -890,10 +778,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/comments"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("description", description);
@@ -934,10 +819,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/comments/"+commentId; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("description", description);
@@ -976,12 +858,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/comments/"+commentId; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = estimateParser.getMessage(response);
 		

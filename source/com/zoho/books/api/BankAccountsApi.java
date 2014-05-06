@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.BankAccountParser;
 
@@ -37,14 +36,11 @@ import java.util.HashMap;
 
 */
 
-public class BankAccountsApi
+public class BankAccountsApi extends API
 {
 	
-	private static String url = BooksUtil.baseURL+"/bankaccounts"; //No I18N
+	private static String url = baseURL+"/bankaccounts"; //No I18N
 	
-	private String authToken;
-	
-	private String organizationId;
 	
 	/**
 	
@@ -58,8 +54,9 @@ public class BankAccountsApi
 	
 	public BankAccountsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+			
+			super(authToken, organizationId);
+		
 	}
 	
 	
@@ -94,15 +91,8 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 	
 	public BankAccountList getBankaccounts(HashMap queryMap)throws Exception
 	{
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
 		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		BankAccountList bankAccountList = bankAccountParser.getBankAccounts(response); 
 		
@@ -128,10 +118,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 	
 	public BankAccount create(BankAccount bankAccount)throws Exception
 	{
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", bankAccount.toJSON().toString());
 		
@@ -161,12 +148,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 			
 		String urlString = url+"/"+accountId; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		BankAccount bankAccount = bankAccountParser.getBankAccount(response);
 		
@@ -194,10 +176,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 	{
 		String urlString = url+"/"+bankAccount.getAccountId(); //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", bankAccount.toJSON().toString());
 		
@@ -228,12 +207,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 		
 		String urlString = url+"/"+accountId; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String message = bankAccountParser.getMessage(response);
 		
@@ -262,12 +236,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 		
 		String urlString = url+"/"+accountId+"/inactive"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String message = bankAccountParser.getMessage(response);
 		
@@ -296,12 +265,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 		
 		String urlString = url+"/"+accountId+"/active"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String message = bankAccountParser.getMessage(response);
 		
@@ -328,12 +292,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 		
 		String urlString = url+"/"+accountId+"/statement/lastimported"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Statement statement = bankAccountParser.getStatement(response);
 		
@@ -364,12 +323,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 		
 		String urlString = url+"/"+accountId+"/statement/"+statementId; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String message = bankAccountParser.getMessage(response);
 		

@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.SettingsParser;
 
@@ -35,12 +34,10 @@ import java.util.HashMap;
 
 */
 
-public class ItemsApi
+public class ItemsApi extends API
 {
-	private static String url = BooksUtil.baseURL+"/items"; //No I18N
+	private static String url = baseURL+"/items"; //No I18N
 
-	private String authToken;
-	private String organizationId;
 	
 	/**
 	
@@ -54,8 +51,9 @@ public class ItemsApi
 
 	public ItemsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -109,15 +107,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 	public ItemList getItems(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		ItemList itemList = settingsParser.getItems(response);
 		
@@ -144,12 +134,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		String urlString = url+"/"+itemId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Item item = settingsParser.getItem(response);
 		
@@ -176,11 +161,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 	public Item create(Item item)throws Exception
 	{
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", item.toJSON().toString());
 		
@@ -211,11 +192,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		String urlString = url+"/"+item.getItemId();
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", item.toJSON().toString());
 		
@@ -246,12 +223,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		String urlString = url+"/"+itemId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -280,12 +252,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		String urlString = url+"/"+itemId+"/active"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -314,12 +281,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		String urlString = url+"/"+itemId+"/inactive"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		

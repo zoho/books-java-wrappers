@@ -230,7 +230,10 @@ public class ProjectParser
 		pageContext.setPerPage(pagecontext.getInt("per_page")); //No I18N
 		pageContext.setHasMorePage(pagecontext.getBoolean("has_more_page")); //No I18N
 		pageContext.setReportName(pagecontext.getString("report_name"));
-		pageContext.setAppliedFilter(pagecontext.getString("applied_filter"));
+		if(pagecontext.has("applied_filter"))
+		{
+			pageContext.setAppliedFilter(pagecontext.getString("applied_filter"));
+		}
 		pageContext.setSortColumn(pagecontext.getString("sort_column"));
 		pageContext.setSortOrder(pagecontext.getString("sort_order"));
 		

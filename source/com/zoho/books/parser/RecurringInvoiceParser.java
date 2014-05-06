@@ -53,7 +53,10 @@ public class RecurringInvoiceParser
 			recurringInvoice.setRecurringInvoiceId(jsonArray.getJSONObject(i).getString("recurring_invoice_id"));
 			recurringInvoice.setRecurrenceName(jsonArray.getJSONObject(i).getString("recurrence_name"));
 			recurringInvoice.setStatus(jsonArray.getJSONObject(i).getString("status"));
-			recurringInvoice.setSubTotal(jsonArray.getJSONObject(i).getDouble("sub_total")); //No I18N
+			if(jsonArray.getJSONObject(i).has("sub_total"))
+			{
+				recurringInvoice.setSubTotal(jsonArray.getJSONObject(i).getDouble("sub_total")); //No I18N
+			}
 			recurringInvoice.setTotal(jsonArray.getJSONObject(i).getDouble("total")); //No I18N
 			recurringInvoice.setCustomerId(jsonArray.getJSONObject(i).getString("customer_id"));
 			recurringInvoice.setCustomerName(jsonArray.getJSONObject(i).getString("customer_name"));

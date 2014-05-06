@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.SettingsParser;
 
@@ -111,12 +110,9 @@ It is used to create:<br><br>
 
 */
 
-public class SettingsApi
+public class SettingsApi extends API
 {
-	private static String url = BooksUtil.baseURL+"/settings"; //No I18N
-
-	private String authToken;
-	private String organizationId;
+	private static String url = baseURL+"/settings"; //No I18N
 	
 	/**
 	
@@ -130,8 +126,9 @@ public class SettingsApi
 
 	public SettingsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -154,12 +151,7 @@ public class SettingsApi
 		
 		String urlString = url+"/preferences"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Preference preference = settingsParser.getPreferences(response);
 		
@@ -188,11 +180,7 @@ public class SettingsApi
 		
 		String urlString = url+"/preferences"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", preference.toJSON().toString());
 		
@@ -225,10 +213,7 @@ public class SettingsApi
 		
 		String urlString = url+"/units"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -265,12 +250,7 @@ public class SettingsApi
 		
 		String urlString = url+"/units/"+unitId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -298,12 +278,7 @@ public class SettingsApi
 	{
 		String urlString = url+"/invoices"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		InvoiceSetting invoiceSetting = settingsParser.getInvoiceSettings(response);
 		
@@ -330,11 +305,7 @@ public class SettingsApi
 	
 		String urlString = url+"/invoices";  //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);		
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", invoiceSetting.toJSON().toString());
 		
@@ -359,12 +330,7 @@ public class SettingsApi
 		
 		String urlString = url+"/invoices/notesandterms"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		NotesAndTerms notesAndTerms = settingsParser.getNotesAndTerms(response);
 		
@@ -393,10 +359,7 @@ public class SettingsApi
 		
 		String urlString = url+"/invoices/notesandterms"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -432,12 +395,7 @@ public class SettingsApi
 		
 		String urlString = url+"/estimates";  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		EstimateSetting estimateSetting = settingsParser.getEstimateSettings(response);
 		
@@ -464,11 +422,7 @@ public class SettingsApi
 		
 		String urlString = url+"/estimates";  //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", estimateSetting.toJSON().toString());
 		
@@ -494,12 +448,7 @@ public class SettingsApi
 		
 		String urlString = url+"/estimates/notesandterms";  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		NotesAndTerms notesAndTerms = settingsParser.getNotesAndTerms(response);
 		
@@ -528,10 +477,7 @@ public class SettingsApi
 		
 		String urlString = url+"/estimates/notesandterms";  //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -567,12 +513,7 @@ public class SettingsApi
 	{
 		String urlString = url+"/creditnotes";  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-				
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CreditnoteSetting creditnoteSetting = settingsParser.getCreditnoteSettings(response);
 		
@@ -599,11 +540,7 @@ public class SettingsApi
 		
 		String urlString = url+"/creditnotes";  //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", creditnoteSetting.toJSON().toString());
 		
@@ -628,12 +565,7 @@ public class SettingsApi
 		
 		String urlString = url+"/creditnotes/notesandterms";  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		NotesAndTerms notesAndTerms = settingsParser.getNotesAndTerms(response);
 		
@@ -662,10 +594,7 @@ public class SettingsApi
 		
 		String urlString = url+"/creditnotes/notesandterms"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -716,15 +645,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 	
 		String urlString = url+"/currencies"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
 		CurrencyList currencyList = settingsParser.getCurrencies(response);
 		
@@ -751,12 +672,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies/"+currencyId; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Currency currency = settingsParser.getCurrency(response);
 		
@@ -785,11 +701,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", currency.toJSON().toString());
 		
@@ -820,11 +732,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies/"+currency.getCurrencyId(); //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", currency.toJSON().toString());
 		
@@ -855,12 +763,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies/"+currencyId; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -902,15 +805,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies/"+currencyId+"/exchangerates"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
 		ExchangeRateList exchangeRateList = settingsParser.getExchangeRates(response);
 		
@@ -939,12 +834,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies/"+currencyId+"/exchangerates/"+exchangeRateId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		ExchangeRate exchangeRate = settingsParser.getExchangeRate(response);
 		
@@ -975,11 +865,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies/"+currencyId+"/exchangerates"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", exchangeRate.toJSON().toString());
 		
@@ -1012,11 +898,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies/"+currencyId+"/exchangerates/"+exchangeRate.getExchangeRateId(); //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", exchangeRate.toJSON().toString());
 		
@@ -1049,12 +931,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies/"+currencyId+"/exchangerates/"+exchangeRateId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -1080,12 +957,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxes"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		TaxList taxList = settingsParser.getTaxes(response);
 		
@@ -1112,12 +984,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxes/"+taxId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Tax tax = settingsParser.getTax(response);
 		
@@ -1146,10 +1013,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxes"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", tax.toJSON().toString());
 		
@@ -1180,11 +1044,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxes/"+tax.getTaxId(); //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", tax.toJSON().toString());
 		
@@ -1215,12 +1075,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxes/"+taxId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -1247,12 +1102,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxgroups/"+taxGroupId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		TaxGroup taxGroup = settingsParser.getTaxGroup(response);
 		
@@ -1281,10 +1131,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxgroups"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -1326,10 +1173,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxgroups/"+taxGroupId; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -1367,12 +1211,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxgroups/"+taxGroupId;  //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -1400,12 +1239,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/openingbalances"; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		OpeningBalance openingBalance = settingsParser.getOpeningBalance(response);
 		
@@ -1434,11 +1268,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/openingbalances"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", openingBalance.toJSON().toString());
 		
@@ -1468,11 +1298,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/openingbalances"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", openingBalance.toJSON().toString());
 		
@@ -1499,12 +1325,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/openingbalances";  //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -1531,12 +1352,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/autoreminders"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		AutoReminderList autoReminderList = settingsParser.getAutoReminders(response);
 		
@@ -1563,12 +1379,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/autoreminders/"+templateId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		AutoReminder autoReminder = settingsParser.getAutoReminder(response);
 		
@@ -1597,12 +1408,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/autoreminders/"+reminderId+"/enable"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -1631,12 +1437,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/autoreminders/"+reminderId+"/disable";  //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -1667,11 +1468,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/autoreminders/"+reminderId; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", autoReminder.toJSON().toString());
 		
@@ -1713,15 +1510,7 @@ Allowed Values: <i>overdue_reminder</i> and <i>open_reminder</i></td></tr>
 		
 		String urlString = url+"/manualreminders"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
 		ManualReminderList manualReminderList = settingsParser.getManualReminders(response);
 		
@@ -1748,12 +1537,7 @@ Allowed Values: <i>overdue_reminder</i> and <i>open_reminder</i></td></tr>
 		
 		String urlString = url+"/manualreminders/"+reminderId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		ManualReminder manualReminder = settingsParser.getManualReminder(response);
 		
@@ -1784,10 +1568,7 @@ Allowed Values: <i>overdue_reminder</i> and <i>open_reminder</i></td></tr>
 		
 		String urlString = url+"/manualreminders/"+reminderId;  //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", manualReminder.toJSON().toString());
 		

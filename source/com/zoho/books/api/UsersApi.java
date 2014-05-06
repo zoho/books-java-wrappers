@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.SettingsParser;
 
@@ -33,12 +32,11 @@ import java.util.HashMap;
 
 */
 
-public class UsersApi
+public class UsersApi extends API
 {
-	private static String url = BooksUtil.baseURL+"/users"; //No I18N
+	
+	private static String url = baseURL+"/users"; //No I18N
 
-	private String authToken;
-	private String organizationId;
 	
 	/**
 	
@@ -52,8 +50,9 @@ public class UsersApi
 
 	public UsersApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -92,15 +91,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 	public UserList getUsers(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		UserList userList = settingsParser.getUsers(response);
 		
@@ -127,12 +118,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+userId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		User user = settingsParser.getUser(response);
 		
@@ -157,12 +143,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/me"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		User user = settingsParser.getUser(response);
 		
@@ -189,10 +170,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 	public User create(User user)throws Exception
 	{
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", user.toJSON().toString());
 		
@@ -223,11 +201,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+user.getUserId();
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", user.toJSON().toString());
 		
@@ -258,12 +232,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+userId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -292,12 +261,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+userId+"/invite"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -326,12 +290,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+userId+"/active"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -360,12 +319,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+userId+"/inactive"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = settingsParser.getMessage(response);
 		

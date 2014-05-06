@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.ChartOfAccountParser;
 
@@ -43,14 +42,12 @@ import java.util.HashMap;
 
 */
 
-public class ChartOfAccountsApi
+public class ChartOfAccountsApi extends API
 {
 	
-	private static String url = BooksUtil.baseURL+"/chartofaccounts"; //No I18N
+	private static String url = baseURL+"/chartofaccounts"; //No I18N
 
-	private String authToken;
-	private String organizationId;
-	
+
 	/**
 	
 	* Construct a new ChartOfAccountsApi using user's authtoken and organizationid.
@@ -63,8 +60,9 @@ public class ChartOfAccountsApi
 
 	public ChartOfAccountsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -91,11 +89,7 @@ public class ChartOfAccountsApi
 	public ChartOfAccount create(ChartOfAccount chartOfAccount)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-						
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", chartOfAccount.toJSON().toString());
 		
@@ -125,12 +119,7 @@ public class ChartOfAccountsApi
 		
 		String urlString = url+"/"+accountId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		ChartOfAccount chartOfAccount = chartOfAccountParser.getChartOfAccount(response);
 		
@@ -159,10 +148,7 @@ public class ChartOfAccountsApi
 		
 		String urlString = url+"/"+chartOfAccount.getAccountId();
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", chartOfAccount.toJSON().toString());
 		
@@ -194,12 +180,7 @@ public class ChartOfAccountsApi
 		
 		String urlString = url+"/"+accountId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = chartOfAccountParser.getMessage(response);
 		
@@ -228,12 +209,7 @@ public class ChartOfAccountsApi
 		
 		String urlString = url+"/"+accountId+"/inactive"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = chartOfAccountParser.getMessage(response);
 		
@@ -262,12 +238,7 @@ public class ChartOfAccountsApi
 		
 		String urlString = url+"/"+accountId+"/active"; //No I18N
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = chartOfAccountParser.getMessage(response);
 		
@@ -304,15 +275,8 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 	
 	public ChartOfAccountList getChartOfAccounts(HashMap queryMap)throws Exception
 	{
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
 		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		ChartOfAccountList chartOfAccountList = chartOfAccountParser.getChartOfAccounts(response);
 		
@@ -363,15 +327,7 @@ Allowed Values: <i>transaction_date, payee, glname, transaction_type_formatted, 
 		
 		String urlString = url+"/transactions"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
 		TransactionList transactionList = chartOfAccountParser.getTransactions(response);
 		
@@ -400,12 +356,7 @@ Allowed Values: <i>transaction_date, payee, glname, transaction_type_formatted, 
 		
 		String urlString = url+"/transactions/"+transactionId; //No I18N
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = chartOfAccountParser.getMessage(response);
 		

@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.JournalParser;
 
@@ -29,12 +28,10 @@ import java.util.HashMap;
 
 */
 
-public class JournalsApi
+public class JournalsApi extends API
 {
-	private static String url = BooksUtil.baseURL+"/journals"; //No I18N
+	private static String url = baseURL+"/journals"; //No I18N
 
-	private String authToken;
-	private String organizationId;
 	
 	/**
 	
@@ -48,8 +45,9 @@ public class JournalsApi
 
 	public JournalsApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -76,11 +74,7 @@ public class JournalsApi
 	public Journal create(Journal journal)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", journal.toJSON().toString());
 		
@@ -109,12 +103,7 @@ public class JournalsApi
 		
 		String urlString = url+"/"+journalId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Journal journal = journalParser.getJournal(response);
 		
@@ -143,11 +132,7 @@ public class JournalsApi
 		
 		String urlString = url+"/"+journal.getJournalId();
 		
-		HashMap requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", journal.toJSON().toString());
 		
@@ -178,12 +163,7 @@ public class JournalsApi
 		
 		String urlString = url+"/"+journalId;
 		
-		HashMap queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = journalParser.getMessage(response);
 		
@@ -236,15 +216,7 @@ Allowed Values: <i>journal_date, entry_number, reference_number</i> and <i>total
 	public JournalList getJournals(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		JournalList journalList = journalParser.getJournals(response);
 		

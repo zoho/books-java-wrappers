@@ -3,7 +3,6 @@
 package com.zoho.books.api;
 
 import com.zoho.books.util.ZohoHTTPClient;
-import com.zoho.books.util.BooksUtil;
 
 import com.zoho.books.parser.InvoiceParser;
 
@@ -121,13 +120,11 @@ import org.json.JSONArray;
 
 */
 
-public class InvoicesApi
+public class InvoicesApi extends API
 {
 	
-	private static String url = BooksUtil.baseURL+"/invoices"; //No I18N
+	private static String url = baseURL+"/invoices"; //No I18N
 
-	private String authToken;
-	private String organizationId;
 	
 	/**
 	
@@ -141,8 +138,9 @@ public class InvoicesApi
 
 	public InvoicesApi(String authToken, String organizationId)
 	{
-		this.authToken = authToken;
-		this.organizationId = organizationId;
+		
+		super(authToken, organizationId);
+		
 	}
 	
 	
@@ -227,15 +225,7 @@ Allowed Values: <i>customer_name, invoice_number, date, due_date, total, balance
 	public InvoiceList getInvoices(HashMap queryMap)throws Exception
 	{
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
 		
 		InvoiceList invoiceList = invoiceParser.getInvoices(response);
 		
@@ -264,11 +254,7 @@ Allowed Values: <i>customer_name, invoice_number, date, due_date, total, balance
 	public Invoice create(String customerId, String contactPersonId, String description)throws Exception
 	{	
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		Invoice invoiceObj = new Invoice();
 		
@@ -330,18 +316,12 @@ Allowed Values: true and false <br><br>
 	public Invoice create(Invoice newInvoice, HashMap paramMap)throws Exception
 	{
 		
-		if(paramMap == null)
-		{
-			paramMap = new HashMap();
-		}
-		
-		paramMap.put("authtoken", authToken);
-		paramMap.put("organization_id", organizationId);
+		HashMap requestBody = getQueryMap(paramMap);
 		
 		
-		paramMap.put("JSONString", newInvoice.toJSON().toString());
+		requestBody.put("JSONString", newInvoice.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, paramMap);
+		String response = ZohoHTTPClient.post(url, requestBody);
 		
 		Invoice invoice = invoiceParser.getInvoice(response);
 		
@@ -368,12 +348,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Invoice invoice = invoiceParser.getInvoice(response);
 		
@@ -408,18 +383,11 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+newInvoice.getInvoiceId();
 		
-		if(paramMap == null)
-		{
-			paramMap = new HashMap();
-		}
+		HashMap requestBody = getQueryMap(paramMap);
 		
-		paramMap.put("authtoken", authToken);
-		paramMap.put("organization_id", organizationId);
+		requestBody.put("JSONString", newInvoice.toJSON().toString());
 		
-		
-		paramMap.put("JSONString", newInvoice.toJSON().toString());
-		
-		String response = ZohoHTTPClient.put(urlString, paramMap);
+		String response = ZohoHTTPClient.put(urlString, requestBody);
 		
 		Invoice invoice = invoiceParser.getInvoice(response);
 		
@@ -448,12 +416,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId;
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -493,11 +456,6 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/email"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
 		
 		if(paramMap == null)
 		{
@@ -513,7 +471,7 @@ Allowed Values: true and false <br><br>
 		fileBody.put("attachments", files);
 		
 		
-		String response = ZohoHTTPClient.post(urlString, queryMap, paramMap, fileBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -548,14 +506,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/email"; //No I18N
 		
-		if(paramMap == null)
-		{
-			paramMap = new HashMap();
-		}
-		
-		paramMap.put("authtoken", authToken);
-		paramMap.put("organization_id", organizationId);
-		
+		HashMap requestBody = getQueryMap(paramMap);
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -573,9 +524,9 @@ Allowed Values: true and false <br><br>
 		
 		jsonObject.put("contacts", contactss);
 		
-		paramMap.put("JSONString", jsonObject.toString());
+		requestBody.put("JSONString", jsonObject.toString());
 		
-		String response = ZohoHTTPClient.post(urlString, paramMap);
+		String response = ZohoHTTPClient.post(urlString, requestBody);
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -608,15 +559,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/email"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
 		Email email = invoiceParser.getEmailContent(response);
 		
@@ -654,12 +597,6 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/paymentreminder"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		
 		if(paramMap == null)
 		{
 			paramMap = new HashMap();
@@ -674,7 +611,7 @@ Allowed Values: true and false <br><br>
 		fileBody.put("attachments", files);
 		
 		
-		String response = ZohoHTTPClient.post(urlString, queryMap, paramMap, fileBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -707,15 +644,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/paymentreminder"; //No I18N
 		
-		if(paramMap == null)
-		{
-			paramMap = new HashMap();
-		}
-		
-		paramMap.put("authtoken", authToken);
-		paramMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, paramMap);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(paramMap));
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -742,12 +671,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/paymentreminder"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		Email email = invoiceParser.getEmailContent(response);
 		
@@ -776,12 +700,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/status/sent"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -810,12 +729,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/status/draft"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -844,12 +758,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/status/void"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -880,15 +789,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/pdf"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		File file = ZohoHTTPClient.getFile(urlString, queryMap);
+		File file = ZohoHTTPClient.getFile(urlString, getQueryMap(queryMap));
 		
 		return file;
 	}
@@ -916,15 +817,7 @@ Allowed Values: true and false <br><br>
 	{
 		String urlString = url+"/print"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		File file = ZohoHTTPClient.getFile(urlString, queryMap);
+		File file = ZohoHTTPClient.getFile(urlString, getQueryMap(queryMap));
 		
 		return file; 
 	}
@@ -951,12 +844,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/paymentreminder/enable"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -985,12 +873,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/paymentreminder/disable"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -1019,12 +902,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/writeoff"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -1053,12 +931,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/writeoff/cancel"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -1089,10 +962,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/address/billing"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 		
@@ -1127,11 +997,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/address/shipping"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", shippingAddress.toJSON().put("is_update_customer", shippingAddress.isUpdateCustomer()).toString());
 		
@@ -1158,12 +1024,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/templates"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		TemplateList templateList = invoiceParser.getTemplates(response);
 		
@@ -1194,12 +1055,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/templates/"+templateId; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -1233,12 +1089,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/payments"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		PaymentList paymentList = invoiceParser.getPayments(response);
 		
@@ -1265,12 +1116,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/creditsapplied"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CreditList credits = invoiceParser.getCreditsApplied(response);
 		
@@ -1301,10 +1147,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/credits"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -1365,12 +1208,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/payments/"+invoicePaymentId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -1402,12 +1240,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/creditsapplied/"+creditnotesInvoiceId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -1451,18 +1284,12 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/attachment"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-
-		
 		HashMap fileBody = new HashMap();
 		
 		fileBody.put("attachment", file);
 		
 		
-		String response = ZohoHTTPClient.post(urlString, queryMap, paramMap, fileBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -1495,15 +1322,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/attachment"; //No I18N
 		
-		if(queryMap == null)
-		{
-			queryMap = new HashMap();
-		}
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		File file = ZohoHTTPClient.getFile(urlString, queryMap);
+		File file = ZohoHTTPClient.getFile(urlString, getQueryMap(queryMap));
 		
 		return file;
 	}
@@ -1536,15 +1355,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/attachment"; //No I18N
 		
-		if(paramMap == null)
-		{
-			paramMap = new HashMap();
-		}
-		
-		paramMap.put("authtoken", authToken);
-		paramMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.put(urlString, paramMap);
+		String response = ZohoHTTPClient.put(urlString, getQueryMap(paramMap));
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -1573,12 +1384,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/attachment"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -1607,12 +1413,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/expenses/"+invoiceId+"/receipt"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
@@ -1645,12 +1446,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/comments"; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
 		CommentList commentList = invoiceParser.getComments(response);
 		
@@ -1683,11 +1479,8 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/comments"; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
-		
+		HashMap	requestBody = getQueryMap();
+
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("description", description);
 		jsonObject.put("payment_expected_date", paymentExpectedDate);
@@ -1728,10 +1521,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/comments/"+commentId; //No I18N
 		
-		HashMap	requestBody = new HashMap();
-		
-		requestBody.put("authtoken", authToken);
-		requestBody.put("organization_id", organizationId);
+		HashMap	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("description", description);
@@ -1770,12 +1560,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/comments/"+commentId; //No I18N
 		
-		HashMap	queryMap = new HashMap();
-		
-		queryMap.put("authtoken", authToken);
-		queryMap.put("organization_id", organizationId);
-		
-		String response = ZohoHTTPClient.delete(urlString, queryMap);
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = invoiceParser.getMessage(response);
 		
