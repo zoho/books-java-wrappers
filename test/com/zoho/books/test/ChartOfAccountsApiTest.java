@@ -31,41 +31,44 @@ public class ChartOfAccountsApiTest
 		
 		String description = "create a new Account";	//No I18N
 		
-		String accountId = "36991000000027003";
-		
-		String transactionId = "36991000000031091";
-		
-		
-		
-		ChartOfAccount chartOfAccount = new ChartOfAccount();
-		
-		chartOfAccount.setAccountId(accountId);
-		chartOfAccount.setAccountName(accountName);
-		chartOfAccount.setAccountType(accountType);
-		chartOfAccount.setDescription(description);
 		
 		
 		HashMap hashMap = new HashMap();
 		
-		hashMap.put("filter_by", "TransactionType.All");
+		hashMap.put("filter_by", "TransactionType.All"); 
 		hashMap.put("sort_column", "transaction_date");
 		
 		try
 		{
 		
+			ChartOfAccountList getChartOfAccounts = chartOfAccountsApi.getChartOfAccounts(hashMap);
+			
+			String accountId = getChartOfAccounts.get(0).getAccountId();
+			
+			
+			ChartOfAccount chartOfAccount = new ChartOfAccount();
+			
+			chartOfAccount.setAccountId(accountId);
+			chartOfAccount.setAccountName(accountName);
+			chartOfAccount.setAccountType(accountType);
+			chartOfAccount.setDescription(description);
+			
+			
 			ChartOfAccount create = chartOfAccountsApi.create(chartOfAccount);
 		
 			ChartOfAccount get = chartOfAccountsApi.get(accountId);
+			
+			get.setAccountType(accountType);
 		
-			ChartOfAccount update = chartOfAccountsApi.update(chartOfAccount);
+			ChartOfAccount update = chartOfAccountsApi.update(get);
 		
 			String markAsInactive = chartOfAccountsApi.markAsInactive(accountId);
 		
 			String markAsActive = chartOfAccountsApi.markAsActive(accountId);
 		
-			ChartOfAccountList getChartOfAccounts = chartOfAccountsApi.getChartOfAccounts(hashMap);
-		
 			TransactionList getTransactions = chartOfAccountsApi.getTransactions(accountId, hashMap);
+			
+			String transactionId = getTransactions.get(0).getImportedTransactionId();
 			
 			String deleteTransaction = chartOfAccountsApi.deleteTransaction(transactionId);
 			

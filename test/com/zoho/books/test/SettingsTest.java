@@ -59,10 +59,6 @@ public class SettingsTest
 		
 		
 		
-		String organizationId = "10578008";
-		
-		
-		String userId = "36991000000013001";
 		
 		String name = "SahayaRamesh";	//No I18N
 		
@@ -72,12 +68,6 @@ public class SettingsTest
 		
 		String terms = "Terms and conditions apply.";	//No I18N
 		
-		String currencyId = "36991000000000099";
-		
-		String exchangeRateId = "36991000000051003";
-		
-		String taxId = "36991000000057001";
-		
 		String taxGroupId = "36991000000057099";
 		
 		String taxGroupName = "Income Tax";	//No I18N
@@ -86,15 +76,7 @@ public class SettingsTest
 		
 		String accountId = "36991000000000370";
 		
-		String openingBalanceId = "36991000000057061";
-		
 		String accountSplitId = "36991000000057065";
-		
-		String autoreminderId = "36991000000002001";
-		
-		String manualreminderId = "36991000000000076";
-		
-		String itemId = "36991000000054013";
 		
 		String filterBy = "Currencies.ExcludeBaseCurrency";	//No I18N
 		
@@ -118,61 +100,12 @@ public class SettingsTest
 		
 		
 		
-		
 		User users = new User();
 		
 		users.setName(name);
 		users.setEmail(email);
 		users.setUserRole("staff");	//No I18N
 		
-		
-		
-		InvoiceSetting invoiceSettings = new InvoiceSetting();
-		
-		invoiceSettings.setAutoGenerate(true);
-		invoiceSettings.setPrefixString("INV-");	//No I18N
-		invoiceSettings.setStartAt(1);
-		invoiceSettings.setNextNumber("45");
-		invoiceSettings.setQuantityPrecision(0);
-		invoiceSettings.setReferenceText("");
-		invoiceSettings.setNotes("thanks for your business.");		//No I18N
-		invoiceSettings.setTerms("terms and conditions apply.");	//No I18N
-		invoiceSettings.setIsShippingChargeRequired(false);
-		invoiceSettings.setIsAdjustmentRequired(true);
-		invoiceSettings.setInvoiceItemType("");
-		invoiceSettings.setIsShowInvoiceSetup(true);
-		invoiceSettings.setDiscountType("");
-		invoiceSettings.setWarnConvertToOpen(true);
-		invoiceSettings.setWarnCreateCreditnotes(true);
-		invoiceSettings.setIsOpenInvoiceEditable(true);
-		invoiceSettings.setIsSalesPersonRequired(true);
-		
-		
-		EstimateSetting estimateSettings = new EstimateSetting();
-		
-		estimateSettings.setAutoGenerate(true);
-		estimateSettings.setPrefixString("EST-");	//No I18N
-		estimateSettings.setStartAt(1);
-		estimateSettings.setNextNumber("25");
-		estimateSettings.setQuantityPrecision(0);
-		estimateSettings.setReferenceText("");
-		estimateSettings.setNotes("thanks for your business.");		//No I18N
-		estimateSettings.setTerms("terms and conditions apply.");	//No I18N
-		estimateSettings.setTermsToInvoice(true);
-		estimateSettings.setNotesToInvoice(true);
-		estimateSettings.setWarnEstimateToInvoice(true);
-		estimateSettings.setDiscountType("");
-		estimateSettings.setIsSalesPersonRequired(true);
-		
-		
-		CreditnoteSetting creditnoteSettings = new CreditnoteSetting();
-		
-		creditnoteSettings.setAutoGenerate(true);
-		creditnoteSettings.setPrefixString("CN-");	//No I18N
-		creditnoteSettings.setNextNumber("15");
-		creditnoteSettings.setReferenceText("");
-		creditnoteSettings.setNotes("thanks for your business.");	//No I18N
-		creditnoteSettings.setTerms("terms and conditions apply.");	//No I18N
 		
 		
 		Currency currencies = new Currency();
@@ -194,26 +127,6 @@ public class SettingsTest
 		taxes.setTaxName("income");	//No I18N
 		taxes.setTaxPercentage(2.5);
 		taxes.setTaxType("tax");	//No I18N
-		
-		
-		OpeningBalance openingBalance = new OpeningBalance();
-		
-		openingBalance.setOpeningBalanceId(openingBalanceId);
-		openingBalance.setDate("2013-12-03");
-		
-		Account account = new Account();
-		
-		account.setAccountSplitId(accountSplitId);
-		account.setAccountId(accountId);
-		account.setDebitOrCredit("debit");	//No I18N
-		account.setExchangeRate(0.00);
-		account.setCurrencyId(currencyId);
-		account.setAmount(20.00);
-		
-		List<Account> accounts = new ArrayList<Account>();
-		accounts.add(0, account);
-		
-		openingBalance.setAccounts(accounts);
 		
 		
 		AutoReminder autoReminders = new AutoReminder();
@@ -249,13 +162,10 @@ public class SettingsTest
 		
 		Item items = new Item();
 		
-		items.setItemId(itemId);
-		
 		items.setName("ITEM");	//No I18N
 		items.setDescription("THIS IS THE ITEM.");	//No I18N
 		items.setRate(300.00);
 		items.setAccountId("831000000000391");
-		items.setTaxId(taxId);
 		
 		
 		try
@@ -271,24 +181,32 @@ public class SettingsTest
 		
 		
 			OrganizationList getOrganizations = organizationsApi.getOrganizations();
-		
-			Organization getAnOrganization = organizationsApi.get(organizationId);
+			
+			String organizationId = getOrganizations.get(0).getOrganizationId();
 		
 			Organization createAnOrganization = organizationsApi.create(organization);
+			
+			Organization getAnOrganization = organizationsApi.get(organizationId);
+			
+			getAnOrganization.setDateFormat("dd-mm-yyyy"); //No I18N
 		
-			Organization updateAnOrganization = organizationsApi.update(organization);
+			Organization updateAnOrganization = organizationsApi.update(getAnOrganization);
 		
 		
 		
 			UserList getUsers = usersApi.getUsers(hashMap);
-		
-			User getUser = usersApi.get(userId);
+			
+			String userId = getUsers.get(0).getUserId();
 		
 			User getCurrentUser = usersApi.getCurrentUser();
 		
 			User createUser = usersApi.create(users);
+			
+			User getUser = usersApi.get(userId);
+			
+			getUser.setName("Ramesh");	//No I18N
 		
-			User updateUser = usersApi.update(users);
+			User updateUser = usersApi.update(getUser);
 		
 			String inviteUser = usersApi.inviteUser(userId);
 		
@@ -302,11 +220,15 @@ public class SettingsTest
 		
 			ItemList getItems = itemsApi.getItems(hashMap);
 		
-			Item getAnItem = itemsApi.get(itemId);
-		
+			String itemId = getItems.get(0).getItemId();
+			
 			Item createAnItem = itemsApi.create(items);
+			
+			Item getAnItem = itemsApi.get(itemId);
+			
+			getAnItem.setName("Gadgets"); //No I18N
 		
-			Item updateAnItem = itemsApi.update(items);
+			Item updateAnItem = itemsApi.update(getAnItem);
 		
 			String markItemAsActive = itemsApi.markItemAsActive(itemId);
 		
@@ -318,8 +240,10 @@ public class SettingsTest
 		
 		
 			InvoiceSetting getInvoiceSettings = settingsApi.getInvoiceSettings();
+			
+			getInvoiceSettings.setAutoGenerate(true);
 		
-			InvoiceSetting updateInvoiceSettings = settingsApi.updateInvoiceSettings(invoiceSettings);
+			InvoiceSetting updateInvoiceSettings = settingsApi.updateInvoiceSettings(getInvoiceSettings);
 		
 			NotesAndTerms getInvoiceNotesAndTerms = settingsApi.getInvoiceNotesAndTerms();
 		
@@ -328,8 +252,10 @@ public class SettingsTest
 		
 		
 			EstimateSetting getEstimateSettings = settingsApi.getEstimateSettings();
+			
+			getEstimateSettings.setAutoGenerate(true);
 		
-			EstimateSetting updateEstimateSettings = settingsApi.updateEstimateSettings(estimateSettings);
+			EstimateSetting updateEstimateSettings = settingsApi.updateEstimateSettings(getEstimateSettings);
 		
 			NotesAndTerms getEstimateNotesAndTerms = settingsApi.getEstimateNotesAndTerms();
 		
@@ -338,8 +264,10 @@ public class SettingsTest
 		
 		
 			CreditnoteSetting getCreditnoteSettings = settingsApi.getCreditnoteSettings();
+			
+			getCreditnoteSettings.setAutoGenerate(true);
 		
-			CreditnoteSetting updateCreditnoteSettings = settingsApi.updateCreditnoteSettings(creditnoteSettings);
+			CreditnoteSetting updateCreditnoteSettings = settingsApi.updateCreditnoteSettings(getCreditnoteSettings);
 		
 			NotesAndTerms getCreditnoteNotesAndTerms = settingsApi.getCreditnotesNotesAndTerms();
 		
@@ -350,21 +278,27 @@ public class SettingsTest
 		
 			CurrencyList getCurrencies = settingsApi.getCurrencies(hashMap);
 		
-			String curId = getCurrencies.get(0).getCurrencyId();
-		
-			Currency getCurrency = settingsApi.getCurrency(currencyId);
+			String currencyId = getCurrencies.get(0).getCurrencyId();
 		
 			Currency createCurrency = settingsApi.createCurrency(currencies);
+			
+			Currency getCurrency = settingsApi.getCurrency(currencyId);
+			
+			getCurrency.setCurrencySymbol("Rs."); 	//No I18N
 		
-			Currency updateCurrency = settingsApi.updateCurrency(currencies);
+			Currency updateCurrency = settingsApi.updateCurrency(getCurrency);
 		
 			ExchangeRateList getExchangeRates = settingsApi.getExchangeRates(currencyId, null);
-		
-			ExchangeRate getExchangeRate = settingsApi.getExchangeRate(currencyId, exchangeRateId);
+			
+			String exchangeRateId = getExchangeRates.get(0).getExchangeRateId();
 		
 			ExchangeRate createExchangeRate = settingsApi.createExchangeRate(currencyId, exchangeRates);
+			
+			ExchangeRate getExchangeRate = settingsApi.getExchangeRate(currencyId, exchangeRateId);
+			
+			getExchangeRate.setCurrencyCode("INR");	//No I18N
 		
-			ExchangeRate updateExchangeRate = settingsApi.updateExchangeRate(currencyId, exchangeRates);
+			ExchangeRate updateExchangeRate = settingsApi.updateExchangeRate(currencyId, getExchangeRate);
 		
 			String deleteExchangeRate = settingsApi.deleteExchangeRate(currencyId, exchangeRateId);
 			
@@ -372,12 +306,16 @@ public class SettingsTest
 		
 		
 			TaxList getTaxes = settingsApi.getTaxes();
-		
-			Tax getTax = settingsApi.getTax(taxId);
+			
+			String taxId = getTaxes.get(0).getTaxId();
 		
 			Tax createTax = settingsApi.createTax(taxes);
+			
+			Tax getTax = settingsApi.getTax(taxId);
+			
+			getTax.setTaxName("VAT");	//No I18N
 		
-			Tax updateTax = settingsApi.updateTax(taxes);
+			Tax updateTax = settingsApi.updateTax(getTax);
 		
 			TaxGroup getTaxGroup = settingsApi.getTaxGroup(taxGroupId);
 		
@@ -391,29 +329,59 @@ public class SettingsTest
 		
 		
 		
-			OpeningBalance getOpeningBalance = settingsApi.get();
+			OpeningBalance getOpeningBalance = settingsApi.getOpeningBalance();
+			
+			String openingBalanceId = getOpeningBalance.getOpeningBalanceId();
+			
+			OpeningBalance openingBalance = new OpeningBalance();
+			
+			openingBalance.setDate("2013-12-03");
+			
+			Account account = new Account();
+			
+			account.setAccountSplitId(accountSplitId);
+			account.setAccountId(accountId);
+			account.setDebitOrCredit("debit");	//No I18N
+			account.setExchangeRate(0.00);
+			account.setCurrencyId(currencyId);
+			account.setAmount(20.00);
+			
+			List<Account> accounts = new ArrayList<Account>();
+			accounts.add(0, account);
+			
+			openingBalance.setAccounts(accounts);
 		
-			OpeningBalance createOpeningBalance = settingsApi.create(openingBalance);
+			OpeningBalance createOpeningBalance = settingsApi.createOpeningBalance(openingBalance);
+			
+			getOpeningBalance.setDate("2014-06-12");
 		
-			OpeningBalance updateOpeningBalance = settingsApi.update(openingBalance);
+			OpeningBalance updateOpeningBalance = settingsApi.updateOpeningBalance(getOpeningBalance);
 		
-			String deleteOpeningBalance = settingsApi.delete();
+			String deleteOpeningBalance = settingsApi.deleteOpeningBalance();
 		
 		
 		
 			AutoReminderList getAutoPaymentReminders = settingsApi.getAutoPaymentReminders();
-		
-			AutoReminder getAutoPaymentReminder = settingsApi.getAutoPaymentReminder(autoreminderId);
+			
+			String autoreminderId = getAutoPaymentReminders.get(0).getAutoreminderId();
 		
 			String enableAutoReminder = settingsApi.enableAutoReminder(autoreminderId);
+			
+			AutoReminder getAutoPaymentReminder = settingsApi.getAutoPaymentReminder(autoreminderId);
+			
+			getAutoPaymentReminder.setIsEnabled(true);
 		
-			String updateAutoReminder = settingsApi.updateAutoReminder(autoreminderId, autoReminders);
+			String updateAutoReminder = settingsApi.updateAutoReminder(autoreminderId, getAutoPaymentReminder);
 		
 			ManualReminderList getManualReminders = settingsApi.getManualReminders(hashMap);
+			
+			String manualreminderId = getManualReminders.get(0).getManualreminderId();
 		
 			ManualReminder getManualReminder = settingsApi.getManualReminder(manualreminderId);
+			
+			getManualReminder.setCcMe(true);
 		
-			String updateManualReminder = settingsApi.updateManualReminder(manualreminderId, manualReminders);
+			String updateManualReminder = settingsApi.updateManualReminder(manualreminderId, getManualReminder);
 			
 			String disableAutoReminder = settingsApi.disableAutoReminder(autoreminderId);
 		

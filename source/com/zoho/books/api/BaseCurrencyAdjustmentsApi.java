@@ -89,8 +89,6 @@ public class BaseCurrencyAdjustmentsApi extends API
 		
 		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
 		
-		System.out.print(response);
-		
 		BaseCurrencyAdjustment baseCurrencyAdjustment = baseCurrencyAdjustmentParser.getBaseCurrencyAdjustment(response);
 		
 		return baseCurrencyAdjustment;

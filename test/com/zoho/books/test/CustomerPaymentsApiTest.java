@@ -33,8 +33,6 @@ public class CustomerPaymentsApiTest
 		
 		String accountId = "36991000000029003";
 		
-		String customerPaymentId = "36991000000053005";
-		
 		String invoicePaymentId = "36991000000037003";
 		
 		
@@ -70,11 +68,15 @@ public class CustomerPaymentsApiTest
 		{
 			CustomerPaymentList getCustomerPayments = customerPaymentsApi.getCustomerPayments(hashMap);
 			
+			String customerPaymentId = getCustomerPayments.get(0).getPaymentId();
+			
 			CustomerPayment create = customerPaymentsApi.create(customerPayments);
 		
 			CustomerPayment get = customerPaymentsApi.get(customerPaymentId);
+			
+			get.setExchangeRate(2.00);
 		
-			CustomerPayment update = customerPaymentsApi.update(customerPayments);
+			CustomerPayment update = customerPaymentsApi.update(get);
 		
 			String delete = customerPaymentsApi.delete(customerPaymentId);
 		

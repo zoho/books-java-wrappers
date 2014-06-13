@@ -1234,7 +1234,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 	
 	*/
 	
-	public OpeningBalance get()throws Exception
+	public OpeningBalance getOpeningBalance()throws Exception
 	{
 		
 		String urlString = url+"/openingbalances"; //No I18N
@@ -1263,7 +1263,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 	
 	*/
 	
-	public OpeningBalance create(OpeningBalance openingBalance)throws Exception
+	public OpeningBalance createOpeningBalance(OpeningBalance openingBalance)throws Exception
 	{
 		
 		String urlString = url+"/openingbalances"; //No I18N
@@ -1293,7 +1293,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 	
 	*/
 	
-	public OpeningBalance update(OpeningBalance openingBalance)throws Exception
+	public OpeningBalance updateOpeningBalance(OpeningBalance openingBalance)throws Exception
 	{
 		
 		String urlString = url+"/openingbalances"; //No I18N
@@ -1320,7 +1320,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 	
 	*/
 	
-	public String delete()throws Exception
+	public String deleteOpeningBalance()throws Exception
 	{
 		
 		String urlString = url+"/openingbalances";  //No I18N

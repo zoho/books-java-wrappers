@@ -85,8 +85,10 @@ public class RecurringExpenseTest
 			RecurringExpense create = recurringExpenseApi.create(recurringExpense);
 		
 			RecurringExpense get = recurringExpenseApi.get(recurringExpenseId);
+			
+			get.setDescription("Update the recurring expense"); //No I18N
 		
-			RecurringExpense update = recurringExpenseApi.update(recurringExpense);
+			RecurringExpense update = recurringExpenseApi.update(get);
 		
 			String resumeRecurringExpense = recurringExpenseApi.resume(recurringExpenseId);
 		

@@ -45,8 +45,6 @@ public class CreditNotesApiTest
 		
 		
 		
-		String creditNoteId = "36991000000035019";
-		
 		String recurringInvoiceId = "36991000000056043"; 
 		
 		String customerId = "36991000000025001"; 
@@ -56,8 +54,6 @@ public class CreditNotesApiTest
 		boolean ignore_auto_number_generation = false;
 		
 		String invoiceId = "36991000000035007"; 
-		
-		String creditnoteRefundId = "36991000000056069";
 		
 		String from_account_id = "36991000000029003";
 		
@@ -69,16 +65,14 @@ public class CreditNotesApiTest
 		
 		String description = "This is a testing comment";	//No I18N
 		
-		String commentId = "36991000000043079";
-		
 		String accountId = "36991000000000388"; 
 		
 		String itemName = "Trial";	//No I18N
 		
 		String creditnoteInvoiceId = "36991000000000390";
 		
-		File file1 = new File("/home/likewise-open/ZOHOCORP/ramesh-2099/inv.jpg");
-		File file2 = new File("/home/likewise-open/ZOHOCORP/ramesh-2099/cacert.pem");
+		File file1 = new File("{Dir_name}/file.jpg");
+		File file2 = new File("{Dir_name}/file1.pem");
 		
 		ArrayList<File> file = new ArrayList<File>();
 		
@@ -99,8 +93,6 @@ public class CreditNotesApiTest
 		
 		
 		CreditNote creditNotes = new CreditNote();
-		
-		creditNotes.setCreditnoteId(creditNoteId);
 		
 		creditNotes.setCustomerId(customerId);
 		creditNotes.setTemplateId(templateId);
@@ -176,16 +168,20 @@ public class CreditNotesApiTest
  		
 		try
 		{
+			
+			CreditNoteList getCreditNotes = creditNotesApi.getCreditNotes(hashMap);
+			
+			String creditNoteId = getCreditNotes.get(0).getCreditnoteId();
 		
 			CreditNote create = creditNotesApi.create(customerId, accountId, itemName);
 		
 			CreditNote create1 = creditNotesApi.create(creditNotes, hashMap);
 		
 			CreditNote get = creditNotesApi.get(creditNoteId);
+			
+			get.setBalance(0.00);
 		
-			CreditNote update = creditNotesApi.update(creditNotes, hashMap);
-		
-			CreditNoteList getCreditNotes = creditNotesApi.getCreditNotes(hashMap);
+			CreditNote update = creditNotesApi.update(get, hashMap);
 		
 			String sendEmail = creditNotesApi.sendEmail(creditNoteId, email, hashMap);
 		
@@ -216,17 +212,21 @@ public class CreditNotesApiTest
 		
 		
 		
-		
+			
+			CreditnoteRefundList getCreditnoteRefunds = creditNotesApi.getCreditnoteRefunds(hashMap);
+			
+			String creditnoteRefundId = getCreditnoteRefunds.get(0).getCreditnoteRefundId();
+			
 			CreditnoteRefund addCreditnoteRefund = creditNotesApi.addRefund(creditNoteId, creditnoteRefunds);
 		
 			CreditnoteRefund getCreditnoteRefund = creditNotesApi.getRefund(creditNoteId, creditnoteRefundId);
+			
+			getCreditnoteRefund.setCustomerName("Ramesh");	//No I18N
 		
-			CreditnoteRefund updateCreditnoteRefund = creditNotesApi.updateRefund(creditNoteId, creditnoteRefunds);
+			CreditnoteRefund updateCreditnoteRefund = creditNotesApi.updateRefund(creditNoteId, getCreditnoteRefund);
 		
 			CreditnoteRefundList getRefundsOfCreditnotes = creditNotesApi.getRefundsOfCreditnotes(creditNoteId);
 		
-			CreditnoteRefundList getCreditnoteRefunds = creditNotesApi.getCreditnoteRefunds(hashMap);
-			
 			String deleteCreditnoteRefund = creditNotesApi.deleteRefund(creditNoteId, creditnoteRefundId);
 		
 		
@@ -234,6 +234,8 @@ public class CreditNotesApiTest
 			Comment addComment = creditNotesApi.addComment(creditNoteId, description);
 		
 			CommentList getComments = creditNotesApi.getComments(creditNoteId);
+			
+			String commentId = getComments.get(0).getCommentId();
 		
 			String deleteComment = creditNotesApi.deleteComment(creditNoteId, commentId);
 			

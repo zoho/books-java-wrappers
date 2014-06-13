@@ -41,17 +41,13 @@ public class EstimatesApiTest
 	
 		String description = "This is a testing comment"; //No I18N
 	
-		String commentId = "36991000000051009";
-	
 		String itemName = "Trial";	//No I18N
-		
-		String estimateId = "36991000000051005";
 		
 		String estimateIds = "36991000000051005";
 		
 		boolean show_comment_to_clients = true;
 		
-		File file1 = new File("/home/likewise-open/ZOHOCORP/ramesh-zu276/inv.jpg");
+		File file1 = new File("{Dir_name}/file.jpg");
 		
 		ArrayList<File> file = new ArrayList<File>();
 		file.add(0, file1);
@@ -124,16 +120,20 @@ public class EstimatesApiTest
 		
 		try
 		{
+			
+			EstimateList getEstimates = estimatesApi.getEstimates(hashMap);
+			
+			String estimateId = getEstimates.get(0).getEstimateId();
 
 			Estimate create = estimatesApi.create(customerId, itemName);
 	
 			Estimate createEstimate = estimatesApi.create(estimates, hashMap);
 	
 			Estimate get = estimatesApi.get(estimateId);
+			
+			get.setIsDiscountBeforeTax(true);
 	
-			Estimate update = estimatesApi.update(estimates, hashMap);
-	
-			EstimateList getEstimates = estimatesApi.getEstimates(hashMap);
+			Estimate update = estimatesApi.update(get, hashMap);
 	
 			String sendEmail = estimatesApi.sendEmail(estimateId, email);
 	
@@ -163,6 +163,8 @@ public class EstimatesApiTest
 	
 	
 			CommentList getComments = estimatesApi.getComments(estimateId);
+			
+			String commentId = getComments.get(0).getCommentId();
 	
 			Comment addComment = estimatesApi.addComment(estimateId, description, show_comment_to_clients);
 	

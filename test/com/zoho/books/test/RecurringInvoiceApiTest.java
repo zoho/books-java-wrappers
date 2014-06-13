@@ -28,7 +28,7 @@ public class RecurringInvoiceApiTest
 		
 		RecurringInvoicesApi recurringInvoiceApi = service.getRecurringInvoicesApi();
 		
-		String recurringInvoiceId = "36991000000056043";
+
 		
 		String customerId = "36991000000042001"; 
 		
@@ -40,8 +40,6 @@ public class RecurringInvoiceApiTest
 		
 		
 		RecurringInvoice recurringInvoice = new RecurringInvoice();
-		
-		recurringInvoice.setRecurringInvoiceId(recurringInvoiceId); //only for update
 		
 		recurringInvoice.setRecurrenceName("ss");	//No I18N
 		recurringInvoice.setStatus("active");		//No I18N
@@ -98,13 +96,18 @@ public class RecurringInvoiceApiTest
 		
 		try
 		{
+			
+			RecurringInvoiceList getRecurringInvoices = recurringInvoiceApi.getRecurringInvoices(hashMap);
+			
+			String recurringInvoiceId = getRecurringInvoices.get(0).getRecurringInvoiceId();
+			
 			RecurringInvoice create = recurringInvoiceApi.create(recurringInvoice);
 		
 			RecurringInvoice get = recurringInvoiceApi.get(recurringInvoiceId);
+			
+			get.setDiscount(3.00);
 		
-			RecurringInvoice update = recurringInvoiceApi.update(recurringInvoice);
-		
-			RecurringInvoiceList getRecurringInvoices = recurringInvoiceApi.getRecurringInvoices(hashMap);
+			RecurringInvoice update = recurringInvoiceApi.update(get);
 		
 			String stopRecurringInvoice = recurringInvoiceApi.stop(recurringInvoiceId);
 		

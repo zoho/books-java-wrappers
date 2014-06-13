@@ -4,8 +4,6 @@ package com.zoho.books.test;
 
 import com.zoho.books.exception.BooksException;
 
-import com.zoho.books.util.BooksUtil;
-
 import com.zoho.books.service.ZohoBooks;
 
 import com.zoho.books.api.ContactsApi;
@@ -64,15 +62,13 @@ public class ContactsApiTest
 		
 		String customerId = "36991000000041005"; 
 		
-		String contactPersonId = "36991000000048001";
-		
 		String startDate = "2014-02-21";
 		
 		String endDate = "2014-02-21";
 		
-		File file1 = new File("/home/likewise-open/ZOHOCORP/ramesh-2099/inv.jpg");
-		File file2 = new File("/home/likewise-open/ZOHOCORP/ramesh-2099/cacert.pem");
-		File file3 = new File("/home/likewise-open/ZOHOCORP/ramesh-2099/pdf files/javascript1-sample.pdf");
+		File file1 = new File("{Dir_name}/file.jpg");
+		File file2 = new File("{Dir_name}/file1.pem");
+		File file3 = new File("{Dir_name}/file2.pdf");
 		
 		ArrayList file = new ArrayList();
 		file.add(0, file1);
@@ -88,8 +84,6 @@ public class ContactsApiTest
 		hashMap.put("send_customer_statement", "false");
 		
 		Contact contacts = new Contact();
-		
-		contacts.setContactId(contactPersonId);
 		
 		contacts.setContactName(contactName);
 		contacts.setPaymentTerms(15);
@@ -145,9 +139,6 @@ public class ContactsApiTest
 		
 		ContactPerson contactPersons1 = new ContactPerson();
 		
-		contactPersons1.setContactPersonId(contactPersonId); // only for update
-		
-		contactPersons1.setContactId(contactPersonId);
 		contactPersons1.setSalutation("Mr.");	//No I18N
 		contactPersons1.setFirstName("Ramesh");	//No I18N
 		contactPersons1.setLastName("Sahaya");	//No I18N
@@ -173,13 +164,15 @@ public class ContactsApiTest
 			
 			String contactId = getContacts.get(0).getContactId();
 		
-			Contact get = contactsApi.get(contactId);
-		
 			Contact create = contactsApi.create(contactName, currencyId);
 		
 			Contact create1 = contactsApi.create(contacts);
+			
+			Contact get = contactsApi.get(contactId);
+			
+			get.setContactName("Sahaya Ramesh");	//No I18N
 		
-			Contact update = contactsApi.update(contacts);
+			Contact update = contactsApi.update(get);
 		
 			String markAsActive = contactsApi.markAsActive(contactId);
 		
@@ -204,16 +197,21 @@ public class ContactsApiTest
 			String untrack1099 = contactsApi.untrack1099(contactId);
 		
 		
+			
+			ContactPersonList getContactPersons = contactPersonsApi.getContactPersons(contactId);
+			
+			String contactPersonId = getContactPersons.get(0).getContactPersonId();
+			
 			ContactPerson createContactPerson = contactPersonsApi.create(contactPersons1);
 		
 			ContactPerson getContactPerson = contactPersonsApi.get(contactPersonId);
+			
+			getContactPerson.setIsPrimaryContact(true);	
 		
-			ContactPerson updateContactPerson = contactPersonsApi.update(contactPersons1);
+			ContactPerson updateContactPerson = contactPersonsApi.update(getContactPerson);
 		
 			String markAsPrimaryContactPerson = contactPersonsApi.markAsPrimaryContactPerson(contactPersonId);
 		
-			ContactPersonList getContactPersons = contactPersonsApi.getContactPersons(contactId);
-			
 			String deleteContactPerson = contactPersonsApi.delete(contactPersonId);
 			
 			

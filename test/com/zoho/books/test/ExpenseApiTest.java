@@ -29,8 +29,6 @@ public class ExpenseApiTest
 		ExpensesApi expenseApi = service.getExpensesApi();
 		
 		
-		//String expenseId = "36991000000051015";
-		
 		String accountId = "36991000000000424";
 		
 		String paidThroughAccountId = "36991000000029003";
@@ -41,7 +39,7 @@ public class ExpenseApiTest
 		
 		String taxId = "36991000000032001";
 		
-		File file = new File("/home/likewise-open/ZOHOCORP/ramesh-2099/inv.jpg");
+		File file = new File("{Dir_name}/file.jpg");
 		
 		
 		

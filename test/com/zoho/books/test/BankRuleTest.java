@@ -40,12 +40,10 @@ public class BankRuleTest
 		
 			String ruleId = getRules.get(0).getRuleId();
 		
-			Rule get = bankRuleApi.get(ruleId);
-		
 			Rule rule = new Rule();
 		
 			rule.setRuleName("Minimum Deposit Rule");	//No I18N
-			rule.setTargetAccountId("36991000000029003");
+			rule.setTargetAccountId(getRules.get(0).getTargetAccountId());
 			rule.setApplyTo("deposits");		//No I18N
 			rule.setCriteriaType("and");		//No I18N
 		
@@ -67,8 +65,12 @@ public class BankRuleTest
 			rule.setCustomerId("36991000000041005");
 				
 			Rule create = bankRuleApi.create(rule);
+			
+			Rule get = bankRuleApi.get(ruleId);
+			
+			get.setRuleName("Minimum Deposit");	//No I18N
 		
-			Rule update = bankRuleApi.update(create);
+			Rule update = bankRuleApi.update(get);
 		
 			String delete = bankRuleApi.delete(ruleId);
 		

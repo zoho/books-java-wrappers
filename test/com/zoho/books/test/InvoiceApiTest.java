@@ -43,10 +43,6 @@ public class InvoiceApiTest
 		
 		
 
-		String invoiceId = "36991000000056053";
-		
-		String invoiceIds = "36991000000056053";
-		
 		String customerId = "36991000000025001"; 
 		
 		String contactPersonId = "36991000000026003"; 
@@ -73,10 +69,6 @@ public class InvoiceApiTest
 		
 		String creditId = "36991000000035019";
 		
-		String templateId = "36991000000000155"; 
-		
-		String commentId = "36991000000056059"; 
-		
 		boolean show_comment_to_clients = true;
 		
 		File file1 = new File("/home/likewise-open/ZOHOCORP/ramesh-2099/inv.jpg");
@@ -96,12 +88,10 @@ public class InvoiceApiTest
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		
 		/*hashMap.put("filter_by", "Status.Paid");
-		hashMap.put("sort_column", "invoice_number");
+		hashMap.put("sort_column", "invoice_number");*/
 		
-		hashMap.put("can_send_in_mail", "true");*/
+		hashMap.put("can_send_in_mail", "true");
 		
-		hashMap.put("invoice_ids", invoiceIds);
-
 
 		Invoice newInvoice = new Invoice();
 		
@@ -135,7 +125,6 @@ public class InvoiceApiTest
 		
 		newInvoice.setAllowPartialPayments(false);
 		newInvoice.setExchangeRate(1.00);
-		newInvoice.setTemplateId(templateId);
 		newInvoice.setIsDiscountBeforeTax(true);
 		newInvoice.setDiscount("0.00");
 		newInvoice.setDiscountType("entity_level");	//No I18N
@@ -205,14 +194,18 @@ public class InvoiceApiTest
 		{
 		
 			InvoiceList invoices = invoiceApi.getInvoices(hashMap);
+			
+			String invoiceId = invoices.get(0).getInvoiceId();
 		
 			Invoice create = invoiceApi.create(customerId, contactPersonId, description);
 		
 			Invoice createInvoice = invoiceApi.create(newInvoice, hashMap); 
 		
 			Invoice invoice = invoiceApi.get(invoiceId);
+			
+			invoice.setAllowPartialPayments(true);
 		
-			Invoice update = invoiceApi.update(newInvoice, hashMap);
+			Invoice update = invoiceApi.update(invoice, hashMap);
 		
 			String sendEmail = invoiceApi.sendEmail(invoiceId, email, hashMap);
 		
@@ -231,6 +224,8 @@ public class InvoiceApiTest
 			String markAsDraft = invoiceApi.markAsDraft(invoiceId);
 		
 			String markAsVoid = invoiceApi.markAsVoid(invoiceId);
+			
+			hashMap.put("invoice_ids", invoiceId);
 		
 			File getPdf = invoiceApi.bulkExport(hashMap);
 		
@@ -249,6 +244,8 @@ public class InvoiceApiTest
 			String updateShippingAddress = invoiceApi.updateShippingAddress(invoiceId, shippingAddress);
 		
 			TemplateList getTemplates = invoiceApi.getTemplates();
+			
+			String templateId = getTemplates.get(0).getTemplateId();
 		
 			String updateTemplate = invoiceApi.updateTemplate(invoiceId, templateId);
 		
@@ -283,6 +280,8 @@ public class InvoiceApiTest
 			Comment addComment = invoiceApi.addComment(invoiceId, description, paymentExpectedDate, showCommentToClients);
 		
 			CommentList getComments = invoiceApi.getComments(invoiceId);
+			
+			String commentId = getComments.get(0).getCommentId();
 		
 			Comment updateComment = invoiceApi.updateComment(invoiceId, commentId, description, show_comment_to_clients);
 		

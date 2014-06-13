@@ -54,8 +54,6 @@ public class BankTransactionTest
 		
 			String transactionId = getTransactions.get(0).getTransactionId();
 		
-			Transaction get = bankTransactionApi.get(transactionId);
-			
 			
 			Transaction transaction = new Transaction();
 		
@@ -68,8 +66,12 @@ public class BankTransactionTest
 			transaction.setDescription("Amount transfer");		//No I18N
 		
 			Transaction create = bankTransactionApi.create(transaction);
+			
+			Transaction get = bankTransactionApi.get(transactionId);
+			
+			get.setDescription("Amount transferd");	//No I18N
 		
-			Transaction update = bankTransactionApi.update(create);
+			Transaction update = bankTransactionApi.update(get);
 		
 			TransactionList getMatchingTransactions = bankTransactionApi.getMatchingTransactions(transactionId, queryMap);
 		

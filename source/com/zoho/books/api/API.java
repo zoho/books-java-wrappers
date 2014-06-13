@@ -41,7 +41,7 @@ public class API
 		
 		
 		/**
-		 * Create a queryMap using user's authToken and organizationId.
+		 * Construct a queryMap using user's authToken and organizationId.
 		 * 
 		 * @return Returns a HashMap.
 		 */
@@ -60,7 +60,7 @@ public class API
 		
 		
 		/**
-		 * Create a queryMap using user's authToken, organizationId and query string parameters.
+		 * Construct a queryMap using user's authToken, organizationId and query string parameters.
 		 *  
 		 * @param queryMap This queryMap contains the query string parameters.
 		 * 

@@ -37,7 +37,6 @@ public class ProjectTest
 		
 		
 		
-		String projectId = "36991000000038011";
 		
 		String projectName = "zoho";	//No I18N
 		
@@ -55,14 +54,6 @@ public class ProjectTest
 		
 		String userId = "36991000000013001";
 		
-		String taskId = "36991000000052001";
-		
-		String timeEntryId = "36991000000052003";
-		
-		String timeEntryIds = "36991000000052003,36991000000052009";
-		
-		String commentId = "36991000000061001";	
-		
 		
 		
 		HashMap hashMap = new HashMap();
@@ -74,8 +65,6 @@ public class ProjectTest
 		
 		Project projects = new Project();
 		
-		projects.setProjectId(projectId);
-		
 		projects.setProjectName(projectName);
 		projects.setCustomerId(customerId);
 		projects.setDescription(description);
@@ -85,7 +74,6 @@ public class ProjectTest
 		projects.setBudgetHours(10);
 		
 		Task task = new Task();
-		task.setTaskId(taskId); //ony for update
 		task.setTaskName(taskName);
 		task.setDescription(description);
 		task.setRate(1000.00);
@@ -136,27 +124,21 @@ public class ProjectTest
 		newUser.setBudgetHours(1);
 		
 		
-		TimeEntry timeEntries = new TimeEntry();
-		
-		timeEntries.setProjectId(projectId);
-		timeEntries.setTaskId(taskId);
-		timeEntries.setUserId(userId);
-		timeEntries.setLogDate("2014-02-21");
-		timeEntries.setLogTime("4:35");
-		timeEntries.setNotes("Task has been finished.");	//No I18N
-		timeEntries.setStartTimer(false);
-		
 		
 		try
 		{
 		
 			ProjectList getProjects = projectsApi.getProjects(hashMap);
+			
+			String projectId = getProjects.get(0).getProjectId();
 		
 			Project create = projectsApi.create(projects);
 		
 			Project get = projectsApi.get(projectId);
+			
+			get.setBillingType("based_on_task_hours"); //No I18N
 		
-			Project update = projectsApi.update(projects);
+			Project update = projectsApi.update(get);
 		
 			String activateProject = projectsApi.activate(projectId);
 		
@@ -166,38 +148,58 @@ public class ProjectTest
 		
 		
 			TaskList getTasks = projectsApi.getTasks(projectId, hashMap);
+			
+			String taskId = getTasks.get(0).getTaskId();
 		
 			Task addTask = projectsApi.addTask(projectId, tasks);
 		
 			Task getTask = projectsApi.getTask(projectId, taskId);
+			
+			getTask.setBudgetHours(2);
 		
-			Task updateTask = projectsApi.updateTask(projectId, tasks);
+			Task updateTask = projectsApi.updateTask(projectId, getTask);
 		
 			String deleteTask = projectsApi.deleteTask(projectId, taskId);
 		
 		
 		
 			UserList getUsers = projectsApi.getUsers(projectId);
-		
-			User getUser = projectsApi.getUser(projectId, userId);
-		
+			
 			UserList assignUsers = projectsApi.assignUsers(projectId, usersList);
 		
 			User inviteUser = projectsApi.inviteUser(projectId, newUser);
+			
+			User getUser = projectsApi.getUser(projectId, userId);
+			
+			getUser.setIsCurrentUser(true);
 		
-			User updateUser = projectsApi.updateUser(projectId, newUser);
+			User updateUser = projectsApi.updateUser(projectId, getUser);
 		
 			String deleteUser = projectsApi.deleteUser(projectId, userId);
 		
 		
 		
 			TimeEntryList getTimeEntries = projectsApi.getTimeEntries(hashMap);
+			
+			String timeEntryId = getTimeEntries.get(0).getTimeEntryId();
+			
+			TimeEntry timeEntries = new TimeEntry();
+			
+			timeEntries.setProjectId(projectId);
+			timeEntries.setTaskId(taskId);
+			timeEntries.setUserId(userId);
+			timeEntries.setLogDate("2014-02-21");
+			timeEntries.setLogTime("4:35");
+			timeEntries.setNotes("Task has been finished.");	//No I18N
+			timeEntries.setStartTimer(false);
 		
 			TimeEntry logTimeEntries = projectsApi.logTimeEntry(timeEntries);
 		
 			TimeEntry getTimeEntry = projectsApi.getTimeEntry(timeEntryId);
+			
+			getTimeEntry.setNotes("Complete the task."); //No I18N
 		
-			TimeEntry updateTimeEntry = projectsApi.updateTimeEntry(timeEntries);
+			TimeEntry updateTimeEntry = projectsApi.updateTimeEntry(getTimeEntry);
 		
 			TimeEntry startTimer = projectsApi.startTimer(timeEntryId);
 		
@@ -205,13 +207,15 @@ public class ProjectTest
 			
 			String deleteTimeEntry = projectsApi.deleteTimeEntry(timeEntryId);
 			
-			hashMap.put("time_entry_ids", timeEntryIds);
+			hashMap.put("time_entry_ids", timeEntryId);
 		
 			String deleteTimeEntries = projectsApi.deleteTimeEntries(hashMap);
 		
 		
 		
 			CommentList getComments = projectsApi.getComments(projectId);
+			
+			String commentId = getComments.get(0).getCommentId();
 		
 			Comment addComment = projectsApi.addComment(projectId, description);
 		

@@ -30,8 +30,6 @@ public class BankAccountTest
 		
 			String accountId = getBankaccounts.get(0).getAccountId();
 		
-			BankAccount get = bankAccountApi.get(accountId);
-		
 			BankAccount bankAccount = new BankAccount();
 		
 			bankAccount.setAccountId(accountId);
@@ -39,7 +37,7 @@ public class BankAccountTest
 			bankAccount.setAccountName("icici"); 		//No I18N
 			bankAccount.setAccountNumber("123456789");	//No I18N
 			bankAccount.setAccountType("bank");		//No I18N
-			bankAccount.setCurrencyId("36991000000000099");	//No I18N
+			bankAccount.setCurrencyId(getBankaccounts.get(0).getCurrencyId());	//No I18N
 			bankAccount.setCurrencyCode("INR");		//No I18N
 			bankAccount.setUncategorizedTransactions(0);
 			bankAccount.setIsActive(true);
@@ -50,8 +48,12 @@ public class BankAccountTest
 			bankAccount.setIsPaypalAccount(false);
 		
 			BankAccount create = bankAccountApi.create(bankAccount);
+			
+			BankAccount get = bankAccountApi.get(accountId);
+			
+			get.setAccountName("Test Account");	//No I18N
 		
-			BankAccount update = bankAccountApi.update(create);
+			BankAccount update = bankAccountApi.update(get);
 		
 			String deactivate = bankAccountApi.deactivateAccount(accountId);
 		

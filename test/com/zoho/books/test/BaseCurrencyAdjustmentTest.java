@@ -74,7 +74,7 @@ public class BaseCurrencyAdjustmentTest
 			BaseCurrencyAdjustment create = baseCurrencyAdjustmentApi.create(queryMap, baseCurrencyAdjustment);
 		
 			BaseCurrencyAdjustment get = baseCurrencyAdjustmentApi.get(baseCurrencyAdjustmentId);
-		
+			
 			BaseCurrencyAdjustmentList getBaseCurrencyAdjustments = baseCurrencyAdjustmentApi.getBaseCurrencyAdjustments(queryMap);
 			
 			String delete = baseCurrencyAdjustmentApi.delete(baseCurrencyAdjustmentId);

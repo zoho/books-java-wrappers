@@ -37,8 +37,6 @@ public class VendorPaymentsTest
 		
 		String billId = "36991000000035035";
 		
-		String paymentId = "36991000000056019";
-		
 		
 		
 		HashMap<String, String> hashMap = new HashMap<String, String>();
@@ -48,8 +46,6 @@ public class VendorPaymentsTest
 		
 		
 		VendorPayment vendorPayments = new VendorPayment();
-		
-		vendorPayments.setPaymentId(paymentId);
 		
 		vendorPayments.setVendorId(vendorId);
 		vendorPayments.setPaymentMode("Stripe");	//No I18N
@@ -73,16 +69,20 @@ public class VendorPaymentsTest
 		
 		try
 		{
+			
+			VendorPaymentList getVendorPayments = vendorPaymentsApi.getVendorPayments(hashMap);
+			
+			String vendorPaymentId = getVendorPayments.get(0).getPaymentId(); 
 		
 			VendorPayment create = vendorPaymentsApi.create(vendorPayments);
 		
-			VendorPayment get = vendorPaymentsApi.get(paymentId);
-		
-			VendorPayment update = vendorPaymentsApi.update(vendorPayments);
-		
-			VendorPaymentList getVendorPayments = vendorPaymentsApi.getVendorPayments(hashMap);
+			VendorPayment get = vendorPaymentsApi.get(vendorPaymentId);
 			
-			String delete = vendorPaymentsApi.delete(paymentId);
+			get.setExchangeRate(2.00);
+		
+			VendorPayment update = vendorPaymentsApi.update(get);
+		
+			String delete = vendorPaymentsApi.delete(vendorPaymentId);
 		
 			//System.out.println(getVendorPayments);
 			

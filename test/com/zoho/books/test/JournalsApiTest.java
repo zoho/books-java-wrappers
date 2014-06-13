@@ -25,11 +25,11 @@ public class JournalsApiTest
 	
 		JournalsApi journalsApi = service.getJournalsApi();
 		
+		
+		
 		String accountId = "36991000000000361";
 		
 		String accountName = "account";	//No I18N
-		
-		String journalId = "36991000000056001";
 		
 		String lineId = "36991000000056005"; 
 		
@@ -71,15 +71,19 @@ public class JournalsApiTest
 		
 		try
 		{
+			
+			JournalList getJournals = journalsApi.getJournals(hashMap);
+			
+			String journalId = getJournals.get(0).getJournalId();
 		
 			Journal create = journalsApi.create(journals);
 		
 			Journal get = journalsApi.get(journalId);
-		
-			Journal update = journalsApi.update(journals);
-		
-			JournalList getJournals = journalsApi.getJournals(hashMap);
 			
+			get.setNotes("Thank you"); //No I18N
+		
+			Journal update = journalsApi.update(get);
+		
 			String delete = journalsApi.delete(journalId);
 			
 		

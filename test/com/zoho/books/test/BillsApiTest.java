@@ -45,8 +45,6 @@ public class BillsApiTest
 		
 		String vendorId = "36991000000025001";
 		
-		String billId = "36991000000035035";
-		
 		String paymentId = "36991000000056019";
 		
 		String transactionId = "36991000000031091";
@@ -73,8 +71,6 @@ public class BillsApiTest
 		
 		
 		Bill bills = new Bill();
-		
-		bills.setBillId(billId);
 		
 		bills.setVendorId(vendorId);
 		bills.setBillNumber("1");
@@ -137,17 +133,22 @@ public class BillsApiTest
 			
 			BillList getBills = billsApi.getBills(hashMap);
 			
+			String billId = getBills.get(0).getBillId();
+			
+			
 			Bill create = billsApi.create(bills, file);
 		
 			Bill createBill = billsApi.create(vendorId, billNumber, accountId);
 		
 			Bill createBill1 = billsApi.create(bills);
-		
+			
 			Bill get = billsApi.get(billId);
+			
+			get.setDueDate("2014-06-12");	//No I18N
 		
-			Bill update = billsApi.update(bills);
+			Bill update = billsApi.update(get);
 		
-			Bill updateBill = billsApi.update(bills, file);
+			Bill updateBill = billsApi.update(get, file);
 		
 			String voidABill = billsApi.voidABill(billId);
 		
