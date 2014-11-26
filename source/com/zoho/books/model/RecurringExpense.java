@@ -2,9 +2,6 @@
 
 package com.zoho.books.model;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import org.json.JSONObject;
 
 /**
@@ -24,32 +21,32 @@ public class RecurringExpense
 	private String lastCreatedDate = "";
 	private String nextExpenseDate = "";
 	private String accountId = "";
-        private String accountName = "";
-        private String paidThroughAccountId = "";
-        private String paidThroughAccountName = "";
-        private String vendorId = "";
-        private String vendorName = "";
-        private String taxId = "";
-        private String taxName = "";
-        private double taxPercentage = 0.00;
-        private String currencyId = "";
-        private String currencyCode = "";
-        private double exchangeRate = 0.00;
-        private double taxAmount = 0.00;
-        private double subTotal = 0.00;
-        private double total = 0.00;
-        private double bcyTotal = 0.00;
-        private double amount = 0.00;
-        private boolean isInclusiveTax = false;
-        private String description = "";
-        private boolean isBillable = false;
-        private String customerId = "";
-        private String customerName = "";
-        private String createdTime = "";
-        private String lastModifiedTime = "";
-        private String status = "";
-        private String projectId = "";
-        private String projectName = "";
+    private String accountName = "";
+    private String paidThroughAccountId = "";
+    private String paidThroughAccountName = "";
+    private String vendorId = "";
+    private String vendorName = "";
+    private String taxId = "";
+    private String taxName = "";
+    private double taxPercentage = 0.00;
+    private String currencyId = "";
+    private String currencyCode = "";
+    private double exchangeRate = 0.00;
+    private double taxAmount = 0.00;
+    private double subTotal = 0.00;
+    private double total = 0.00;
+    private double bcyTotal = 0.00;
+    private double amount = 0.00;
+    private boolean isInclusiveTax = false;
+    private String description = "";
+    private boolean isBillable = false;
+    private String customerId = "";
+    private String customerName = "";
+    private String createdTime = "";
+    private String lastModifiedTime = "";
+    private String status = "";
+    private String projectId = "";
+    private String projectName = "";
 	
 	
 	

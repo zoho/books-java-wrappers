@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.HashMap;
+
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -222,7 +223,7 @@ Allowed Values: <i>customer_name, invoice_number, date, due_date, total, balance
 	
 	*/
 	
-	public InvoiceList getInvoices(HashMap queryMap)throws Exception
+	public InvoiceList getInvoices(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
@@ -254,7 +255,7 @@ Allowed Values: <i>customer_name, invoice_number, date, due_date, total, balance
 	public Invoice create(String customerId, String contactPersonId, String description)throws Exception
 	{	
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		Invoice invoiceObj = new Invoice();
 		
@@ -313,10 +314,10 @@ Allowed Values: true and false <br><br>
 	
 	*/
 	
-	public Invoice create(Invoice newInvoice, HashMap paramMap)throws Exception
+	public Invoice create(Invoice newInvoice, HashMap<String, Object> paramMap)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap(paramMap);
+		HashMap<String, Object> requestBody = getQueryMap(paramMap);
 		
 		
 		requestBody.put("JSONString", newInvoice.toJSON().toString());
@@ -378,12 +379,12 @@ Allowed Values: true and false <br><br>
 	
 	*/
 	
-	public Invoice update(Invoice newInvoice, HashMap paramMap)throws Exception
+	public Invoice update(Invoice newInvoice, HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/"+newInvoice.getInvoiceId();
 		
-		HashMap requestBody = getQueryMap(paramMap);
+		HashMap<String, Object> requestBody = getQueryMap(paramMap);
 		
 		requestBody.put("JSONString", newInvoice.toJSON().toString());
 		
@@ -451,7 +452,7 @@ Allowed Values: true and false <br><br>
 	
 	*/
 	
-	public String sendEmail(String invoiceId, Email email, HashMap paramMap)throws Exception
+	public String sendEmail(String invoiceId, Email email, HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/"+invoiceId+"/email"; //No I18N
@@ -459,14 +460,14 @@ Allowed Values: true and false <br><br>
 		
 		if(paramMap == null)
 		{
-			paramMap = new HashMap();
+			paramMap = new HashMap<String, Object>();
 		}
 		
 		paramMap.put("JSONString", email.toJSON().toString());
 		
 		ArrayList<File> files = email.getAttachments();
 		
-		HashMap fileBody = new HashMap(files.size());
+		HashMap<String, Object> fileBody = new HashMap<String, Object>(files.size());
 		
 		fileBody.put("attachments", files);
 		
@@ -501,12 +502,12 @@ Allowed Values: true and false <br><br>
 	
 	*/
 	
-	public String sendEmailInvoices(List<Contact> contacts, HashMap paramMap)throws Exception
+	public String sendEmailInvoices(List<Contact> contacts, HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/email"; //No I18N
 		
-		HashMap requestBody = getQueryMap(paramMap);
+		HashMap<String, Object> requestBody = getQueryMap(paramMap);
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -554,7 +555,7 @@ Allowed Values: true and false <br><br>
 	
 	*/
 	
-	public Email getEmailContent(String invoiceId, HashMap queryMap)throws Exception
+	public Email getEmailContent(String invoiceId, HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/"+invoiceId+"/email"; //No I18N
@@ -592,21 +593,21 @@ Allowed Values: true and false <br><br>
 	
 	*/
 	
-	public String sendPaymentReminder(String invoiceId, Email email, HashMap paramMap)throws Exception
+	public String sendPaymentReminder(String invoiceId, Email email, HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/"+invoiceId+"/paymentreminder"; //No I18N
 		
 		if(paramMap == null)
 		{
-			paramMap = new HashMap();
+			paramMap = new HashMap<String, Object>();
 		}
 		
 		paramMap.put("JSONString", email.toJSON().toString());
 		
 		ArrayList<File> files = email.getAttachments();
 		
-		HashMap fileBody = new HashMap(files.size());
+		HashMap<String, Object> fileBody = new HashMap<String, Object>(files.size());
 		
 		fileBody.put("attachments", files);
 		
@@ -639,7 +640,7 @@ Allowed Values: true and false <br><br>
 	
 	*/
 	
-	public String sendBulkInvoiceReminder(HashMap paramMap)throws Exception
+	public String sendBulkInvoiceReminder(HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/paymentreminder"; //No I18N
@@ -784,7 +785,7 @@ Allowed Values: true and false <br><br>
 	
 	*/
 	
-	public File bulkExport(HashMap queryMap)throws Exception
+	public File bulkExport(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/pdf"; //No I18N
@@ -813,7 +814,7 @@ Allowed Values: true and false <br><br>
 	
 	*/
 	
-	public File bulkPrint(HashMap queryMap)throws Exception
+	public File bulkPrint(HashMap<String, Object> queryMap)throws Exception
 	{
 		String urlString = url+"/print"; //No I18N
 		
@@ -962,7 +963,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/address/billing"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 		
@@ -997,7 +998,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/address/shipping"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", shippingAddress.toJSON().put("is_update_customer", shippingAddress.isUpdateCustomer()).toString());
 		
@@ -1147,7 +1148,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/credits"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -1279,12 +1280,12 @@ Allowed Values: true and false <br><br>
 	*/
 	
 	
-	public String addAttachment(String invoiceId, File file, HashMap paramMap)throws Exception
+	public String addAttachment(String invoiceId, File file, HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/"+invoiceId+"/attachment"; //No I18N
 		
-		HashMap fileBody = new HashMap();
+		HashMap<String, Object> fileBody = new HashMap<String, Object>();
 		
 		fileBody.put("attachment", file);
 		
@@ -1317,7 +1318,7 @@ Allowed Values: true and false <br><br>
 	
 	*/
 	
-	public File getAttachment(String invoiceId, HashMap queryMap)throws Exception
+	public File getAttachment(String invoiceId, HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/"+invoiceId+"/attachment"; //No I18N
@@ -1350,7 +1351,7 @@ Allowed Values: true and false <br><br>
 	
 	*/
 	
-	public String updateAttachment(String invoiceId, HashMap paramMap)throws Exception
+	public String updateAttachment(String invoiceId, HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/"+invoiceId+"/attachment"; //No I18N
@@ -1479,7 +1480,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/comments"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("description", description);
@@ -1521,7 +1522,7 @@ Allowed Values: true and false <br><br>
 		
 		String urlString = url+"/"+invoiceId+"/comments/"+commentId; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("description", description);

@@ -22,6 +22,7 @@ public class Address
 	private String zip = "";
 	private String fax = "";
 	private boolean isUpdateCustomer = false;
+	private String organizationAddressId;
 	
 	
 	/**
@@ -261,14 +262,38 @@ public class Address
 	}
 	
 	
+	/**
+	 * Get the organization address id.
+	 * 
+	 * @return Returns the organization address id.
+	 */
+	
+	public String getOrganizationAddressId() 
+	{
+		return organizationAddressId;
+	}
+	
+	/**
+	 * Set the organization address id.
+	 * 
+	 * @param organizationAddressId ID of the organization address.
+	 */
+
+	public void setOrganizationAddressId(String organizationAddressId)
+	{
+		this.organizationAddressId = organizationAddressId;
+	}
 	
 	
 	
+
 	/**
 	
 	* Convert Address object into JSONObject.
 	
 	* @return Returns a JSONObject.
+	
+	* @throws Exception
 	
 	*/
 	
@@ -284,6 +309,11 @@ public class Address
 		if(streetAddress2 != null && !streetAddress2.equals(""))
 		{
 			jsonObject.put("street_address2", streetAddress2);
+		}
+		
+		if(address != null)
+		{
+			jsonObject.put("address", address);
 		}
 		
 		if(city != null)
@@ -309,6 +339,16 @@ public class Address
 		if(fax != null && !fax.equals(""))
 		{
 			jsonObject.put("fax", fax);
+		}
+		
+		if((Boolean)isUpdateCustomer != null)
+		{
+			jsonObject.put("is_update_customer", isUpdateCustomer);
+		}
+		
+		if(organizationAddressId != null && !organizationAddressId.equals(""))
+		{
+			jsonObject.put("organization_address_id", organizationAddressId);
 		}
 		
 		return jsonObject;

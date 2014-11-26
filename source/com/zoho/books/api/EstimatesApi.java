@@ -116,7 +116,7 @@ public class EstimatesApi extends API
 	public Estimate create(String customerId, String itemName)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 
 		Estimate estimateObj = new Estimate();
@@ -170,10 +170,10 @@ public class EstimatesApi extends API
 	
 	*/
 	
-	public Estimate create(Estimate estimate, HashMap paramMap)throws Exception
+	public Estimate create(Estimate estimate, HashMap<String, Object> paramMap)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap(paramMap);
+		HashMap<String, Object> requestBody = getQueryMap(paramMap);
 		
 		requestBody.put("JSONString", estimate.toJSON().toString());
 		
@@ -235,12 +235,12 @@ public class EstimatesApi extends API
 	
 	*/
 	
-	public Estimate update(Estimate estimate, HashMap paramMap)throws Exception
+	public Estimate update(Estimate estimate, HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/"+estimate.getEstimateId();
 		
-		HashMap requestBody = getQueryMap(paramMap);
+		HashMap<String, Object> requestBody = getQueryMap(paramMap);
 		
 		requestBody.put("JSONString", estimate.toJSON().toString());
 		
@@ -345,7 +345,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 	
 	*/
 	
-	public EstimateList getEstimates(HashMap queryMap)throws Exception
+	public EstimateList getEstimates(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		
@@ -381,13 +381,13 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/email"; //No I18N
 		
-		HashMap requestBody = new HashMap();
+		HashMap<String, Object> requestBody = new HashMap<String, Object>();
 		
 		requestBody.put("JSONString", email.toJSON().toString());
 		
 		ArrayList<File> files = email.getAttachments();
 		
-		HashMap fileBody = new HashMap(files.size());
+		HashMap<String, Object> fileBody = new HashMap<String, Object>(files.size());
 		
 		fileBody.put("attachments", files);
 		
@@ -416,7 +416,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 	
 	*/
 	
-	public String sendEmailEstimates(HashMap paramMap)throws Exception
+	public String sendEmailEstimates(HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/email"; //No I18N
@@ -449,7 +449,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 	
 	*/
 	
-	public Email getEmailContent(String estimateId, HashMap queryMap)throws Exception
+	public Email getEmailContent(String estimateId, HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/"+estimateId+"/email"; //No I18N
@@ -563,7 +563,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 	
 	*/
 	
-	public File bulkExport(HashMap queryMap)throws Exception
+	public File bulkExport(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/pdf"; //No I18N
@@ -588,7 +588,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 	
 	*/
 	
-	public File bulkPrint(HashMap queryMap)throws Exception
+	public File bulkPrint(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/print"; //No I18N
@@ -622,7 +622,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/address/billing"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 	
@@ -657,7 +657,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/address/shipping"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", shippingAddress.toJSON().put("is_update_customer", shippingAddress.isUpdateCustomer()).toString());
 		
@@ -778,7 +778,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/comments"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("description", description);
@@ -819,7 +819,7 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		
 		String urlString = url+"/"+estimateId+"/comments/"+commentId; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("description", description);

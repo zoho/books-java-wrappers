@@ -180,7 +180,7 @@ public class SettingsApi extends API
 		
 		String urlString = url+"/preferences"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", preference.toJSON().toString());
 		
@@ -213,7 +213,7 @@ public class SettingsApi extends API
 		
 		String urlString = url+"/units"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -305,7 +305,7 @@ public class SettingsApi extends API
 	
 		String urlString = url+"/invoices";  //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", invoiceSetting.toJSON().toString());
 		
@@ -359,7 +359,7 @@ public class SettingsApi extends API
 		
 		String urlString = url+"/invoices/notesandterms"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -422,7 +422,7 @@ public class SettingsApi extends API
 		
 		String urlString = url+"/estimates";  //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", estimateSetting.toJSON().toString());
 		
@@ -477,7 +477,7 @@ public class SettingsApi extends API
 		
 		String urlString = url+"/estimates/notesandterms";  //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -540,7 +540,7 @@ public class SettingsApi extends API
 		
 		String urlString = url+"/creditnotes";  //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", creditnoteSetting.toJSON().toString());
 		
@@ -594,7 +594,7 @@ public class SettingsApi extends API
 		
 		String urlString = url+"/creditnotes/notesandterms"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -640,7 +640,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 	
 	*/
 	
-	public CurrencyList getCurrencies(HashMap queryMap)throws Exception
+	public CurrencyList getCurrencies(HashMap<String, Object> queryMap)throws Exception
 	{
 	
 		String urlString = url+"/currencies"; //No I18N
@@ -701,7 +701,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", currency.toJSON().toString());
 		
@@ -732,7 +732,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies/"+currency.getCurrencyId(); //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", currency.toJSON().toString());
 		
@@ -800,7 +800,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 	
 	*/
 	
-	public ExchangeRateList getExchangeRates(String currencyId, HashMap queryMap)throws Exception
+	public ExchangeRateList getExchangeRates(String currencyId, HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/currencies/"+currencyId+"/exchangerates"; //No I18N
@@ -865,7 +865,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies/"+currencyId+"/exchangerates"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", exchangeRate.toJSON().toString());
 		
@@ -898,7 +898,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/currencies/"+currencyId+"/exchangerates/"+exchangeRate.getExchangeRateId(); //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", exchangeRate.toJSON().toString());
 		
@@ -1013,7 +1013,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxes"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", tax.toJSON().toString());
 		
@@ -1044,7 +1044,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxes/"+tax.getTaxId(); //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", tax.toJSON().toString());
 		
@@ -1131,7 +1131,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxgroups"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -1173,7 +1173,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/taxgroups/"+taxGroupId; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -1268,7 +1268,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/openingbalances"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", openingBalance.toJSON().toString());
 		
@@ -1298,7 +1298,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/openingbalances"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", openingBalance.toJSON().toString());
 		
@@ -1468,7 +1468,7 @@ Allowed Values: <i>Currencies.ExcludeBaseCurrency</i></td></tr>
 		
 		String urlString = url+"/autoreminders/"+reminderId; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", autoReminder.toJSON().toString());
 		
@@ -1505,7 +1505,7 @@ Allowed Values: <i>overdue_reminder</i> and <i>open_reminder</i></td></tr>
 	
 	*/
 	
-	public ManualReminderList getManualReminders(HashMap queryMap)throws Exception
+	public ManualReminderList getManualReminders(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/manualreminders"; //No I18N
@@ -1568,7 +1568,7 @@ Allowed Values: <i>overdue_reminder</i> and <i>open_reminder</i></td></tr>
 		
 		String urlString = url+"/manualreminders/"+reminderId;  //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", manualReminder.toJSON().toString());
 		

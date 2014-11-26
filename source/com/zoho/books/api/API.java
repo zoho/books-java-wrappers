@@ -46,10 +46,10 @@ public class API
 		 * @return Returns a HashMap.
 		 */
 		
-		public HashMap getQueryMap() 
+		public HashMap<String, Object> getQueryMap() 
 		{
 			
-				HashMap queryMap = new HashMap();
+				HashMap<String, Object> queryMap = new HashMap<String, Object>();
 				
 				queryMap.put("authtoken", authToken);
 				queryMap.put("organization_id", organizationId);
@@ -67,12 +67,12 @@ public class API
 		 * @return Returns a HashMap.
 		 */
 		
-		public HashMap getQueryMap(HashMap queryMap) 
+		public HashMap<String, Object> getQueryMap(HashMap<String, Object> queryMap) 
 		{
 			
 				if(queryMap == null || queryMap.isEmpty())
 				{
-						queryMap = new HashMap();
+						queryMap = new HashMap<String, Object>();
 				}
 				
 				queryMap.put("authtoken", authToken);

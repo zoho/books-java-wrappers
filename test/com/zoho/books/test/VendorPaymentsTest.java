@@ -39,7 +39,7 @@ public class VendorPaymentsTest
 		
 		
 		
-		HashMap<String, String> hashMap = new HashMap<String, String>();
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		
 		hashMap.put("filter_by", "PaymentMode.All");
 		

@@ -14,6 +14,8 @@ public class FromEmail
 	private boolean selected = true;
 	private String email = "";
 	
+	private boolean isOrgEmailId;
+	
 	
 	
 	/**
@@ -93,5 +95,30 @@ public class FromEmail
 	{
 		return email;
 	}
+	
+	/**
+	 * Get the email is from org email id or not.
+	 *  
+	 * @return Returns true if the email is from org email id. 
+	 */
+
+	public boolean isOrgEmailId()
+	{
+		return isOrgEmailId;
+	}
+	
+	/**
+	 * Set the email id is org email id or not.
+	 * 
+	 * @param isOrgEmailId True or false to set the email id is org email id or not.
+	 */
+
+	public void setOrgEmailId(boolean isOrgEmailId) 
+	{
+		this.isOrgEmailId = isOrgEmailId;
+	}
+	
+	
+	
 	
 }

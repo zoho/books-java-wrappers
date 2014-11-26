@@ -113,7 +113,7 @@ public class OrganizationsApi extends API
 	public Organization create(Organization organization)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", organization.toJSON().toString());
 		
@@ -144,7 +144,7 @@ public class OrganizationsApi extends API
 		
 		String urlString = url+"/"+organization.getOrganizationId();
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", organization.toJSON().toString());
 		

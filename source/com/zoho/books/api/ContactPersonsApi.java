@@ -74,7 +74,7 @@ public class ContactPersonsApi extends API
 		
 		String urlString = url+"/contactpersons"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", contactPerson.toJSON().toString());
 		
@@ -91,6 +91,7 @@ public class ContactPersonsApi extends API
 	  
 	* It returns a ContactPerson object.
 	
+	* @param contactId ID of the contact.
 	
 	* @param contactPersonId ID of the contact person.
 	
@@ -98,10 +99,10 @@ public class ContactPersonsApi extends API
 	
 	*/
 	
-	public ContactPerson get(String contactPersonId)throws Exception
+	public ContactPerson get(String contactId, String contactPersonId)throws Exception
 	{
 		
-		String urlString = url+"/contactpersons/"+contactPersonId;  //No I18N
+		String urlString = url+"/"+contactId+"/contactpersons/"+contactPersonId;  //No I18N
 		
 		String response = ZohoHTTPClient.get(urlString, getQueryMap());
 		
@@ -132,7 +133,7 @@ public class ContactPersonsApi extends API
 		
 		String urlString = url+"/contactpersons/"+contactPerson.getContactPersonId(); //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", contactPerson.toJSON().toString());
 		

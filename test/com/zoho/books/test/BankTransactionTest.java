@@ -45,7 +45,7 @@ public class BankTransactionTest
 		
 			String accountId = getBankaccounts.get(0).getAccountId();
 		
-			HashMap<String, String> queryMap = new HashMap<String, String>();
+			HashMap<String, Object> queryMap = new HashMap<String, Object>();
 			queryMap.put("account_id", accountId); 
 		
 			queryMap.put("transaction_type", "expense");

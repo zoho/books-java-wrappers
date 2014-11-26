@@ -106,7 +106,7 @@ public class ContactsApi extends API
 	public Contact create(String contactName, String currencyId)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		Contact contact = new Contact();
 		
@@ -140,7 +140,7 @@ public class ContactsApi extends API
 	public Contact create(Contact contact)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", contact.toJSON().toString());
 		
@@ -199,7 +199,7 @@ public class ContactsApi extends API
 		
 		String urlString = url+"/"+contact.getContactId();
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", contact.toJSON().toString());
 		
@@ -288,7 +288,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 	
 	*/
 	
-	public ContactList getContacts(HashMap queryMap)throws Exception
+	public ContactList getContacts(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
@@ -443,22 +443,25 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 	
 	*/
 	
-	public String sendEmailStatement(String contactId, Email email, HashMap paramMap)throws Exception
+	public String sendEmailStatement(String contactId, Email email, HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/"+contactId+"/statements/email"; //No I18N
 		
 		if(paramMap == null)
 		{
-			paramMap = new HashMap();
+			paramMap = new HashMap<String, Object>();
 		}
 		
 		paramMap.put("JSONString", email.toJSON().toString());
 		
 		ArrayList<File> files = email.getAttachments();
 		
-		HashMap fileBody = new HashMap(files.size());
-		fileBody.put("attachments", files);
+		HashMap<String, Object> fileBody = new HashMap<String, Object>();
+		if(files != null && !files.isEmpty())
+		{
+			fileBody.put("attachments", files);
+		}
 		
 		String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
 		
@@ -494,7 +497,7 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 	
 	*/
 	
-	public Email getStatementMailContent(String contactId, HashMap queryMap)throws Exception
+	public Email getStatementMailContent(String contactId, HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/"+contactId+"/statements/email"; //No I18N
@@ -533,23 +536,26 @@ Allowed Values: <i>contact_name, first_name, last_name, email, outstanding_recei
 	
 	*/
 	
-	public String sendEmailContact(String contactId, Email email, HashMap paramMap)throws Exception
+	public String sendEmailContact(String contactId, Email email, HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/"+contactId+"/email"; //No I18N
 		
 		if(paramMap == null)
 		{
-			paramMap = new HashMap();
+			paramMap = new HashMap<String, Object>();
 		}
 		
 		paramMap.put("JSONString", email.toJSON().toString());
 		
 		ArrayList<File> files = email.getAttachments();
 		
-		HashMap fileBody = new HashMap(files.size());
+		HashMap<String, Object> fileBody = new HashMap<String, Object>();
 		
-		fileBody.put("attachments", files);
+		if(files != null && !files.isEmpty())
+		{
+			fileBody.put("attachments", files);
+		}
 		
 		String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
 		

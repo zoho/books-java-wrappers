@@ -75,7 +75,7 @@ public class VendorPaymentsApi extends API
 	public VendorPayment create(VendorPayment vendorPayment)throws Exception
 	{
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", vendorPayment.toJSON().toString());
 		
@@ -133,7 +133,7 @@ public class VendorPaymentsApi extends API
 		
 		String urlString = url+"/"+vendorPayment.getPaymentId();
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", vendorPayment.toJSON().toString());
 		
@@ -226,7 +226,7 @@ Allowed Values: <i>vendor_name, date, reference_number, amount and balance</i></
 	
 	*/
 	
-	public VendorPaymentList getVendorPayments(HashMap queryMap)throws Exception
+	public VendorPaymentList getVendorPayments(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));

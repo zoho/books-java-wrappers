@@ -71,7 +71,7 @@ public class InvoiceApiTest
 		
 		boolean show_comment_to_clients = true;
 		
-		File file1 = new File("/home/likewise-open/ZOHOCORP/ramesh-2099/inv.jpg");
+		File file1 = new File("{Dir_name}/file.jpg");
 		
 		String invoicePaymentId = "36991000000051035";
 		
@@ -85,7 +85,7 @@ public class InvoiceApiTest
 		
 		
 		
-		HashMap<String, String> hashMap = new HashMap<String, String>();
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		
 		/*hashMap.put("filter_by", "Status.Paid");
 		hashMap.put("sort_column", "invoice_number");*/
@@ -196,14 +196,14 @@ public class InvoiceApiTest
 			InvoiceList invoices = invoiceApi.getInvoices(hashMap);
 			
 			String invoiceId = invoices.get(0).getInvoiceId();
+			
+			Invoice invoice = invoiceApi.get(invoiceId);
+			
+			invoice.setAllowPartialPayments(true);
 		
 			Invoice create = invoiceApi.create(customerId, contactPersonId, description);
 		
 			Invoice createInvoice = invoiceApi.create(newInvoice, hashMap); 
-		
-			Invoice invoice = invoiceApi.get(invoiceId);
-			
-			invoice.setAllowPartialPayments(true);
 		
 			Invoice update = invoiceApi.update(invoice, hashMap);
 		
@@ -292,11 +292,12 @@ public class InvoiceApiTest
 			String delete = invoiceApi.delete(invoiceId);
 			
 			
-			//System.out.println(getAttachment);
+			//System.out.println(getComments);
 		
 		}
 		catch(BooksException be)
 		{
+			//System.out.println("Code: "+be.getCode()+"	Message: "+be.getMessage());
 			
 			throw be;
 		}

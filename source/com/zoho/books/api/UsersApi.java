@@ -88,7 +88,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 	
 	*/
 	
-	public UserList getUsers(HashMap queryMap)throws Exception
+	public UserList getUsers(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
@@ -170,7 +170,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 	public User create(User user)throws Exception
 	{
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", user.toJSON().toString());
 		
@@ -201,7 +201,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+user.getUserId();
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", user.toJSON().toString());
 		

@@ -3,6 +3,7 @@
 package com.zoho.books.service;
 
 import com.zoho.books.api.InvoicesApi;
+import com.zoho.books.api.PurchaseOrderApi;
 import com.zoho.books.api.RecurringInvoicesApi;
 import com.zoho.books.api.CreditNotesApi;
 import com.zoho.books.api.EstimatesApi;
@@ -14,6 +15,8 @@ import com.zoho.books.api.JournalsApi;
 import com.zoho.books.api.BaseCurrencyAdjustmentsApi;
 import com.zoho.books.api.ContactsApi;
 import com.zoho.books.api.ContactPersonsApi;
+import com.zoho.books.api.SalesOrderApi;
+import com.zoho.books.api.VendorCreditsApi;
 import com.zoho.books.api.VendorPaymentsApi;
 import com.zoho.books.api.BankAccountsApi;
 import com.zoho.books.api.BankTransactionsApi;
@@ -421,6 +424,51 @@ public class ZohoBooks
 		ItemsApi itemsApi = new ItemsApi(authToken, organizationId);
 		
 		return itemsApi;
+	}
+	
+	/**
+	 * Get an instance of sales order api.
+	 * 
+	 * @return Returns the SalesOrderApi object.
+	 */
+	
+	public SalesOrderApi getSalesOrderApi()
+	{
+		
+		SalesOrderApi salesOrderApi = new SalesOrderApi(authToken, organizationId);
+		
+		return salesOrderApi;
+		
+	}
+	
+	/**
+	 * Get an instance of purchase order api.
+	 * 
+	 * @return Returns the PurchaseOrderApi object.
+	 */
+	
+	public PurchaseOrderApi getPurchaseOrderApi()
+	{
+		
+		PurchaseOrderApi purchaseOrderApi = new PurchaseOrderApi(authToken, organizationId);
+		
+		return purchaseOrderApi;
+		
+	}
+	
+	/**
+	 * Get the vendor credits api.
+	 * 
+	 * @return Returns the VendorCreditsApi object.
+	 */
+	
+	public VendorCreditsApi getVendorCreditsApi()
+	{
+		
+		VendorCreditsApi vendorCreditsApi = new VendorCreditsApi(authToken, organizationId);
+		
+		return vendorCreditsApi;
+		
 	}
 	
 	

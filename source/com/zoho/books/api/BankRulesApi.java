@@ -73,7 +73,7 @@ public class BankRulesApi extends API
 	
 	public RuleList getRules(String accountId)throws Exception
 	{
-		HashMap queryMap = getQueryMap();
+		HashMap<String, Object> queryMap = getQueryMap();
 		
 		if(accountId != null)
 		{
@@ -132,7 +132,7 @@ public class BankRulesApi extends API
 	
 	public Rule create(Rule rule)throws Exception
 	{
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", rule.toJSON().toString());
 		
@@ -162,7 +162,7 @@ public class BankRulesApi extends API
 	{
 		String urlString = url+"/"+rule.getRuleId();
 	
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", rule.toJSON().toString());
 		

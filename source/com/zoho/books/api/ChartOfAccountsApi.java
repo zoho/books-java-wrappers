@@ -89,7 +89,7 @@ public class ChartOfAccountsApi extends API
 	public ChartOfAccount create(ChartOfAccount chartOfAccount)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", chartOfAccount.toJSON().toString());
 		
@@ -148,7 +148,7 @@ public class ChartOfAccountsApi extends API
 		
 		String urlString = url+"/"+chartOfAccount.getAccountId();
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", chartOfAccount.toJSON().toString());
 		
@@ -273,7 +273,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 	
 	*/
 	
-	public ChartOfAccountList getChartOfAccounts(HashMap queryMap)throws Exception
+	public ChartOfAccountList getChartOfAccounts(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
@@ -322,7 +322,7 @@ Allowed Values: <i>transaction_date, payee, glname, transaction_type_formatted, 
 	
 	*/
 	
-	public TransactionList getTransactions(String accountId, HashMap queryMap)throws Exception
+	public TransactionList getTransactions(String accountId, HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/transactions"; //No I18N

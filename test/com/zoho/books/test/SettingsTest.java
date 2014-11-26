@@ -85,7 +85,7 @@ public class SettingsTest
 		String unitId = "";
 		
 		
-		HashMap<String, String> hashMap = new HashMap<String, String>();
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		
 		hashMap.put("from_date", "2014-02-21");
 		hashMap.put("is_current_date", "true");

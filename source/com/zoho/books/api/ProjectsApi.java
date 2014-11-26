@@ -155,7 +155,7 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 	
 	*/
 	
-	public ProjectList getProjects(HashMap queryMap)throws Exception
+	public ProjectList getProjects(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
@@ -212,7 +212,7 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 	
 	public Project create(Project project)throws Exception
 	{
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", project.toJSON().toString());
 		
@@ -245,7 +245,7 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 		
 		String urlString = url+"/"+project.getProjectId();
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", project.toJSON().toString());
 		
@@ -369,7 +369,7 @@ Allowed Values: <i>project_name, customer_name, rate</i> and <i>created_time</i>
 		
 		String urlString = url+"/"+projectId+"/clone"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -418,7 +418,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 	
 	*/
 	
-	public TaskList getTasks(String projectId, HashMap queryMap)throws Exception
+	public TaskList getTasks(String projectId, HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/"+projectId+"/tasks"; //No I18N
@@ -455,7 +455,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/tasks"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", task.toJSON().toString());
 		
@@ -519,7 +519,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/tasks/"+task.getTaskId(); //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", task.toJSON().toString());
 		
@@ -648,7 +648,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/users"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -698,7 +698,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/users/invite"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", user.toJSON().toString());
 		
@@ -732,7 +732,7 @@ Allowed Values: <i>task_name, billed_hours, log_time</i> and <i>un_billed_hours<
 		
 		String urlString = url+"/"+projectId+"/users/"+user.getUserId(); //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", user.toJSON().toString());
 		
@@ -815,7 +815,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 	
 	*/
 	
-	public TimeEntryList getTimeEntries(HashMap queryMap)throws Exception
+	public TimeEntryList getTimeEntries(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/timeentries"; //No I18N
@@ -850,7 +850,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 		
 		String urlString = url+"/timeentries"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", timeEntry.toJSON().toString());
 		
@@ -911,7 +911,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 		
 		String urlString = url+"/timeentries/"+timeEntry.getTimeEntryId(); //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", timeEntry.toJSON().toString());
 		
@@ -973,7 +973,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 	
 	*/
 	
-	public String deleteTimeEntries(HashMap queryMap)throws Exception
+	public String deleteTimeEntries(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/timeentries"; //No I18N
@@ -1094,7 +1094,7 @@ Allowed Values: <i>project_name, task_name, user_name, log_date, timer_started_a
 	{
 		String urlString = url+"/"+projectId+"/comments"; //No I18N
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -1173,7 +1173,7 @@ Allowed Values: <i>invoice_number, date, total, balance</i> and <i>created_time<
 	*/
 	
 	
-	public InvoiceList getInvoices(String projectId, HashMap queryMap)throws Exception
+	public InvoiceList getInvoices(String projectId, HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/"+projectId+"/invoices"; //No I18N

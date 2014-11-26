@@ -89,7 +89,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 	
 	*/
 	
-	public BankAccountList getBankaccounts(HashMap queryMap)throws Exception
+	public BankAccountList getBankaccounts(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
@@ -118,7 +118,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 	
 	public BankAccount create(BankAccount bankAccount)throws Exception
 	{
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", bankAccount.toJSON().toString());
 		
@@ -176,7 +176,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 	{
 		String urlString = url+"/"+bankAccount.getAccountId(); //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", bankAccount.toJSON().toString());
 		

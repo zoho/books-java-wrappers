@@ -2,7 +2,6 @@
 
 package com.zoho.books.model;
 
-import java.util.List;
 import java.util.ArrayList;
 
 /**

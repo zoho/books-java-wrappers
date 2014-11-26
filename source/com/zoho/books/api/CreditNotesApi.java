@@ -149,7 +149,7 @@ public class CreditNotesApi extends API
 	public CreditNote create(String customerId, String accountId, String itemName)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		CreditNote creditNote = new CreditNote();
 		
@@ -200,10 +200,10 @@ public class CreditNotesApi extends API
 	
 	*/
 	
-	public CreditNote create(CreditNote creditNote, HashMap paramMap)throws Exception
+	public CreditNote create(CreditNote creditNote, HashMap<String, Object> paramMap)throws Exception
 	{	
 		
-		HashMap requestBody = getQueryMap(paramMap);
+		HashMap<String, Object> requestBody = getQueryMap(paramMap);
 		
 		requestBody.put("JSONString", creditNote.toJSON().toString());
 		
@@ -264,12 +264,12 @@ public class CreditNotesApi extends API
 	
 	*/
 	
-	public CreditNote update(CreditNote creditNote, HashMap paramMap)throws Exception
+	public CreditNote update(CreditNote creditNote, HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/"+creditNote.getCreditnoteId();
 		
-		HashMap requestBody = getQueryMap(paramMap);
+		HashMap<String, Object> requestBody = getQueryMap(paramMap);
 		
 		requestBody.put("JSONString", creditNote.toJSON().toString());
 		
@@ -373,7 +373,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 	
 	*/
 	
-	public CreditNoteList getCreditNotes(HashMap queryMap)throws Exception
+	public CreditNoteList getCreditNotes(HashMap<String, Object> queryMap)throws Exception
 	{
 			
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));	
@@ -409,7 +409,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 	
 	*/
 	
-	public String sendEmail(String creditNoteId, Email email, HashMap paramMap)throws Exception
+	public String sendEmail(String creditNoteId, Email email, HashMap<String, Object> paramMap)throws Exception
 	{
 		
 		String urlString = url+"/"+creditNoteId+"/email"; //No I18N
@@ -417,14 +417,14 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		if(paramMap == null)
 		{
-			paramMap = new HashMap();
+			paramMap = new HashMap<String, Object>();
 		}
 		
 		paramMap.put("JSONString", email.toJSON().toString());
 		
 		ArrayList<File> files = email.getAttachments();
 		
-		HashMap fileBody = new HashMap(files.size());
+		HashMap<String, Object> fileBody = new HashMap<String, Object>(files.size());
 		
 		fileBody.put("attachments", files);
 		
@@ -484,7 +484,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 	
 	*/
 	
-	public Email getEmailContent(String creditNoteId, HashMap queryMap)throws Exception
+	public Email getEmailContent(String creditNoteId, HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/"+creditNoteId+"/email"; //No I18N
@@ -578,7 +578,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/address/billing"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 		
@@ -613,7 +613,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/address/shipping"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", shippingAddress.toJSON().put("is_update_customer", shippingAddress.isUpdateCustomer()).toString());
 		
@@ -706,7 +706,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/invoices"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -820,7 +820,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/refunds"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", creditnoteRefund.toJSON().toString());
 		
@@ -883,7 +883,7 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		
 		String urlString = url+"/"+creditNoteId+"/refunds/"+creditnoteRefund.getCreditnoteRefundId(); //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", creditnoteRefund.toJSON().toString());
 		
@@ -981,7 +981,7 @@ Allowed Values: <i>refund_mode, reference_number, date, creditnote_number, custo
 	
 	*/
 	
-	public CreditnoteRefundList getCreditnoteRefunds(HashMap queryMap)throws Exception
+	public CreditnoteRefundList getCreditnoteRefunds(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/refunds"; //No I18N
@@ -1020,7 +1020,7 @@ Allowed Values: <i>refund_mode, reference_number, date, creditnote_number, custo
 		
 		String urlString = url+"/"+creditNoteId+"/comments"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("description", description);

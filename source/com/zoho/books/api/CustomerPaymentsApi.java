@@ -75,7 +75,7 @@ public class CustomerPaymentsApi extends API
 	public CustomerPayment create(CustomerPayment customerPayment)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", customerPayment.toJSON().toString());
 		
@@ -132,7 +132,7 @@ public class CustomerPaymentsApi extends API
 	{
 		String urlString = url+"/"+customerPayment.getPaymentId();
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", customerPayment.toJSON().toString());
 		
@@ -227,7 +227,7 @@ Allowed Values: <i>customer_name, unused_amount, amount, bcy_amount, date, refer
 	
 	*/
 	
-	public CustomerPaymentList getCustomerPayments(HashMap queryMap)throws Exception
+	public CustomerPaymentList getCustomerPayments(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));

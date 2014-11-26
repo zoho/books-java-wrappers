@@ -30,7 +30,7 @@ public class Invoice
 	private String currencyCode = "";
 	private double total = 0.00;
 	private double balance = 0.00;
-	private boolean isEmailed = true;
+	private boolean isEmailed = false;
 	private int remindersSent = 0;
 	private String paymentExpectedDate = "";
 	private String lastPaymentDate = "";
@@ -69,7 +69,6 @@ public class Invoice
 	private double creditsApplied = 0.00;
 	private double taxAmountWithheld = 0.00;
 	
-	
 	private double amountApplied = 0.00;
 	
 	
@@ -92,6 +91,17 @@ public class Invoice
 	
 	private List<CustomField> customFields = new ArrayList<CustomField>();
 	
+	
+	private boolean isViewedByClient;
+	private String clientViewedTime;
+	private boolean stopReminderUntilPaymentExpectedDate;
+	private String templateType;
+	private boolean isAutobillEnabled;
+	private String invoiceUrl;
+	
+	private String taxId;
+	private String taxAuthorityId;
+	private String taxExemptionId;
 	
 	
 	/**
@@ -1684,6 +1694,208 @@ public class Invoice
 	}
 	
 	
+	
+	/**
+	 * Get the invoice is viewed by client or not.
+	 * 
+	 * @return Returns true if the invoice is viewed by client else returns false.
+	 */
+	
+	public boolean isViewedByClient() 
+	{
+		return isViewedByClient;
+	}
+	
+	/**
+	 * Set the invoice is viewed by client or not.
+	 * 
+	 * @param isViewedByClient True or false to set the invoice is viewed by client or not.
+	 */
+
+	public void setViewedByClient(boolean isViewedByClient) 
+	{
+		this.isViewedByClient = isViewedByClient;
+	}
+	
+	/**
+	 * Get the client viewed time.
+	 * 
+	 * @return Returns the client viewed time.
+	 */
+
+	public String getClientViewedTime() 
+	{
+		return clientViewedTime;
+	}
+	
+	/**
+	 * Set the client viewed time.
+	 * 
+	 * @param clientViewedTime Client viewed time for the invoice.
+	 */
+
+	public void setClientViewedTime(String clientViewedTime) 
+	{
+		this.clientViewedTime = clientViewedTime;
+	}
+	
+	/**
+	 * Get the invoice is stop reminder until payment expected date.
+	 * 
+	 * @return Returns true if the invoice is stop reminder until payment expected date else returns false.
+	 */
+
+	public boolean isStopReminderUntilPaymentExpectedDate() 
+	{
+		return stopReminderUntilPaymentExpectedDate;
+	}
+	
+	/**
+	 * Set the invoice is stop reminder until payment expected date or not.
+	 * 
+	 * @param stopReminderUntilPaymentExpectedDate True or false to set the invoice is stop reminder until payment expected date or not.
+	 */
+
+	public void setStopReminderUntilPaymentExpectedDate(boolean stopReminderUntilPaymentExpectedDate) 
+	{
+		this.stopReminderUntilPaymentExpectedDate = stopReminderUntilPaymentExpectedDate;
+	}
+	
+	/**
+	 * Get the template type.
+	 * 
+	 * @return Returns the template type.
+	 */
+
+	public String getTemplateType() 
+	{
+		return templateType;
+	}
+	
+	/**
+	 * Set the template type.
+	 * 
+	 * @param templateType Type of the template.
+	 */
+
+	public void setTemplateType(String templateType)
+	{
+		this.templateType = templateType;
+	}
+	
+	/**
+	 * Get the invoice is auto bill enabled or not.
+	 * 
+	 * @return Returns true if the invoice is auto bill enabled else returns false.
+	 */
+
+	public boolean isAutobillEnabled() 
+	{
+		return isAutobillEnabled;
+	}
+	
+	/**
+	 * Set the invoice is auto bill enabled or not.
+	 * 
+	 * @param isAutobillEnabled True or false to set the invoice is auto bill enabled or not.
+	 */
+
+	public void setAutobillEnabled(boolean isAutobillEnabled) 
+	{
+		this.isAutobillEnabled = isAutobillEnabled;
+	}
+	
+	/**
+	 * Get the invoice URL.
+	 * 
+	 * @return Returns the invoice URL.
+	 */
+
+	public String getInvoiceUrl() 
+	{
+		return invoiceUrl;
+	}
+	
+	/**
+	 * Set the invoice URL.
+	 * 
+	 * @param invoiceUrl URL for the invoice.
+	 */
+
+	public void setInvoiceUrl(String invoiceUrl) 
+	{
+		this.invoiceUrl = invoiceUrl;
+	}
+	
+	
+
+	/**
+	 * Get the tax id(US Edition only).
+	 * 
+	 * @return Returns the tax id(US Edition only).
+	 */
+	
+	public String getTaxId() 
+	{
+		return taxId;
+	}
+	
+	/**
+	 * Set the tax id(US Edition only).
+	 * 
+	 * @param taxId ID of the tax(US Edition only).
+	 */
+
+	public void setTaxId(String taxId)
+	{
+		this.taxId = taxId;
+	}
+	
+	/**
+	 * Get the tax authority id(US Edition only).
+	 * 
+	 * @return Returns the tax authority id(US Edition only).
+	 */
+
+	public String getTaxAuthorityId() 
+	{
+		return taxAuthorityId;
+	}
+	
+	/**
+	 * Set the tax authority id(US Edition only).
+	 * 
+	 * @param taxAuthorityId ID of the tax authority(US Edition only).
+	 */
+
+	public void setTaxAuthorityId(String taxAuthorityId) 
+	{
+		this.taxAuthorityId = taxAuthorityId;
+	}
+	
+	/**
+	 * Get the tax exemption id(US Edition only).
+	 * 
+	 * @return Returns the tax exemption id(US Edition only).
+	 */
+
+	public String getTaxExemptionId() 
+	{
+		return taxExemptionId;
+	}
+	
+	/**
+	 * Set the tax exemption id(US Edition only).
+	 * 
+	 * @param taxExemptionId ID of the tax exemption(US Edition only).
+	 */
+
+	public void setTaxExemptionId(String taxExemptionId) 
+	{
+		this.taxExemptionId = taxExemptionId;
+	}
+	
+
 	/**
 	
 	* Convert Invoice object into JSONObject.
@@ -1812,10 +2024,21 @@ public class Invoice
 			jsonObject.put("adjustment_description", adjustmentDescription);
 		}
 		
+		if(taxId != null && !taxId.equals(""))
+		{
+			jsonObject.put("tax_id", taxId);
+		}
+		if(taxAuthorityId != null && !taxAuthorityId.equals(""))
+		{
+			jsonObject.put("tax_authority_id", taxAuthorityId);
+		}
+		if(taxExemptionId != null && !taxExemptionId.equals(""))
+		{
+			jsonObject.put("tax_exemption_id", taxExemptionId);
+		}
+		
 		return jsonObject;
 	}
-	
-	
 	
 	
 	

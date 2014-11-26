@@ -41,6 +41,12 @@ public class LineItem
 	private double amount = 0.00;
 	
 	
+	private double discountAmount;
+	
+	private String taxExemptionId;
+	private String salesorderItemId;
+	private String stockOnHand;
+	private boolean isInvoiced;
 	
 	/**
 	
@@ -697,6 +703,119 @@ public class LineItem
 	}
 	
 	
+	
+	/**
+	 * Get the discount amount.
+	 * 
+	 * @return Returns the discount amount.
+	 */
+	
+	public double getDiscountAmount() 
+	{
+		return discountAmount;
+	}
+	
+	/**
+	 * Set the discount amount.
+	 * 
+	 * @param discountAmount Discount amount of the item.
+	 */
+
+	public void setDiscountAmount(double discountAmount)
+	{
+		this.discountAmount = discountAmount;
+	}
+	
+	
+	
+	/**
+	 * Get the tax exemption id(US Edition only).
+	 * 
+	 * @return Returns the tax exemption id.
+	 */
+
+	public String getTaxExemptionId() 
+	{
+		return taxExemptionId;
+	}
+	
+	/**
+	 * Set the tax exemption id(US Edition only).
+	 * 
+	 * @param taxExemptionId Tax exemption id for US Edition.
+	 */
+
+	public void setTaxExemptionId(String taxExemptionId) 
+	{
+		this.taxExemptionId = taxExemptionId;
+	}
+	
+	/**
+	 * Get the sales order item id.
+	 * 
+	 * @return Returns the sales order item id.
+	 */
+
+	public String getSalesorderItemId() 
+	{
+		return salesorderItemId;
+	}
+	
+	/**
+	 * Set the sales order item id.
+	 * 
+	 * @param salesorderItemId ID of the sales order item.
+	 */
+
+	public void setSalesorderItemId(String salesorderItemId)
+	{
+		this.salesorderItemId = salesorderItemId;
+	}
+	
+	/**
+	 * Get the stack on hand.
+	 * 
+	 * @return Returns the stack on hand.
+	 */
+
+	public String getStockOnHand() 
+	{
+		return stockOnHand;
+	}
+	
+	/**
+	 * Set the stack on hand.
+	 * 
+	 * @param stockOnHand Stack on hand.
+	 */
+
+	public void setStockOnHand(String stockOnHand)
+	{
+		this.stockOnHand = stockOnHand;
+	}
+	
+	/**
+	 * Get the item is invoiced or not.
+	 * 
+	 * @return Returns true if the item is invoiced else returns false.
+	 */
+
+	public boolean isInvoiced() 
+	{
+		return isInvoiced;
+	}
+	
+	/**
+	 * Set the item is invoiced or not.
+	 * 
+	 * @param isInvoiced True or flase to set the item is invoiced or not.
+	 */
+
+	public void setInvoiced(boolean isInvoiced) 
+	{
+		this.isInvoiced = isInvoiced;
+	}
+
 	/**
 	
 	* Convert Item object into JSONObject.
@@ -749,7 +868,7 @@ public class LineItem
 			jsonObject.put("item_order", itemOrder);
 		}
 		
-		if((Double)rate != null)
+		if((Double)rate != null && rate > 0)
 		{
 			jsonObject.put("rate", rate);
 		}
@@ -777,6 +896,11 @@ public class LineItem
 		if(debitOrCredit != null && !debitOrCredit.equals(""))
 		{
 			jsonObject.put("debit_or_credit", debitOrCredit);
+		}
+		
+		if(taxExemptionId != null && !taxExemptionId.equals(""))
+		{
+			jsonObject.put("tax_exemption_id", taxExemptionId);
 		}
 		
 		return jsonObject;

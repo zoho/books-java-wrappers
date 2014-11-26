@@ -74,7 +74,7 @@ public class JournalsApi extends API
 	public Journal create(Journal journal)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", journal.toJSON().toString());
 		
@@ -132,7 +132,7 @@ public class JournalsApi extends API
 		
 		String urlString = url+"/"+journal.getJournalId();
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", journal.toJSON().toString());
 		
@@ -213,7 +213,7 @@ Allowed Values: <i>journal_date, entry_number, reference_number</i> and <i>total
 	
 	*/
 	
-	public JournalList getJournals(HashMap queryMap)throws Exception
+	public JournalList getJournals(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));

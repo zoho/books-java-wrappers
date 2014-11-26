@@ -54,15 +54,15 @@ public class EstimatesApiTest
 		
 		
 		
-		HashMap<String, String> hashMap = new HashMap<String, String>();
-		hashMap.put("filter_by", "Status.Sent");
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put("filter_by", "Status.All");
 		hashMap.put("sort_column", "estimate_number");
 		hashMap.put("estimate_ids", estimateIds);
 		
 		Estimate estimates = new Estimate();
 		
 		estimates.setEstimateNumber("EST-9"); //No I18N
-		estimates.setTemplateId(templateId);
+		//estimates.setTemplateId(templateId);
 		estimates.setReferenceNumber("122");
 		estimates.setCustomerId(customerId);
 		estimates.setDate("2014-02-21");
@@ -124,14 +124,14 @@ public class EstimatesApiTest
 			EstimateList getEstimates = estimatesApi.getEstimates(hashMap);
 			
 			String estimateId = getEstimates.get(0).getEstimateId();
+			
+			Estimate get = estimatesApi.get(estimateId);
+			
+			get.setIsDiscountBeforeTax(true);
 
 			Estimate create = estimatesApi.create(customerId, itemName);
 	
 			Estimate createEstimate = estimatesApi.create(estimates, hashMap);
-	
-			Estimate get = estimatesApi.get(estimateId);
-			
-			get.setIsDiscountBeforeTax(true);
 	
 			Estimate update = estimatesApi.update(get, hashMap);
 	
@@ -176,7 +176,7 @@ public class EstimatesApiTest
 			String delete = estimatesApi.delete(estimateId);
 		
 
-			//System.out.println(sendEmail);
+			//System.out.println(getComments);
 		
 		}
 		catch(BooksException be)

@@ -4,6 +4,7 @@ package com.zoho.books.parser;
 
 import com.zoho.books.model.Estimate;
 import com.zoho.books.model.LineItem;
+import com.zoho.books.model.PaymentGateway;
 import com.zoho.books.model.Tax;
 import com.zoho.books.model.CustomField;
 import com.zoho.books.model.Address;
@@ -100,6 +101,14 @@ public class EstimateParser
 			lineItem.setTaxType(lineItems.getJSONObject(i).getString("tax_type"));
 			lineItem.setTaxPercentage(lineItems.getJSONObject(i).getInt("tax_percentage")); //No I18N
 			lineItem.setItemTotal(lineItems.getJSONObject(i).getDouble("item_total"));	//No I18N
+			if(lineItems.getJSONObject(i).has("discount_amount"))
+			{
+				lineItem.setDiscountAmount(lineItems.getJSONObject(i).getDouble("discount_amount"));	//No I18N
+			}
+			if(lineItems.getJSONObject(i).has("tax_exemption_id"))
+			{
+				lineItem.setTaxExemptionId(lineItems.getJSONObject(i).getString("tax_exemption_id"));
+			}
 			
 			lineItemsList.add(i, lineItem);
 		}
@@ -184,6 +193,82 @@ public class EstimateParser
 		estimates.setSalespersonId(estimate.getString("salesperson_id"));
 		estimates.setSalespersonName(estimate.getString("salesperson_name"));
 		
+		if(estimate.has("currency_symbol"))
+		{
+			estimates.setCurrencySymbol(estimate.getString("currency_symbol"));
+		}
+		if(estimate.has("template_type"))
+		{
+			estimates.setTemplateType(estimate.getString("template_type"));
+		}
+		if(estimate.has("allow_partial_payments"))
+		{
+			estimates.setAllowPartialPayments(estimate.getBoolean("allow_partial_payments"));	//No I18N
+		}
+		if(estimate.has("accept_retainer"))
+		{
+			estimates.setAcceptRetainer(estimate.getBoolean("accept_retainer"));	//No I18N
+		}
+		if(estimate.has("retainer_percentage"))
+		{
+			estimates.setRetainerPercentage(estimate.getString("retainer_percentage"));
+		}
+		if(estimate.has("is_viewed_by_client"))
+		{
+			estimates.setIsViewedByClient(estimate.getBoolean("is_viewed_by_client"));	//No I18N
+		}
+		if(estimate.has("client_viewed_time"))
+		{
+			estimates.setClientViewedTime(estimate.getString("client_viewed_time"));
+		}
+		
+		if(estimate.has("payment_options"))
+		{
+			JSONObject paymentOptions = estimate.getJSONObject("payment_options");	//No I18N
+			
+			if(paymentOptions.has("payment_gateways"))
+			{
+				JSONArray paymentGateways = paymentOptions.getJSONArray("payment_gateways");	//No I18N
+				
+				List<PaymentGateway> paymentGatewaysList = new ArrayList<PaymentGateway>();
+				
+				PaymentGateway paymentGateway = new PaymentGateway();
+				
+				for(int i = 0; i < paymentGateways.length(); i++)
+				{
+					if(paymentGateways.getJSONObject(i).has("gateway_name"))
+					{
+						paymentGateway.setGatewayName(paymentGateways.getJSONObject(i).getString("gateway_name"));
+					}
+					if(paymentGateways.getJSONObject(i).has("additional_field1"))
+					{
+						paymentGateway.setAdditionalField1(paymentGateways.getJSONObject(i).getString("additional_field1"));
+					}
+					if(paymentGateways.getJSONObject(i).has("configured"))
+					{
+						paymentGateway.setConfigured(paymentGateways.getJSONObject(i).getBoolean("configured"));	//No I18N
+					}
+					
+					paymentGatewaysList.add(paymentGateway);
+				}
+				
+				estimates.setPaymentGateways(paymentGatewaysList);
+			}
+		}
+		
+		if(estimate.has("tax_id"))
+		{
+			estimates.setTaxId(estimate.getString("tax_id"));
+		}
+		if(estimate.has("tax_authority_id"))
+		{
+			estimates.setTaxAuthorityId(estimate.getString("tax_authority_id"));
+		}
+		if(estimate.has("tax_exemption_id"))
+		{
+			estimates.setTaxExemptionId(estimate.getString("tax_exemption_id"));
+		}
+		
 		return estimates;
 	}
 	
@@ -224,6 +309,14 @@ public class EstimateParser
 			estimate.setAcceptedDate(jsonArray.getJSONObject(i).getString("accepted_date"));
 			estimate.setDeclinedDate(jsonArray.getJSONObject(i).getString("declined_date"));
 			estimate.setExpiryDate(jsonArray.getJSONObject(i).getString("expiry_date"));
+			if(jsonArray.getJSONObject(i).has("is_viewed_by_client"))
+			{
+				estimate.setIsViewedByClient(jsonArray.getJSONObject(i).getBoolean("is_viewed_by_client"));	//No I18N
+			}
+			if(jsonArray.getJSONObject(i).has("client_viewed_time"))
+			{
+				estimate.setClientViewedTime(jsonArray.getJSONObject(i).getString("client_viewed_time"));
+			}
 			
 			estimateList.add(estimate);
 		}
@@ -319,11 +412,28 @@ public class EstimateParser
 			fromEmail.setUserName(fromEmails.getJSONObject(k).getString("user_name"));
 			fromEmail.setSelected(fromEmails.getJSONObject(k).getBoolean("selected")); //No I18N
 			fromEmail.setEmail(fromEmails.getJSONObject(k).getString("email"));
+			if(fromEmails.getJSONObject(k).has("is_org_email_id"))
+			{
+				fromEmail.setOrgEmailId(fromEmails.getJSONObject(k).getBoolean("is_org_email_id")); //No I18N
+			}
 			
 			fromEmailsList.add(k, fromEmail);
 		}
 		
 		email.setFromEmails(fromEmailsList);
+		
+		if(data.has("attach_pdf"))
+		{
+			email.setAttachPdf(data.getBoolean("attach_pdf"));	//No I18N
+		}
+		if(data.has("customer_name"))
+		{
+			email.setCustomerName(data.getString("customer_name"));
+		}
+		if(data.has("file_name_without_extension"))
+		{
+			email.setFileNameWithoutExtension(data.getString("file_name_without_extension"));
+		}
 		
 		return email;
 	}

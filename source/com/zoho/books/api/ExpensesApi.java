@@ -91,7 +91,7 @@ public class ExpensesApi extends API
 	public Expense create(String accountId, String paidThroughAccountId, double amount)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		Expense expense = new Expense();
 		
@@ -126,7 +126,7 @@ public class ExpensesApi extends API
 	public Expense create(Expense expense)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", expense.toJSON().toString());
 		
@@ -157,11 +157,11 @@ public class ExpensesApi extends API
 	public Expense create(Expense expense, File file)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
+		HashMap<String, Object> requestBody = new HashMap<String, Object>();
 		
 		requestBody.put("JSONString", expense.toJSON().toString());
 		
-		HashMap fileBody = new HashMap();
+		HashMap<String, Object> fileBody = new HashMap<String, Object>();
 		
 		fileBody.put("receipt", file);
 		
@@ -220,7 +220,7 @@ public class ExpensesApi extends API
 		
 		String urlString = url+"/"+expense.getExpenseId();
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", expense.toJSON().toString());
 		
@@ -253,11 +253,11 @@ public class ExpensesApi extends API
 		
 		String urlString = url+"/"+expense.getExpenseId();
 		
-		HashMap requestBody = new HashMap();
+		HashMap<String, Object> requestBody = new HashMap<String, Object>();
 		
 		requestBody.put("JSONString", expense.toJSON().toString());
 		
-		HashMap fileBody = new HashMap();
+		HashMap<String, Object> fileBody = new HashMap<String, Object>();
 		
 		fileBody.put("receipt", file);
 		
@@ -360,7 +360,7 @@ Allowed Values: <i>date, account_name, paid_through_account_name, total, bcy_tot
 	
 	*/
 	
-	public ExpenseList getExpesnses(HashMap queryMap)throws Exception
+	public ExpenseList getExpesnses(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
@@ -425,7 +425,7 @@ Allowed Values: <i>date, account_name, paid_through_account_name, total, bcy_tot
 		
 		String urlString = url+"/"+expenseId+"/receipt"; //No I18N
 		
-		HashMap fileBody = new HashMap();
+		HashMap<String, Object> fileBody = new HashMap<String, Object>();
 		
 		fileBody.put("receipt", file);
 		

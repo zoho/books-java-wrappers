@@ -104,7 +104,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 	
 	*/
 	
-	public ItemList getItems(HashMap queryMap)throws Exception
+	public ItemList getItems(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
@@ -161,7 +161,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 	public Item create(Item item)throws Exception
 	{
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", item.toJSON().toString());
 		
@@ -192,7 +192,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		String urlString = url+"/"+item.getItemId();
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", item.toJSON().toString());
 		

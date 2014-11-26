@@ -169,7 +169,7 @@ public class PaymentGateway
 	
 	public void setCurrencyId(String currencyId)
 	{
-		currencyId = currencyId;
+		this.currencyId = currencyId;
 	}
 	
 	/**
@@ -195,7 +195,7 @@ public class PaymentGateway
 	
 	public void setCurrencyCode(String currencyCode)
 	{
-		currencyCode = currencyCode;
+		this.currencyCode = currencyCode;
 	}
 	
 	/**
@@ -221,7 +221,7 @@ public class PaymentGateway
 	
 	public void setSupportedCurrencies(String supportedCurrencies)
 	{
-		supportedCurrencies = supportedCurrencies;
+		this.supportedCurrencies = supportedCurrencies;
 	}
 	
 	/**

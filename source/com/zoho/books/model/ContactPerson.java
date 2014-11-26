@@ -25,6 +25,9 @@ public class ContactPerson
 	
 	private String contactId = "";
 	
+	private boolean isAddedInPortal;
+	private boolean canInvite;
+	
 	
 	/**
 	
@@ -263,6 +266,50 @@ public class ContactPerson
 	}
 	
 	
+	/**
+	 * Get the contact person is added in portal or not.
+	 * 
+	 * @return Returns true if the contact person is added in portal else returns false.
+	 */
+	
+	public boolean isAddedInPortal() 
+	{
+		return isAddedInPortal;
+	}
+	
+	/**
+	 * Set the contact person is added in portal or not.
+	 * 
+	 * @param isAddedInPortal True or false to set the contact person is added in portal.
+	 */
+
+	public void setAddedInPortal(boolean isAddedInPortal) 
+	{
+		this.isAddedInPortal = isAddedInPortal;
+	}
+	
+	/**
+	 * Get the contact person can be invite again or not.
+	 * 
+	 * @return Returns true if the contact person can be invite again else returns false.
+	 */
+
+	public boolean isCanInvite() 
+	{
+		return canInvite;
+	}
+	
+	/**
+	 * Set the contact person can be invite again.
+	 * 
+	 * @param canInvite True or false to set the contact person can be invite again or not.
+	 */
+
+	public void setCanInvite(boolean canInvite) 
+	{
+		this.canInvite = canInvite;
+	}
+
 	/**
 	
 	* Convert the ContactPerson object into JSONObject.

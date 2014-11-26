@@ -12,8 +12,6 @@ import com.zoho.books.model.BankAccount;
 import com.zoho.books.model.Statement;
 import com.zoho.books.model.BankAccountList;
 
-import java.util.List;
-
 public class BankAccountTest
 {
 	public static void main(String[] args)throws Exception

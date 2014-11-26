@@ -35,7 +35,7 @@ public class JournalsApiTest
 		
 		
 		
-		HashMap<String, String> hashMap = new HashMap<String, String>();
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		
 		hashMap.put("filter_by", "JournalDate.All");
 		hashMap.put("sort_column", "journal_date");

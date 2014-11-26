@@ -72,16 +72,19 @@ public class ContactsApiTest
 		
 		ArrayList file = new ArrayList();
 		file.add(0, file1);
-		file.add(1, file2);
-		file.add(2, file3);
+		//file.add(1, file2);
+		//file.add(2, file3);
 		
 		
-		HashMap<String, String> hashMap = new HashMap<String, String>();
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		
-		hashMap.put("filter_by", "Status.Active");
+		/*hashMap.put("filter_by", "Status.Active");
 		hashMap.put("sort_column", "contact_name");
 		
-		hashMap.put("send_customer_statement", "false");
+		hashMap.put("send_customer_statement", "false");*/
+		
+		hashMap.put("start_date", startDate);
+		hashMap.put("end_date", endDate);
 		
 		Contact contacts = new Contact();
 		
@@ -89,6 +92,7 @@ public class ContactsApiTest
 		contacts.setPaymentTerms(15);
 		contacts.setPaymentTermsLabel("Net 15");	//No I18N
 		contacts.setCurrencyId(currencyId);
+		contacts.setTaxable(true);
 		contacts.setNotes("Thanks for your business.");	//No I18N
 		
 		Address billingAddress = new Address();
@@ -153,7 +157,7 @@ public class ContactsApiTest
 		email.setToMailIds(str);
 		email.setSubject("Payment reminder for Invoice (Invoice#: INV-24)");	//No I18N
 		email.setBody("Dear Customer, \nThanks for your business. The invoice INV-24 is attached with this email. You can choose the easy way. Here's an overview of the invoice for your reference. Invoice Overview: Invoice # : INV-24 Date : 24 Sep 2013 Amount : Rs.612.00 It was great working with you. Looking forward to working with you again.\n\n\n\n Regards\nSSR");	//No I18N
-		email.setSendFromOrgEmailId(false);
+		email.setSendFromOrgEmailId(true);
 		email.setAttachments(file);
 		
 		
@@ -162,7 +166,7 @@ public class ContactsApiTest
 			
 			ContactList getContacts = contactsApi.getContacts(hashMap);
 			
-			String contactId = getContacts.get(0).getContactId();
+			String contactId = getContacts.get(3).getContactId();
 		
 			Contact create = contactsApi.create(contactName, currencyId);
 		
@@ -204,7 +208,7 @@ public class ContactsApiTest
 			
 			ContactPerson createContactPerson = contactPersonsApi.create(contactPersons1);
 		
-			ContactPerson getContactPerson = contactPersonsApi.get(contactPersonId);
+			ContactPerson getContactPerson = contactPersonsApi.get(contactId, contactPersonId);
 			
 			getContactPerson.setIsPrimaryContact(true);	
 		
@@ -223,7 +227,7 @@ public class ContactsApiTest
 		}
 		catch(BooksException be)
 		{
-			
+			//System.out.println("Code : "+be.getCode()+",  Message : "+be.getMessage());
 			throw be;
 		}
 		catch(Exception e)

@@ -82,6 +82,16 @@ public class InvoiceParser
 			inv.setPaymentExpectedDate(jsonArray.getJSONObject(i).getString("payment_expected_date"));
 			inv.setLastPaymentDate(jsonArray.getJSONObject(i).getString("last_payment_date"));
 			
+			if(jsonArray.getJSONObject(i).has("is_viewed_by_client"))
+			{
+				inv.setViewedByClient(jsonArray.getJSONObject(i).getBoolean("is_viewed_by_client"));	//No I18N
+			}
+			if(jsonArray.getJSONObject(i).has("client_viewed_time"))
+			{
+				inv.setClientViewedTime(jsonArray.getJSONObject(i).getString("client_viewed_time"));
+			}
+			
+			
 			invoiceList.add(inv);
 		}
 		
@@ -179,6 +189,18 @@ public class InvoiceParser
 			lineItem.setQuantity(lineItems.getJSONObject(i).getDouble("quantity")); //No I18N
 			lineItem.setTaxPercentage(lineItems.getJSONObject(i).getDouble("tax_percentage")); //No I18N
 			lineItem.setItemTotal(lineItems.getJSONObject(i).getDouble("item_total")); //No I18N
+			if(lineItems.getJSONObject(i).has("salesorder_item_id"))
+			{
+				lineItem.setSalesorderItemId(lineItems.getJSONObject(i).getString("salesorder_item_id"));
+			}
+			if(lineItems.getJSONObject(i).has("stock_on_hand"))
+			{
+				lineItem.setStockOnHand(lineItems.getJSONObject(i).getString("stock_on_hand"));
+			}
+			if(lineItems.getJSONObject(i).has("tax_exemption_id"))
+			{
+				lineItem.setTaxExemptionId(lineItems.getJSONObject(i).getString("tax_exemption_id"));
+			}
 			
 			lineItemsList.add(i, lineItem);
 		}
@@ -304,6 +326,44 @@ public class InvoiceParser
 		invoice.setCanSendInMail(invoiceDetails.getBoolean("can_send_in_mail")); //No I18N
 		invoice.setSalespersonId(invoiceDetails.getString("salesperson_id"));
 		invoice.setSalespersonName(invoiceDetails.getString("salesperson_name"));
+		
+		if(invoiceDetails.has("client_viewed_time"))
+		{
+			invoice.setClientViewedTime(invoiceDetails.getString("client_viewed_time"));
+		}
+		if(invoiceDetails.has("is_viewed_by_client"))
+		{
+			invoice.setViewedByClient(invoiceDetails.getBoolean("is_viewed_by_client"));	//No I18N
+		}
+		if(invoiceDetails.has("stop_reminder_until_payment_expected_date"))
+		{
+			invoice.setStopReminderUntilPaymentExpectedDate(invoiceDetails.getBoolean("stop_reminder_until_payment_expected_date"));//No I18N
+		}
+		if(invoiceDetails.has("template_type"))
+		{
+			invoice.setTemplateType(invoiceDetails.getString("template_type"));
+		}
+		if(invoiceDetails.has("is_autobill_enabled"))
+		{
+			invoice.setAutobillEnabled(invoiceDetails.getBoolean("is_autobill_enabled"));	//No I18N
+		}
+		if(invoiceDetails.has("invoice_url"))
+		{
+			invoice.setInvoiceUrl(invoiceDetails.getString("invoice_url"));
+		}
+		
+		if(invoiceDetails.has("tax_id"))
+		{
+			invoice.setTaxId(invoiceDetails.getString("tax_id"));
+		}
+		if(invoiceDetails.has("tax_authority_id"))
+		{
+			invoice.setTaxAuthorityId(invoiceDetails.getString("tax_authority_id"));
+		}
+		if(invoiceDetails.has("tax_exemption_id"))
+		{
+			invoice.setTaxExemptionId(invoiceDetails.getString("tax_exemption_id"));
+		}
 	
 		return invoice;
 	}
@@ -387,11 +447,32 @@ public class InvoiceParser
 			fromEmail.setUserName(fromEmails.getJSONObject(k).getString("user_name"));
 			fromEmail.setSelected(fromEmails.getJSONObject(k).getBoolean("selected")); //No I18N
 			fromEmail.setEmail(fromEmails.getJSONObject(k).getString("email"));
+			if(fromEmails.getJSONObject(k).has("is_org_email_id"))
+			{
+				fromEmail.setOrgEmailId(fromEmails.getJSONObject(k).getBoolean("is_org_email_id"));	//No I18N
+			}
 			
 			fromEmailsList.add(k, fromEmail);
 		}
 		
 		email.setFromEmails(fromEmailsList);
+		
+		if(data.has("attach_pdf"))
+		{
+			email.setAttachPdf(data.getBoolean("attach_pdf"));	//No I18N
+		}
+		if(data.has("entity_id"))
+		{
+			email.setEntityId(data.getString("entity_id"));
+		}
+		if(data.has("file_name_without_extension"))
+		{
+			email.setFileNameWithoutExtension(data.getString("file_name_without_extension"));
+		}
+		if(data.has("gateways_associated"))
+		{
+			email.setGatewaysAssociated(data.getBoolean("gateways_associated"));	//No I18N
+		}
 		
 		return email;
 	}

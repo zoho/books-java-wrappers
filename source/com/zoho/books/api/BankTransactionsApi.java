@@ -131,7 +131,7 @@ Allowed Values: <i>date</i></td></tr>
 	
 	*/
 	
-	public TransactionList getTransactions(HashMap queryMap)throws Exception
+	public TransactionList getTransactions(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
@@ -186,7 +186,7 @@ Allowed Values: <i>date</i></td></tr>
 	
 	public Transaction create(Transaction transaction)throws Exception
 	{
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", transaction.toJSON().toString());
 		
@@ -217,7 +217,7 @@ Allowed Values: <i>date</i></td></tr>
 		
 		String urlString = url+"/"+transaction.getTransactionId(); //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", transaction.toJSON().toString());
 		
@@ -289,7 +289,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	
 	*/
 	
-	public TransactionList getMatchingTransactions(String transactionId, HashMap queryMap)throws Exception
+	public TransactionList getMatchingTransactions(String transactionId, HashMap<String, Object> queryMap)throws Exception
 	{
 		String urlString = url+"/uncategorized/"+transactionId+"/match"; //No I18N
 		
@@ -325,7 +325,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	{
 		String urlString = url+"/uncategorized/"+transactionId+"/match"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -401,7 +401,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	{
 		String urlString = url+"/"+transactionId+"/associated"; //No I18N
 		
-		HashMap queryMap = getQueryMap();
+		HashMap<String, Object> queryMap = getQueryMap();
 		
 		if(sortColumn != null)
 		{
@@ -498,7 +498,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 		
 		String urlString = url+"/uncategorized/"+transaction.getTransactionId()+"/categorize"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", transaction.toJSON().toString());
 		
@@ -530,13 +530,13 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	{
 		String urlString = url+"/uncategorized/"+transactionId+"/categorize/creditnoterefunds"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", creditnoteRefund.toJSON().put("creditnote_id", creditnoteRefund.getCreditnoteId()).toString());
 		
 		String response = ZohoHTTPClient.post(urlString, requestBody);
 		
-		String message = bankTransactionParser.getMessage(response); 
+		//String message = bankTransactionParser.getMessage(response); 
 		
 		return new CreditNoteParser().getCreditnoteRefund(response);
 	}
@@ -564,7 +564,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	{
 		String urlString = url+"/uncategorized/"+transactionId+"/categorize/vendorpayments"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", vendorPayment.toJSON().toString());
 		
@@ -596,7 +596,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	{
 		String urlString = url+"/uncategorized/"+transactionId+"/categorize/customerpayments"; //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", customerPayment.toJSON().toString());
 		
@@ -630,11 +630,11 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	{
 		String urlString = url+"/uncategorized/"+transactionId+"/categorize/expense"; //No I18N
 		
-		HashMap requestBody = new HashMap();
+		HashMap<String, Object> requestBody = new HashMap<String, Object>();
 		
 		requestBody.put("JSONString", expense.toJSON().toString());
 		
-		HashMap fileBody = new HashMap();
+		HashMap<String, Object> fileBody = new HashMap<String, Object>();
 		
 		fileBody.put("receipt", file);
 		

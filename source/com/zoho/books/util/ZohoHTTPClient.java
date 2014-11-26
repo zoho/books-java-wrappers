@@ -45,11 +45,11 @@ public class ZohoHTTPClient
 	
 	*/
 	
-	public static String get(String url, HashMap queryMap)throws Exception
+	public static String get(String url, HashMap<String, Object> queryMap)throws Exception
 	{
 		URL urlCon = new URL(url+formQueryString(queryMap));
 		
-		HashMap header = new HashMap();
+		HashMap<String, Object> header = new HashMap<String, Object>();
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
@@ -73,11 +73,11 @@ public class ZohoHTTPClient
 	
 	*/
 	
-	public static File getFile(String url, HashMap queryMap)throws Exception
+	public static File getFile(String url, HashMap<String, Object> queryMap)throws Exception
 	{
 		URL urlCon = new URL(url+formQueryString(queryMap));
 		
-		HashMap header = new HashMap();
+		HashMap<String, Object> header = new HashMap<String, Object>();
 		
 		header.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");	//No I18N
 		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
@@ -103,12 +103,12 @@ public class ZohoHTTPClient
 	*/
 	
 	
-	public static String post(String url, HashMap requestBody)throws Exception
+	public static String post(String url, HashMap<String, Object> requestBody)throws Exception
 	{
 	
 		URL urlCon = new URL(url);
 		
-		HashMap header = new HashMap();
+		HashMap<String, Object> header = new HashMap<String, Object>();
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
@@ -173,7 +173,7 @@ public class ZohoHTTPClient
 	
 	*/
 	
-	public static String post(String url, HashMap queryMap, HashMap requestBody, HashMap fileBody)throws Exception
+	public static String post(String url, HashMap<String, Object> queryMap, HashMap<String, Object> requestBody, HashMap<String, Object> fileBody)throws Exception
 	{
 	
 		URL urlCon = new URL(url+formQueryString(queryMap));
@@ -182,7 +182,7 @@ public class ZohoHTTPClient
 		String twoHyphens = "--"; 	//No I18N
 		String boundary = String.valueOf(System.currentTimeMillis()); 	//No I18N
 		
-		HashMap header = new HashMap();
+		HashMap<String, Object> header = new HashMap<String, Object>();
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "multipart/form-data; boundary="+ boundary);	//No I18N
@@ -193,18 +193,16 @@ public class ZohoHTTPClient
 		
 		FileInputStream fStream = null; 
 		
-		StringBuffer requestParams = new StringBuffer();
-		
 		try
 		{
 		
 			if(requestBody != null)
 			{
-				Iterator keyIterator = requestBody.keySet().iterator();
+				Iterator<String> keyIterator = requestBody.keySet().iterator();
 			
 				while(keyIterator.hasNext())
 				{
-					String key = (String)keyIterator.next();
+					String key = keyIterator.next();
 			
 					dos.writeBytes(twoHyphens + boundary + lineEnd);
 					dos.writeBytes("Content-Disposition: form-data; name=\""+key+"\""+lineEnd+lineEnd+requestBody.get(key).toString()+lineEnd); //No I18N
@@ -215,19 +213,18 @@ public class ZohoHTTPClient
 			}
 			if(fileBody != null)
 			{
-				Iterator iterator = fileBody.keySet().iterator();
+				Iterator<String> iterator = fileBody.keySet().iterator();
 			
 				while(iterator.hasNext())
 				{
 					
-					String key = (String)iterator.next();
+					String key = iterator.next();
 					
 					if(fileBody.get(key) instanceof ArrayList)
 					{
 			
-						ArrayList fileList = (ArrayList)fileBody.get(key);
+						ArrayList<?> fileList = (ArrayList<?>) fileBody.get(key);
 			
-				
 						for(int i = 0; i < fileList.size(); i++)
 						{
 					
@@ -306,11 +303,11 @@ public class ZohoHTTPClient
 	*/
 	
 	
-	public static String put(String url, HashMap requestBody)throws Exception
+	public static String put(String url, HashMap<String, Object> requestBody)throws Exception
 	{
 		URL urlCon = new URL(url);
 		
-		HashMap header = new HashMap();
+		HashMap<String, Object> header = new HashMap<String, Object>();
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
@@ -377,7 +374,7 @@ public class ZohoHTTPClient
 	
 	*/
 	
-	public static String put(String url, HashMap queryMap, HashMap requestBody, HashMap fileBody)throws Exception
+	public static String put(String url, HashMap<String, Object> queryMap, HashMap<String, Object> requestBody, HashMap<String, Object> fileBody)throws Exception
 	{
 	
 		URL urlCon = new URL(url+formQueryString(queryMap));
@@ -386,7 +383,7 @@ public class ZohoHTTPClient
 		String twoHyphens = "--";	//No I18N
 		String boundary = String.valueOf(System.currentTimeMillis());	//No I18N
 		
-		HashMap header = new HashMap();
+		HashMap<String, Object> header = new HashMap<String, Object>();
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "multipart/form-data; boundary="+ boundary);	//No I18N
@@ -402,11 +399,11 @@ public class ZohoHTTPClient
 		
 			if(requestBody != null)
 			{
-				Iterator keyIterator = requestBody.keySet().iterator();
+				Iterator<String> keyIterator = requestBody.keySet().iterator();
 				
 				while(keyIterator.hasNext())
 				{
-					String key = (String)keyIterator.next();
+					String key = keyIterator.next();
 				
 					dos.writeBytes(twoHyphens + boundary + lineEnd);
 					dos.writeBytes("Content-Disposition: form-data; name=\""+key+"\""+lineEnd+lineEnd+requestBody.get(key).toString()+lineEnd); //No I18N
@@ -415,11 +412,11 @@ public class ZohoHTTPClient
 			}
 			if(fileBody != null)
 			{
-				Iterator iterator = fileBody.keySet().iterator();
+				Iterator<String> iterator = fileBody.keySet().iterator();
 			
 				while(iterator.hasNext())
 				{
-					String key = (String)iterator.next();
+					String key = iterator.next();
 				
 					if(fileBody.get(key) instanceof File)
 					{
@@ -478,12 +475,12 @@ public class ZohoHTTPClient
 	*/
 	
 	
-	public static String delete(String url, HashMap queryMap)throws Exception
+	public static String delete(String url, HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		URL urlCon = new URL(url+formQueryString(queryMap));
 		
-		HashMap header = new HashMap();
+		HashMap<String, Object> header = new HashMap<String, Object>();
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
@@ -505,20 +502,20 @@ public class ZohoHTTPClient
 	
 	*/
 	
-	public static String formQueryString(HashMap queryMap)throws Exception
+	public static String formQueryString(HashMap<String, Object> queryMap)throws Exception
 	{
 		StringBuffer queryString = new StringBuffer();
 		
 		if(queryMap != null && !queryMap.isEmpty())
 		{
 		
-			Iterator keyIterator = queryMap.keySet().iterator();
+			Iterator<String> keyIterator = queryMap.keySet().iterator();
 			
 			queryString.append("?");
 		
 			while(keyIterator.hasNext())
 			{
-				String key = (String)keyIterator.next();
+				String key = keyIterator.next();
 				queryString.append(key).append("=").append(queryMap.get(key).toString());
 				if(keyIterator.hasNext())
 				{
@@ -564,7 +561,7 @@ public class ZohoHTTPClient
 			}
 	
 			String resp = responseLine;
-		
+			
 			return resp;
 		}
 	
@@ -667,7 +664,7 @@ public class ZohoHTTPClient
 		
 	}
 	
-	public static HttpsURLConnection getConnection(URL url, String method, HashMap header)throws Exception
+	public static HttpsURLConnection getConnection(URL url, String method, HashMap<String, Object> header)throws Exception
 	{
 		
 		HttpsURLConnection request = (HttpsURLConnection) url.openConnection();
@@ -686,11 +683,11 @@ public class ZohoHTTPClient
 		
 		if(header != null && !header.isEmpty())
 		{
-			Iterator keyIterator = header.keySet().iterator();
+			Iterator<String> keyIterator = header.keySet().iterator();
 			
 			while(keyIterator.hasNext())
 			{
-				String key = (String)keyIterator.next();
+				String key = keyIterator.next();
 				
 				request.setRequestProperty(key, header.get(key).toString());
 			}

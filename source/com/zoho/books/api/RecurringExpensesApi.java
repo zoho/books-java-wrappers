@@ -87,7 +87,7 @@ public class RecurringExpensesApi extends API
 	public RecurringExpense create(RecurringExpense recurringExpense)throws Exception
 	{
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", recurringExpense.toJSON().toString());
 		
@@ -146,7 +146,7 @@ public class RecurringExpensesApi extends API
 	{
 		String urlString = url+"/"+recurringExpense.getRecurringExpenseId();
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", recurringExpense.toJSON().toString());
 		
@@ -250,7 +250,7 @@ Allowed Values: <i>recurrence_name, last_created_date, next_expense_date, accoun
 	
 	*/
 	
-	public RecurringExpenseList getRecurringExpenses(HashMap queryMap)throws Exception
+	public RecurringExpenseList getRecurringExpenses(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
@@ -346,7 +346,7 @@ Allowed Values: <i>date, account_name, vendor_name, paid_through_account_name, c
 	
 	*/
 	
-	public ExpenseList getExpensesCreated(String recurringExpenseId, HashMap queryMap)throws Exception
+	public ExpenseList getExpensesCreated(String recurringExpenseId, HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/"+recurringExpenseId+"/expenses"; //No I18N

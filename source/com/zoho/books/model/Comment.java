@@ -3,9 +3,9 @@
 package com.zoho.books.model;
 
 /**
-
 * This class is used to make an object for comments.
-
+* 
+* @author ramesh-2099
 */
 
 public class Comment
@@ -46,6 +46,10 @@ public class Comment
 	private String projectId ="";
 	private boolean isCurrentUser = false;
 	
+	private String salesorderId;
+	
+	private String vendorCreditId;
+	
 	
 	
 	/**
@@ -58,7 +62,7 @@ public class Comment
 	
 	public void setCommentId(String commentId)
 	{
-		commentId = commentId;
+		this.commentId = commentId;
 	}
 	
 	/**
@@ -730,4 +734,53 @@ public class Comment
 	{
 		return isCurrentUser;
 	}
+	
+	/**
+	 * Get the sales order id.
+	 * 
+	 * @return Returns the sales order id.
+	 */
+
+	public String getSalesorderId()
+	{
+		return salesorderId;
+	}
+	
+	/**
+	 * Set the sales order id.
+	 * 
+	 * @param salesorderId ID of the sales order.
+	 */
+
+	public void setSalesorderId(String salesorderId)
+	{
+		this.salesorderId = salesorderId;
+	}
+	
+	
+	/**
+	 * Get the vendor credit id.
+	 * 
+	 * @return Returns the vendor credit id.
+	 */
+	
+	public String getVendorCreditId() 
+	{
+		return vendorCreditId;
+	}
+	
+	/**
+	 * Set the vendor credit id.
+	 * 
+	 * @param vendorCreditId ID of the vendor credit.
+	 */
+
+	public void setVendorCreditId(String vendorCreditId)
+	{
+		this.vendorCreditId = vendorCreditId;
+	}
+	
+	
+	
+	
 }

@@ -33,7 +33,7 @@ public class RecurringInvoiceApiTest
 		String customerId = "36991000000042001"; 
 		
 		
-		HashMap<String, String> hashMap = new HashMap<String, String>();
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		
 		hashMap.put("filter_by", "Status.All");
 		hashMap.put("sort_column", "customer_name");

@@ -45,7 +45,7 @@ public class RecurringExpenseTest
 		
 		
 		
-		HashMap<String, String> hashMap = new HashMap<String, String>();
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		
 		hashMap.put("filter_by", "RecExpenseStatus.Expired");
 		hashMap.put("sort_column", "customer_name");

@@ -65,6 +65,26 @@ public class Contact
         private DefaultTemplate defaultTemplates = new DefaultTemplate();
         
         
+        
+        private String website;
+        private String contactSalutation; 
+        private String source;
+        private boolean isLinkedWithZohocrm;
+        private int pricePrecision;
+        private String pricebookId;
+        private String pricebookName;
+        private boolean associatedWithSquare;
+        
+        
+        private boolean track1099;
+        private String taxIdType;
+        private String taxIdValue;
+        private boolean isTaxable;
+        private String taxAuthorityId;
+        private String taxExemptionId;
+        private String taxId;
+        
+        
         /**
         
         * set the contact id.
@@ -941,13 +961,13 @@ public class Contact
         
         
         
-        /**
-        
-        * set the billing address.
-        
-        * @param billingAddress  Billing address of the contact.
-        
-        */
+    /**
+    
+    * set the billing address.
+    
+    * @param billingAddress  Billing address of the contact.
+    
+    */
 	
 	public void setBillingAddress(Address billingAddress)throws Exception
 	{
@@ -956,11 +976,11 @@ public class Contact
 
 	/**
         
-        * get the billing address.
-        
-        * @return Returns the BillingAddress object.
-        
-        */
+    * get the billing address.
+    
+    * @return Returns the BillingAddress object.
+    
+    */
 	
 	public Address getBillingAddress()
 	{
@@ -972,11 +992,11 @@ public class Contact
 	
 	/**
         
-        * set the shipping address.
-        
-        * @param shippingAddress  Shipping address of the contact.
-        
-        */
+    * set the shipping address.
+    
+    * @param shippingAddress  Shipping address of the contact.
+    
+    */
 	
 	public void setShippingAddress(Address shippingAddress)throws Exception
 	{
@@ -984,12 +1004,12 @@ public class Contact
 	}
 	
 	/**
-        
-        * get the shipping address.
-        
-        * @return Returns the ShippingAddress object.
-        
-        */
+    
+    * get the shipping address.
+    
+    * @return Returns the ShippingAddress object.
+    
+    */
 	
 	public Address getShippingAddress()
 	{
@@ -1002,11 +1022,11 @@ public class Contact
 	
 	/**
         
-        * set the contact persons.
-        
-        * @param contactPerson  Contact persons of a contact.
-        
-        */
+    * set the contact persons.
+    
+    * @param contactPerson  Contact persons of a contact.
+    
+    */
 	
 	public void setContactPersons(List<ContactPerson> contactPerson)throws Exception
 	{
@@ -1015,11 +1035,11 @@ public class Contact
 	
 	/**
         
-        * get the contact persons.
-        
-        * @return Returns list of ContactPerson object.
-        
-        */
+    * get the contact persons.
+    
+    * @return Returns list of ContactPerson object.
+    
+    */
 	
 	public List<ContactPerson> getContactPersons()
 	{
@@ -1032,11 +1052,11 @@ public class Contact
 	
 	/**
         
-        * set the default templates.
-        
-        * @param defaultTemplates  Default templates of a contact.
-        
-        */
+    * set the default templates.
+    
+    * @param defaultTemplates  Default templates of a contact.
+    
+    */
 	
 	public void setDefaultTemplates(DefaultTemplate defaultTemplates)throws Exception
 	{
@@ -1045,27 +1065,359 @@ public class Contact
 	
 	/**
         
-        * get the default templates.
-        
-        * @return Returns a DefaultTemplate object.
-        
-        */
+    * get the default templates.
+    
+    * @return Returns a DefaultTemplate object.
+    
+    */
 	
 	public DefaultTemplate getDefaultTemplates()
 	{
 		return defaultTemplates;
 	}
+	
+    
+	
+	/**
+	 * Get the website.
+	 * 
+	 * @return Returns the website.
+	 */
+	
         
-        
-        
-        /**
+    public String getWebsite() 
+    {
+		return website;
+	}
+    
+    /**
+     * Set the website.
+     * 
+     * @param website Website for the contact.
+     */
+
+	public void setWebsite(String website) 
+	{
+		this.website = website;
+	}
+	
+	/**
+	 * Get the contact salutation.
+	 * 
+	 * @return Returns the cantact salutation.
+	 */
+
+	public String getContactSalutation() 
+	{
+		return contactSalutation;
+	}
+	
+	/**
+	 * Set the contact salutation.
+	 * 
+	 * @param contactSalutation Salutation for the contact.
+	 */
+
+	public void setContactSalutation(String contactSalutation)
+	{
+		this.contactSalutation = contactSalutation;
+	}
+	
+	/**
+	 * Get the source.
+	 * 
+	 * @return Returns the source.
+	 */
+
+	public String getSource() 
+	{
+		return source;
+	}
+	
+	/**
+	 * Set the source of the request.
+	 * 
+	 * @param source Source of the request.
+	 */
+
+	public void setSource(String source) 
+	{
+		this.source = source;
+	}
+	
+	/**
+	 * Get the contact linked with zoho crm.
+	 * 
+	 * @return Returns true if the contact linked with zoho crm else returns false.
+	 */
+
+	public boolean isLinkedWithZohocrm() 
+	{
+		return isLinkedWithZohocrm;
+	}
+	
+	/**
+	 * Set the contact is linked with zoho crm or not.
+	 * 
+	 * @param isLinkedWithZohocrm True or false to set the contact linked with zoho crm or not.
+	 */
+
+	public void setLinkedWithZohocrm(boolean isLinkedWithZohocrm) 
+	{
+		this.isLinkedWithZohocrm = isLinkedWithZohocrm;
+	}
+	
+	/**
+	 * Get the price precision of the contact.
+	 * 
+	 * @return Returns the price precision for the contact.
+	 */
+
+	public int getPricePrecision() 
+	{
+		return pricePrecision;
+	}
+	
+	/**
+	 * Set the price precision for the contact.
+	 * 
+	 * @param pricePrecision Price precision for the contact.
+	 */
+
+	public void setPricePrecision(int pricePrecision) 
+	{
+		this.pricePrecision = pricePrecision;
+	}
+	
+	/**
+	 * Get the price book id.
+	 * 
+	 * @return Returns the price book id.
+	 */
+
+	public String getPricebookId() 
+	{
+		return pricebookId;
+	}
+	
+	/**
+	 * Set the price book id.
+	 * 
+	 * @param pricebookId ID of the price book.
+	 */
+
+	public void setPricebookId(String pricebookId)
+	{
+		this.pricebookId = pricebookId;
+	}
+	
+	/**
+	 * Get the price book name.
+	 * 
+	 * @return returns the price book name.
+	 */
+
+	public String getPricebookName() 
+	{
+		return pricebookName;
+	}
+	
+	/**
+	 * Set the price book name.
+	 * 
+	 * @param pricebookName Name of the price book.
+	 */
+
+	public void setPricebookName(String pricebookName)
+	{
+		this.pricebookName = pricebookName;
+	}
+	
+	/**
+	 * Get the contact associated with square or not.
+	 * 
+	 * @return Returns true if the contact associated with square.
+	 */
+
+	public boolean isAssociatedWithSquare() 
+	{
+		return associatedWithSquare;
+	}
+	
+	/**
+	 * Set the contact associated with square or not.
+	 * 
+	 * @param associatedWithSquare True or false to set the contact associated with square.
+	 */
+
+	public void setAssociatedWithSquare(boolean associatedWithSquare) 
+	{
+		this.associatedWithSquare = associatedWithSquare;
+	}
+	
+	
+	
+	/**
+	 * Get the contact is track1099.
+	 * 
+	 * @return Returns true if the contact is track1099 else returns false.
+	 */
+
+	public boolean isTrack1099() 
+	{
+		return track1099;
+	}
+	
+	/**
+	 * Set the contact is track1099 or not.
+	 * 
+	 * @param track1099 True or false to set the contact is track1099 or not.
+	 */
+
+	public void setTrack1099(boolean track1099) 
+	{
+		this.track1099 = track1099;
+	}
+	
+	/**
+	 * Get the tax id type.
+	 * 
+	 * @return Returns the tax id type.
+	 */
+
+	public String getTaxIdType() 
+	{
+		return taxIdType;
+	}
+	
+	/**
+	 * Set the tax id type.
+	 * 
+	 * @param taxIdType Type of the tax id.
+	 */
+
+	public void setTaxIdType(String taxIdType)
+	{
+		this.taxIdType = taxIdType;
+	}
+	
+	/**
+	 * Get the tax id value.
+	 * 
+	 * @return Returns the tax id value.
+	 */
+
+	public String getTaxIdValue() 
+	{
+		return taxIdValue;
+	}
+	
+	/**
+	 * Set the tax id value.
+	 * 
+	 * @param taxIdValue Value of the tax id.
+	 */
+
+	public void setTaxIdValue(String taxIdValue)
+	{
+		this.taxIdValue = taxIdValue;
+	}
+	
+	/**
+	 * Get the contact is taxable or not.
+	 * 
+	 * @return Returns true of the contact is taxable else returns false.
+	 */
+
+	public boolean isTaxable() 
+	{
+		return isTaxable;
+	}
+	
+	/**
+	 * Set the contact is taxable or not.
+	 * 
+	 * @param isTaxable True or false to set the contact is taxable or not.
+	 */
+
+	public void setTaxable(boolean isTaxable) 
+	{
+		this.isTaxable = isTaxable;
+	}
+	
+	/**
+	 * Get the tax authority id.
+	 * 
+	 * @return Returns the tax authority id.
+	 */
+
+	public String getTaxAuthorityId() 
+	{
+		return taxAuthorityId;
+	}
+	
+	/**
+	 * Set the tax authority id.
+	 * 
+	 * @param taxAuthorityId ID of the tax authority.
+	 */
+
+	public void setTaxAuthorityId(String taxAuthorityId)
+	{
+		this.taxAuthorityId = taxAuthorityId;
+	}
+	
+	/**
+	 * Get the tax exemption id.
+	 * 
+	 * @return Returns the tax exemption id.
+	 */
+
+	public String getTaxExemptionId() 
+	{
+		return taxExemptionId;
+	}
+	
+	/**
+	 * Set the tax exemption id.
+	 * 
+	 * @param taxExemptionId ID of the tax exemption.
+	 */
+
+	public void setTaxExemptionId(String taxExemptionId)
+	{
+		this.taxExemptionId = taxExemptionId;
+	}
+	
+	/**
+	 * Get the tax id.
+	 * 
+	 * @return Returns the tax id.
+	 */
+
+	public String getTaxId() 
+	{
+		return taxId;
+	}
+	
+	/**
+	 * Set the tax id.
+	 * 
+	 * @param taxId ID of the tax.
+	 */
+
+	public void setTaxId(String taxId)
+	{
+		this.taxId = taxId;
+	}
+
+	/**
 	
 	* Convert the Contact object into JSONObject.
 	
 	* @return  Returns the JSONObject.
 	
 	*/
-	
 	
 	public JSONObject toJSON()throws Exception
 	{
@@ -1116,6 +1468,38 @@ public class Contact
 		if(defaultTemplates != null)
 		{
 			jsonObject.put("default_templates", defaultTemplates.toJSON());
+		}
+		
+		if((Boolean)track1099 != null && track1099 != false)
+		{
+			jsonObject.put("track_1099", track1099);
+		}
+		if(taxIdType != null && !taxIdType.equals(""))
+		{
+			jsonObject.put("tax_id_type", taxIdType);
+		}
+		if(taxIdValue != null && !taxIdValue.equals(""))
+		{
+			jsonObject.put("tax_id_value", taxIdValue);
+		}
+		if(track1099)
+		{
+			if((Boolean)isTaxable != null )
+			{
+				jsonObject.put("is_taxable", isTaxable);
+			}
+		}
+		if(taxId != null && !taxId.equals(""))
+		{
+			jsonObject.put("tax_id", taxId);
+		}
+		if(taxAuthorityId != null && !taxAuthorityId.equals(""))
+		{
+			jsonObject.put("tax_authority_id", taxAuthorityId);
+		}
+		if(taxExemptionId != null && !taxExemptionId.equals(""))
+		{
+			jsonObject.put("tax_exemption_id", taxExemptionId);
 		}
 		
 		return jsonObject;

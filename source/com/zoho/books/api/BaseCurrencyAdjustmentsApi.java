@@ -82,7 +82,7 @@ public class BaseCurrencyAdjustmentsApi extends API
 	
 	*/
 	
-	public BaseCurrencyAdjustment getBaseCurrencyAdjustmentAccounts(HashMap queryMap)throws Exception
+	public BaseCurrencyAdjustment getBaseCurrencyAdjustmentAccounts(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String urlString = url+"/accounts"; //No I18N
@@ -122,10 +122,10 @@ public class BaseCurrencyAdjustmentsApi extends API
 	
 	*/
 	
-	public BaseCurrencyAdjustment create(HashMap paramMap, BaseCurrencyAdjustment baseCurrencyAdjustment)throws Exception
+	public BaseCurrencyAdjustment create(HashMap<String, Object> paramMap, BaseCurrencyAdjustment baseCurrencyAdjustment)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap(paramMap);
+		HashMap<String, Object> requestBody = getQueryMap(paramMap);
 		
 		requestBody.put("JSONString", baseCurrencyAdjustment.toJSON().toString());
 		
@@ -183,7 +183,7 @@ public class BaseCurrencyAdjustmentsApi extends API
 		
 		String urlString = url+"/"+baseCurrencyAdjustmentId;
 		
-		String response = ZohoHTTPClient.delete(url, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
 		
 		String success = baseCurrencyAdjustmentParser.getMessage(response);
 		
@@ -218,7 +218,7 @@ Allowed Values: <i>adjustment_date, exchange_rate, currency_code, debit_or_credi
 	
 	*/
 	
-	public BaseCurrencyAdjustmentList getBaseCurrencyAdjustments(HashMap queryMap)throws Exception
+	public BaseCurrencyAdjustmentList getBaseCurrencyAdjustments(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));

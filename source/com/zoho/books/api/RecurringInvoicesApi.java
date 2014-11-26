@@ -87,7 +87,7 @@ public class RecurringInvoicesApi extends API
 	public RecurringInvoice create(RecurringInvoice recurringInvoice)throws Exception
 	{
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", recurringInvoice.toJSON().toString());
 		
@@ -145,7 +145,7 @@ public class RecurringInvoicesApi extends API
 		
 		String urlString = url+"/"+recurringInvoice.getRecurringInvoiceId();
 		
-		HashMap	requestBody = getQueryMap();
+		HashMap<String, Object>	requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", recurringInvoice.toJSON().toString());
 		
@@ -249,7 +249,7 @@ Allowed Values: <i>customer_name, recurrence_name, total, start_date, end_date, 
 	
 	*/
 	
-	public RecurringInvoiceList getRecurringInvoices(HashMap queryMap)throws Exception
+	public RecurringInvoiceList getRecurringInvoices(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));

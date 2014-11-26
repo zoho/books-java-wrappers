@@ -17,7 +17,7 @@ import org.json.JSONArray;
 public class Estimate
 {
 
-	private String estimateId = "";
+		private String estimateId = "";
         private String estimateNumber = "";
         private String date = "";
         private String referenceNumber = "";
@@ -35,7 +35,7 @@ public class Estimate
         private String declinedDate = "";
         private String expiryDate = "";
         
-	private double shippingCharge = 0.00;
+        private double shippingCharge = 0.00;
         private double adjustment = 0.00;
         private String adjustmentDescription = ""; 
         private double subTotal = 0.00;
@@ -53,7 +53,7 @@ public class Estimate
         private String salespersonName = "";
         
         
-	private String[] contactPersons = {};
+        private String[] contactPersons = {};
         
         private List<LineItem> lineItems = new ArrayList<LineItem>();
         
@@ -64,6 +64,23 @@ public class Estimate
         private Address shippingAddress = new Address();
         
         private List<CustomField> customFields = new ArrayList<CustomField>();
+        
+        
+        private boolean isViewedByClient;
+        private String clientViewedTime;
+        private String currencySymbol;
+        private String templateType;
+        private boolean allowPartialPayments;
+        private boolean acceptRetainer;
+        private String retainerPercentage;
+        
+        
+        private List<PaymentGateway> paymentGateways = new ArrayList<PaymentGateway>();
+        
+        
+        private String taxId;
+        private String taxAuthorityId;
+        private String taxExemptionId;
         
         
         /**
@@ -880,13 +897,13 @@ public class Estimate
         
         
        	
-       	/**
-        
-        * set the contact persons.
-        
-        * @param contactPersons  Array of contact person(s) for whom estimate has to be sent.
-                
-        */
+   	/**
+    
+    * set the contact persons.
+    
+    * @param contactPersons  Array of contact person(s) for whom estimate has to be sent.
+            
+    */
 	
 	public void setContactPersons(String[] contactPersons)throws Exception
 	{
@@ -895,11 +912,11 @@ public class Estimate
 	
 	/**
         
-        * get the contact persons.
-        
-        * @return Returns the array of contact persons.
-        
-        */
+    * get the contact persons.
+    
+    * @return Returns the array of contact persons.
+    
+    */
 	
 	public String[] getContactPersons()
 	{
@@ -911,11 +928,11 @@ public class Estimate
 	
 	/**
         
-        * set the line items.
-        
-        * @param lineItems  Line items of an estimate.
-                
-        */
+    * set the line items.
+    
+    * @param lineItems  Line items of an estimate.
+            
+    */
 	
 	public void setLineItems(List<LineItem> lineItems)throws Exception
 	{
@@ -924,11 +941,11 @@ public class Estimate
 	
 	/**
         
-        * get the line items.
-        
-        * @return Returns list of LineItem object.
-        
-        */
+    * get the line items.
+    
+    * @return Returns list of LineItem object.
+    
+    */
 	
 	public List<LineItem> getLineItems()
 	{
@@ -940,11 +957,11 @@ public class Estimate
 	
 	/**
         
-        * set the taxes.
-        
-        * @param taxes  Taxes of an estimate.
-                
-        */
+    * set the taxes.
+    
+    * @param taxes  Taxes of an estimate.
+            
+    */
 	
 	public void setTaxes(List<Tax> taxes)throws Exception
 	{
@@ -953,11 +970,11 @@ public class Estimate
 	
 	/**
         
-        * get the taxes.
-        
-        * @return Returns list of Tax object.
-        
-        */
+    * get the taxes.
+    
+    * @return Returns list of Tax object.
+    
+    */
 	
 	public List<Tax> getTaxes()
 	{
@@ -968,12 +985,12 @@ public class Estimate
 	
 	
 	/**
-        
-        * set the billing address.
-        
-        * @param billingAddress  Billing address of an estimate.
-                
-        */
+    
+    * set the billing address.
+    
+    * @param billingAddress  Billing address of an estimate.
+            
+    */
 	
 	public void setBillingAddress(Address billingAddress)throws Exception
 	{
@@ -982,11 +999,11 @@ public class Estimate
 	
 	/**
         
-        * get the billing address.
-        
-        * @return Returns a BillingAddress object.
-        
-        */
+    * get the billing address.
+    
+    * @return Returns a BillingAddress object.
+    
+    */
 	
 	public Address getBillingAddress()
 	{
@@ -999,11 +1016,11 @@ public class Estimate
 	
 	/**
         
-        * set the shipping address.
-        
-        * @param shippingAddress  Shipping address of an estimate.
-                
-        */
+    * set the shipping address.
+    
+    * @param shippingAddress  Shipping address of an estimate.
+            
+    */
 	
 	public void setShippingAddress(Address shippingAddress)throws Exception
 	{
@@ -1012,11 +1029,11 @@ public class Estimate
 	
 	/**
         
-        * get the shipping address.
-        
-        * @return Returns a ShippingAddress object.
-        
-        */
+    * get the shipping address.
+    
+    * @return Returns a ShippingAddress object.
+    
+    */
 	
 	public Address getShippingAddress()
 	{
@@ -1028,11 +1045,11 @@ public class Estimate
 	
 	/**
         
-        * set the custom fields.
-        
-        * @param customFields  Custom fields for an estimate.
-                
-        */
+    * set the custom fields.
+    
+    * @param customFields  Custom fields for an estimate.
+            
+    */
 	
 	public void setCustomFields(List<CustomField> customFields)throws Exception
 	{
@@ -1041,11 +1058,11 @@ public class Estimate
 	
 	/**
         
-        * get the custom fields.
-        
-        * @return Returns list of CustomField object.
-        
-        */
+    * get the custom fields.
+    
+    * @return Returns list of CustomField object.
+    
+    */
 	
 	public List<CustomField> getCustomFields()
 	{
@@ -1053,7 +1070,253 @@ public class Estimate
 	}
 	
 	
+	/**
+	 * Get the estimate is viewed by client or not. 
+	 * 
+	 * @return Returns true if the estimate is viewed by client else returns false.
+	 */
 	
+	public boolean isViewedByClient() 
+	{
+		return isViewedByClient;
+	}
+	
+	/**
+	 * Set the estimate is viewed by client or not.
+	 * 
+	 * @param isViewedByClient True or false to set the estimate is viewed by client.
+	 */
+
+	public void setIsViewedByClient(boolean isViewedByClient) 
+	{
+		this.isViewedByClient = isViewedByClient;
+	}
+	
+	/**
+	 * Get the client viewed time.
+	 * 
+	 * @return Returns the client viewed time.
+	 */
+
+	public String getClientViewedTime() 
+	{
+		return clientViewedTime;
+	}
+	
+	/**
+	 * Set the client viewed time.
+	 * 
+	 * @param clientViewedTime Estimate viewed time by the client.
+	 */
+
+	public void setClientViewedTime(String clientViewedTime) 
+	{
+		this.clientViewedTime = clientViewedTime;
+	}
+	
+	/**
+	 * Get the currency symbol.
+	 * 
+	 * @return Returns the currency symbol.
+	 */
+
+	public String getCurrencySymbol() 
+	{
+		return currencySymbol;
+	}
+	
+	/**
+	 * Set the currency symbol.
+	 * 
+	 * @param currencySymbol Symbol of the currency.
+	 */
+
+	public void setCurrencySymbol(String currencySymbol)
+	{
+		this.currencySymbol = currencySymbol;
+	}
+	
+	/**
+	 * Get the template type.
+	 * 
+	 * @return Returns the template type.
+	 */
+
+	public String getTemplateType() 
+	{
+		return templateType;
+	}
+	
+	/**
+	 * Set the template type.
+	 * 
+	 * @param templateType Type of the tmplate.
+	 */
+
+	public void setTemplateType(String templateType)
+	{
+		this.templateType = templateType;
+	}
+	
+	/**
+	 * Get the estimate allows partial payment or not.
+	 * 
+	 * @return Returns true if the estimate allows partial payment else returns false.
+	 */
+
+	public boolean isAllowPartialPayments() 
+	{
+		return allowPartialPayments;
+	}
+	
+	/**
+	 * Set the estimate allows partial payment or not.
+	 * 
+	 * @param allowPartialPayments True or false to set the estimate allows the partial payments or not.
+	 */
+
+	public void setAllowPartialPayments(boolean allowPartialPayments) 
+	{
+		this.allowPartialPayments = allowPartialPayments;
+	}
+	
+	/**
+	 * Get the estimate is accept retainer or not.
+	 * 
+	 * @return Returns true if the estimate is accept retainer.
+	 */
+
+	public boolean isAcceptRetainer() 
+	{
+		return acceptRetainer;
+	}
+	
+	/**
+	 * Set the estimate is accept retainer or not.
+	 * 
+	 * @param acceptRetainer True or false to set the estimate is accept retainer or not.
+	 */
+
+	public void setAcceptRetainer(boolean acceptRetainer) 
+	{
+		this.acceptRetainer = acceptRetainer;
+	}
+	
+	/**
+	 * Get the retainer percentage.
+	 * 
+	 * @return Returns the retainer percentage.
+	 */
+
+	public String getRetainerPercentage() 
+	{
+		return retainerPercentage;
+	}
+	
+	/**
+	 * Set the retainer percentage.
+	 * 
+	 * @param retainerPercentage Percentage of the retainer.
+	 */
+
+	public void setRetainerPercentage(String retainerPercentage)
+	{
+		this.retainerPercentage = retainerPercentage;
+	}
+	
+	
+	/**
+	 * Get the list of payment gateways for the estimate.
+	 * 
+	 * @return Returns list of PaymentGateway Object.
+	 */
+
+	public List<PaymentGateway> getPaymentGateways() 
+	{
+		return paymentGateways;
+	}
+	
+	/**
+	 * Set the list of payment gateways for the estimate.
+	 * 
+	 * @param paymentGateways List of PaymentGateway object.
+	 */
+
+	public void setPaymentGateways(List<PaymentGateway> paymentGateways)
+	{
+		this.paymentGateways = paymentGateways;
+	}
+	
+	
+	
+	/**
+	 * Get the tax id(US Edition only).
+	 * 
+	 * @return Returns the tax id(US Edititon only).
+	 */
+
+	public String getTaxId() 
+	{
+		return taxId;
+	}
+	
+	/**
+	 * Set the tax id(US Edition only).
+	 * 
+	 * @param taxId Tax id for US Edition.
+	 */
+
+	public void setTaxId(String taxId) 
+	{
+		this.taxId = taxId;
+	}
+	
+	/**
+	 * Get tax authority id(US Edition only).
+	 * 
+	 * @return Returns the tax authority id(US Edititon only).
+	 */
+
+	public String getTaxAuthorityId() 
+	{
+		return taxAuthorityId;
+	}
+	
+	/**
+	 * Set the tax authority id(US Edititon only).
+	 * 
+	 * @param taxAuthorityId Tax authority id for US edition.
+	 */
+
+	public void setTaxAuthorityId(String taxAuthorityId) 
+	{
+		this.taxAuthorityId = taxAuthorityId;
+	}
+	
+	/**
+	 * Get the tax exemption id(US Edititon only).
+	 * 
+	 * @return Returns the tax exemption id(US Edititon only).
+	 */
+
+	public String getTaxExemptionId() 
+	{
+		return taxExemptionId;
+	}
+	
+	/**
+	 * Set the tax exemption id(US Edititon only).
+	 * 
+	 * @param taxExemptionId Tax exemption id for US Edition.
+	 */
+
+	public void setTaxExemptionId(String taxExemptionId) 
+	{
+		this.taxExemptionId = taxExemptionId;
+	}
+	
+	
+
 	/**
 	
 	* Convert Estimate object into JSONObject.
@@ -1122,6 +1385,19 @@ public class Estimate
 				lineItem.put(lineItems.get(i).toJSON());
 			}
 			jsonObject.put("line_items", lineItem);
+		}
+		
+		if(taxId != null && !taxId.equals(""))
+		{
+			jsonObject.put("tax_id", taxId);
+		}
+		if(taxAuthorityId != null && !taxAuthorityId.equals(""))
+		{
+			jsonObject.put("tax_authority_id", taxAuthorityId);
+		}
+		if(taxExemptionId != null && !taxExemptionId.equals(""))
+		{
+			jsonObject.put("tax_exemption_id", taxExemptionId);
 		}
 		
 		return jsonObject;

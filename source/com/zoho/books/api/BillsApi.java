@@ -120,7 +120,7 @@ public class BillsApi extends API
 	public Bill create(String vendorId, String billNumber, String accountId)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		
 		Bill billObj = new Bill();
@@ -168,7 +168,7 @@ public class BillsApi extends API
 	public Bill create(Bill bill)throws Exception
 	{
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", bill.toJSON().toString());
 		
@@ -200,11 +200,11 @@ public class BillsApi extends API
 	public Bill create(Bill bill, File file)throws Exception
 	{
 		
-		HashMap requestBody = new HashMap();
+		HashMap<String, Object> requestBody = new HashMap<String, Object>();
 		
 		requestBody.put("JSONString", bill.toJSON().toString());
 		
-		HashMap fileBody = new HashMap();
+		HashMap<String, Object> fileBody = new HashMap<String, Object>();
 		fileBody.put("attachment", file);
 		
 		String response = ZohoHTTPClient.post(url, getQueryMap(), requestBody, fileBody);
@@ -262,7 +262,7 @@ public class BillsApi extends API
 		
 		String urlString = url+"/"+bill.getBillId(); 
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", bill.toJSON().toString());
 		
@@ -295,11 +295,11 @@ public class BillsApi extends API
 		
 		String urlString = url+"/"+bill.getBillId(); 
 		
-		HashMap requestBody = new HashMap();
+		HashMap<String, Object> requestBody = new HashMap<String, Object>();
 		
 		requestBody.put("JSONString", bill.toJSON().toString());
 		
-		HashMap fileBody = new HashMap();
+		HashMap<String, Object> fileBody = new HashMap<String, Object>();
 		
 		fileBody.put("attachment", file);
 		
@@ -394,7 +394,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 	
 	*/
 	
-	public BillList getBills(HashMap queryMap)throws Exception
+	public BillList getBills(HashMap<String, Object> queryMap)throws Exception
 	{
 		
 		
@@ -487,7 +487,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/address/billing";  //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 	
@@ -556,7 +556,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/credits";  //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		
 		JSONObject jsonObject = new JSONObject();
@@ -667,7 +667,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/attachment";  //No I18N
 		
-		HashMap fileBody = new HashMap();
+		HashMap<String, Object> fileBody = new HashMap<String, Object>();
 		
 		fileBody.put("attachment", file);
 		
@@ -763,7 +763,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/comments";  //No I18N
 		
-		HashMap requestBody = getQueryMap();
+		HashMap<String, Object> requestBody = getQueryMap();
 		
 		JSONObject jsonObject = new JSONObject();
 		

@@ -76,6 +76,68 @@ public class ContactParser
 		contacts.setCreatedTime(contact.getString("created_time"));
 		contacts.setLastModifiedTime(contact.getString("last_modified_time"));
 		
+		if(contact.has("website"))
+		{
+			contacts.setWebsite(contact.getString("website"));
+		}
+		if(contact.has("contact_salutation"))
+		{
+			contacts.setContactSalutation(contact.getString("contact_salutation"));
+		}
+		if(contact.has("source"))
+		{
+			contacts.setSource(contact.getString("source"));
+		}
+		if(contact.has("is_linked_with_zohocrm"))
+		{
+			contacts.setLinkedWithZohocrm(contact.getBoolean("is_linked_with_zohocrm"));	//No I18N
+		}
+		if(contact.has("price_precision"))
+		{
+			contacts.setPricePrecision(contact.getInt("price_precision"));	//No I18N
+		}
+		if(contact.has("pricebook_id"))
+		{
+			contacts.setPricebookId(contact.getString("pricebook_id"));
+		}
+		if(contact.has("pricebook_name"))
+		{
+			contacts.setPricebookName(contact.getString("pricebook_name"));
+		}
+		if(contact.has("associated_with_square"))
+		{
+			contacts.setAssociatedWithSquare(contact.getBoolean("associated_with_square"));	//No I18N
+		}
+		
+		if(contact.has("track_1099"))
+		{
+			contacts.setTrack1099(contact.getBoolean("track_1099"));	//No I18N
+		}
+		if(contact.has("tax_id_type"))
+		{
+			contacts.setTaxIdType(contact.getString("tax_id_type"));
+		}
+		if(contact.has("tax_id_value"))
+		{
+			contacts.setTaxIdValue(contact.getString("tax_id_value"));
+		}
+		if(contact.has("is_taxable"))
+		{
+			contacts.setTaxable(contact.getBoolean("is_taxable"));	//No I18N
+		}
+		if(contact.has("tax_id"))
+		{
+			contacts.setTaxId(contact.getString("tax_id"));
+		}
+		if(contact.has("tax_authority_id"))
+		{
+			contacts.setTaxAuthorityId(contact.getString("tax_authority_id"));
+		}
+		if(contact.has("tax_exemption_id"))
+		{
+			contacts.setTaxExemptionId(contact.getString("tax_exemption_id"));
+		}
+		
 		JSONObject billingAddress = contact.getJSONObject("billing_address"); 	//No I18N
 		
 		Address billingAddressObj = new Address();
@@ -118,6 +180,14 @@ public class ContactParser
 			contactPerson.setPhone(contactPersons.getJSONObject(i).getString("phone"));
 			contactPerson.setMobile(contactPersons.getJSONObject(i).getString("mobile"));
 			contactPerson.setIsPrimaryContact(contactPersons.getJSONObject(i).getBoolean("is_primary_contact")); //No I18N
+			if(contactPersons.getJSONObject(i).has("is_added_in_portal"))
+			{
+				contactPerson.setAddedInPortal(contactPersons.getJSONObject(i).getBoolean("is_added_in_portal"));	//No I18N
+			}
+			if(contactPersons.getJSONObject(i).has("can_invite"))
+			{
+				contactPerson.setCanInvite(contactPersons.getJSONObject(i).getBoolean("can_invite"));	//No I18N
+			}
 			
 			contactPersonsList.add(i, contactPerson);
 		}
@@ -188,6 +258,16 @@ public class ContactParser
 			contact.setMobile(jsonArray.getJSONObject(i).getString("mobile"));
 			contact.setCreatedTime(jsonArray.getJSONObject(i).getString("created_time"));
 			contact.setLastModifiedTime(jsonArray.getJSONObject(i).getString("last_modified_time"));
+			if(jsonArray.getJSONObject(i).has("source"))
+			{
+				contact.setSource(jsonArray.getJSONObject(i).getString("source"));
+			}
+			if(jsonArray.getJSONObject(i).has("is_linked_with_zohocrm"))
+			{
+				contact.setLinkedWithZohocrm(jsonArray.getJSONObject(i).getBoolean("is_linked_with_zohocrm"));	//No I18N
+			}
+			
+			
 			
 			contactList.add(contact);
 			
@@ -197,13 +277,34 @@ public class ContactParser
 		
 		JSONObject pagecontext = jsonObject.getJSONObject("page_context"); //No I18N
 		
-		pageContext.setPage(pagecontext.getInt("page")); //No I18N
-		pageContext.setPerPage(pagecontext.getInt("per_page")); //No I18N
-		pageContext.setHasMorePage(pagecontext.getBoolean("has_more_page")); //No I18N
-		pageContext.setReportName(pagecontext.getString("report_name"));
-		pageContext.setAppliedFilter(pagecontext.getString("applied_filter"));
-		pageContext.setSortColumn(pagecontext.getString("sort_column"));
-		pageContext.setSortOrder(pagecontext.getString("sort_order"));
+		if(pagecontext.has("page"))
+		{
+			pageContext.setPage(pagecontext.getInt("page")); //No I18N
+		}
+		if(pagecontext.has("per_page"))
+		{
+			pageContext.setPerPage(pagecontext.getInt("per_page")); //No I18N
+		}
+		if(pagecontext.has("has_more_page"))
+		{
+			pageContext.setHasMorePage(pagecontext.getBoolean("has_more_page")); //No I18N
+		}
+		if(pagecontext.has("report_name"))
+		{
+			pageContext.setReportName(pagecontext.getString("report_name"));
+		}
+		if(pagecontext.has("applied_filter"))
+		{
+			pageContext.setAppliedFilter(pagecontext.getString("applied_filter"));
+		}
+		if(pagecontext.has("sort_column"))
+		{
+			pageContext.setSortColumn(pagecontext.getString("sort_column"));
+		}
+		if(pagecontext.has("sort_order"))
+		{
+			pageContext.setSortOrder(pagecontext.getString("sort_order"));
+		}
 		
 		contactList.setPageContext(pageContext);
 		
@@ -237,6 +338,14 @@ public class ContactParser
 		contactPersons.setPhone(contactPerson.getString("phone"));
 		contactPersons.setMobile(contactPerson.getString("mobile"));
 		contactPersons.setIsPrimaryContact(contactPerson.getBoolean("is_primary_contact")); //No I18N
+		if(contactPerson.has("is_added_in_portal"))
+		{
+			contactPersons.setAddedInPortal(contactPerson.getBoolean("is_added_in_portal"));	//No I18N
+		}
+		if(contactPerson.has("can_invite"))
+		{
+			contactPersons.setCanInvite(contactPerson.getBoolean("can_invite"));	//No I18N
+		}
 		
 		return contactPersons;
 		
@@ -274,6 +383,14 @@ public class ContactParser
 			contactPerson.setPhone(jsonArray.getJSONObject(i).getString("phone"));
 			contactPerson.setMobile(jsonArray.getJSONObject(i).getString("mobile"));
 			contactPerson.setIsPrimaryContact(jsonArray.getJSONObject(i).getBoolean("is_primary_contact")); //No I18N
+			if(jsonArray.getJSONObject(i).has("is_added_in_portal"))
+			{
+				contactPerson.setAddedInPortal(jsonArray.getJSONObject(i).getBoolean("is_added_in_portal")); //No I18N
+			}
+			if(jsonArray.getJSONObject(i).has("can_invite"))
+			{
+				contactPerson.setCanInvite(jsonArray.getJSONObject(i).getBoolean("can_invite"));	//No I18N
+			}
 			
 			contactPersonList.add(contactPerson);
 		}
@@ -314,6 +431,14 @@ public class ContactParser
 		email.setSubject(data.getString("subject"));
 		email.setBody(data.getString("body"));
 		email.setFileName(data.getString("file_name"));
+		if(data.has("file_name_without_extension"))
+		{
+			email.setFileNameWithoutExtension(data.getString("file_name_without_extension"));
+		}
+		if(data.has("entity_id"))
+		{
+			email.setEntityId(data.getString("entity_id"));
+		}
 		email.setContactId(data.getString("contact_id"));
 		
 		JSONArray toContacts = data.getJSONArray("to_contacts"); //No I18N
@@ -349,6 +474,10 @@ public class ContactParser
 			fromEmail.setUserName(fromEmails.getJSONObject(j).getString("user_name"));
 			fromEmail.setSelected(fromEmails.getJSONObject(j).getBoolean("selected")); //No I18N
 			fromEmail.setEmail(fromEmails.getJSONObject(j).getString("email"));
+			if(fromEmails.getJSONObject(j).has("is_org_email_id"))
+			{
+				fromEmail.setOrgEmailId(fromEmails.getJSONObject(j).getBoolean("is_org_email_id")); //No I18N
+			}
 			
 			fromEmailsList.add(j, fromEmail);
 		}

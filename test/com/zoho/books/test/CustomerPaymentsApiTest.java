@@ -36,7 +36,7 @@ public class CustomerPaymentsApiTest
 		String invoicePaymentId = "36991000000037003";
 		
 		
-		HashMap<String, String> hashMap = new HashMap<String, String>();
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		
 		hashMap.put("filter_by", "PaymentMode.Cash");
 		hashMap.put("sort_column", "customer_name");

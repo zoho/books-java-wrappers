@@ -43,6 +43,17 @@ public class Email
 	private List<FromEmail> fromEmails;
 	
 	
+	private String entityId;
+	private String fileNameWithoutExtension;
+	
+	private String customerName;
+	private boolean attachPdf;
+	private boolean gatewaysAssociated;
+	
+	private String vendorId;
+	private String vendorName;
+	
+	
 	
 	/**
 	
@@ -425,7 +436,164 @@ public class Email
 	}
 	
 	
+	/**
+	 * Get the entity id of the email.
+	 * 
+	 * @return Returns the entity id. 
+	 */
 	
+	public String getEntityId() 
+	{
+		return entityId;
+	}
+	
+	/**
+	 * Set the entity id of the email.
+	 * 
+	 * @param entityId Entity id of the email.
+	 */
+
+	public void setEntityId(String entityId) 
+	{
+		this.entityId = entityId;
+	}
+	
+	/**
+	 * Get the file name without extension.
+	 * 
+	 * @return Returns the attached file name without extension.
+	 */
+
+	public String getFileNameWithoutExtension()
+	{
+		return fileNameWithoutExtension;
+	}
+	
+	/**
+	 * Set the file name without extension.
+	 * 
+	 * @param fileNameWithoutExtension Attached file name without extension.
+	 */
+
+	public void setFileNameWithoutExtension(String fileNameWithoutExtension)
+	{
+		this.fileNameWithoutExtension = fileNameWithoutExtension;
+	}
+	
+	
+	
+	/**
+	 * Get the customer name.
+	 * 
+	 * @return Retruns the customer name.
+	 */
+	
+	public String getCustomerName() 
+	{
+		return customerName;
+	}
+	
+	/**
+	 * Set the customer name.
+	 * 
+	 * @param customerName Name of the customer.
+	 */
+
+	public void setCustomerName(String customerName)
+	{
+		this.customerName = customerName;
+	}
+	
+	/**
+	 * Get the email is attached pdf.
+	 * 
+	 * @return Returns true if the email attached pdf else returns false. 
+	 */
+
+	public boolean isAttachPdf() 
+	{
+		return attachPdf;
+	}
+	
+	/**
+	 * Set the email attached pdf or not.
+	 * 
+	 * @param attachPdf True or false to set the email attached pdf or not.
+	 */
+
+	public void setAttachPdf(boolean attachPdf) 
+	{
+		this.attachPdf = attachPdf;
+	}
+	
+	
+	/**
+	 * Get the invoice is gateways associated or not.
+	 * 
+	 * @return Returns true if the invoice is gateways associated else returns false.
+	 */
+
+	public boolean isGatewaysAssociated() 
+	{
+		return gatewaysAssociated;
+	}
+	
+	/**
+	 * Set the invoice is gateways associated or not.
+	 * 
+	 * @param gatewaysAssociated True or false to set the invoice is assciated with gateways or not.
+	 */
+
+	public void setGatewaysAssociated(boolean gatewaysAssociated) 
+	{
+		this.gatewaysAssociated = gatewaysAssociated;
+	}
+	
+	
+	/**
+	 * Get the vendor id.
+	 * 
+	 * @return Returns the vendor id.
+	 */
+
+	public String getVendorId() 
+	{
+		return vendorId;
+	}
+	
+	/**
+	 * Set the vendor id.
+	 * 
+	 * @param vendorId ID of the vendor.
+	 */
+
+	public void setVendorId(String vendorId)
+	{
+		this.vendorId = vendorId;
+	}
+	
+	/**
+	 * Get the vendor name.
+	 * 
+	 * @return Returns the vendor name.
+	 */
+
+	public String getVendorName() 
+	{
+		return vendorName;
+	}
+	
+	/**
+	 * Set the vendor name.
+	 * 
+	 * @param vendorName Name of the vendor.
+	 */
+
+	public void setVendorName(String vendorName)
+	{
+		this.vendorName = vendorName;
+	}
+
 	/**
 	
 	* Convert Email object into JSONObject.

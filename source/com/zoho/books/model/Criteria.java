@@ -2,9 +2,6 @@
 
 package com.zoho.books.model;
 
-import java.util.List;
-import java.util.ArrayList;
-
 /**
 
 * This class is used to create an object for criteria.
@@ -15,7 +12,7 @@ import java.util.ArrayList;
 public class Criteria
 {
 	
-	private String columnname = "";
+		private String columnname = "";
         private String searchText = "";
         private String comparator = "";
         
