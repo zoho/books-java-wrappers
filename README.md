@@ -96,7 +96,7 @@ First time users signing up for Zoho Books need to create a new organization. Pl
 
 			organization.setName("ZOHO");
 			organization.setFiscalYearStartMonth("january");
-			organization.setCurrencyCode("INR");
+			organization.setCurrencyCode("USD");
 			organization.setTimeZone("Asia/Calcutta");
 			organization.setDateFormat("dd MMM yyyy");
 			organization.setLanguageCode("en");
@@ -109,12 +109,12 @@ First time users signing up for Zoho Books need to create a new organization. Pl
 			
 			Address address = new Address();
 
-			address.setStreetAddress1("1/124,Shivaji Garden");
-			address.setStreetAddress2("Ramapuram");
-			address.setCity("Chennai");
-			address.setState("Tamil Nadu");
-			address.setCountry("India");
-			address.setZip("600 089");
+			address.setStreetAddress1("9390 Research Blvd");
+			address.setStreetAddress2("Bldg II, Suite 440");
+			address.setCity("Austin");
+			address.setState("Texas");
+			address.setCountry("U.S.A");
+			address.setZip("78759");
 
 			organization.setAddress(address);
 
