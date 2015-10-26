@@ -56,7 +56,7 @@ public class ContactsApiTest
 		
 		//String contactId = "36991000000025001";
 		
-		String contactName = "S.Sahaya Ramesh";	//No I18N
+		String contactName = "SSR";	//No I18N
 		
 		String currencyId = "36991000000000099";
 		
@@ -124,6 +124,7 @@ public class ContactsApiTest
 		contactPerson.setEmail("sahaya.ramesh91@gmail.com");	//No I18N
 		contactPerson.setPhone("044471612");
 		contactPerson.setMobile("8056200970");
+		contactPerson.setIsPrimaryContact(true);
 		
 		List<ContactPerson> contactPersons = new ArrayList<ContactPerson>();
 		contactPersons.add(0, contactPerson);
@@ -221,7 +222,7 @@ public class ContactsApiTest
 			
 			String delete = contactsApi.delete(contactId);
 		
-			//System.out.println(getContacts);
+			//System.out.println(create1.getContactPersons().get(0).isPrimaryContact());
 			
 		
 		}

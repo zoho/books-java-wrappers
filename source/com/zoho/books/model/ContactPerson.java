@@ -356,6 +356,10 @@ public class ContactPerson
 		{
 			jsonObject.put("mobile", mobile);
 		}
+		if((Boolean)isPrimaryContact != null)
+		{
+			jsonObject.put("is_primary_contact", isPrimaryContact);
+		}
 		
 		
 		return jsonObject;
