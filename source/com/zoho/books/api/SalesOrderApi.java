@@ -273,21 +273,27 @@ public class SalesOrderApi extends API
 		
 		String urlString = url+"/"+salesorderId+"/email";	//No I18N
 		
+		String  response = "";
+		
 		if(paramMap == null)
 		{
 		
 			paramMap = new HashMap<String, Object>();
 		}
+		HashMap<String, Object> fileBody = null;
+		if(email != null)
+		{
 		
-		ArrayList<File> attachments = email.getAttachments();
-		
-		paramMap.put("JSONString", email.toJSON().toString());
-		
-		String  response = "";
-		
-		HashMap<String, Object> fileBody = new HashMap<String, Object>();
-		
-		fileBody.put("attachments", attachments);
+			paramMap.put("JSONString", email.toJSON().toString());
+			
+			ArrayList<File> attachments = email.getAttachments();
+			if(attachments != null && attachments.size() > 0)
+			{
+				fileBody = new HashMap<String, Object>();
+				
+				fileBody.put("attachments", attachments);
+			}
+		}
 		
 		response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
 		

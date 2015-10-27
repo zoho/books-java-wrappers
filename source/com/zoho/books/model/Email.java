@@ -485,7 +485,7 @@ public class Email
 	/**
 	 * Get the customer name.
 	 * 
-	 * @return Retruns the customer name.
+	 * @return Returns the customer name.
 	 */
 	
 	public String getCustomerName() 
@@ -627,9 +627,14 @@ public class Email
 			}
 			jsonObject.put("cc_mail_ids", ccMailId);
 		}
-		
-		jsonObject.put("subject", subject);
-		jsonObject.put("body", body);
+		if(!subject.equals(""))
+		{
+			jsonObject.put("subject", subject);
+		}
+		if(!body.equals(""))
+		{
+			jsonObject.put("body", body);
+		}
 		if((Boolean)sendFromOrgEmailId != null)
 		{
 			jsonObject.put("send_from_org_email_id", sendFromOrgEmailId);

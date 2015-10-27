@@ -382,14 +382,20 @@ Allowed Values: <i>customer_name, estimate_number, date, total</i> and <i>create
 		String urlString = url+"/"+estimateId+"/email"; //No I18N
 		
 		HashMap<String, Object> requestBody = new HashMap<String, Object>();
+		HashMap<String, Object> fileBody = null;
 		
-		requestBody.put("JSONString", email.toJSON().toString());
-		
-		ArrayList<File> files = email.getAttachments();
-		
-		HashMap<String, Object> fileBody = new HashMap<String, Object>(files.size());
-		
-		fileBody.put("attachments", files);
+		if(email != null)
+		{
+			requestBody.put("JSONString", email.toJSON().toString());
+			
+			ArrayList<File> files = email.getAttachments();
+			
+			if(files != null && files.size() > 0)
+			{
+				fileBody = new HashMap<String, Object>(files.size());
+				fileBody.put("attachments", files);
+			}
+		}
 		
 		
 		String response = ZohoHTTPClient.post(urlString, getQueryMap(), requestBody, fileBody);

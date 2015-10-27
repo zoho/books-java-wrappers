@@ -61,7 +61,7 @@ import org.json.JSONArray;
 	
 	Apply credit note to an invoice.<br>
 	
-	Add a creditnote refund.<br>
+	Add a credit note refund.<br>
 	
 	Add a comment for the credit note.<br><br>
 	
@@ -419,14 +419,20 @@ Allowed Values: <i>customer_name, creditnote_number, balance, total, date</i> an
 		{
 			paramMap = new HashMap<String, Object>();
 		}
-		
-		paramMap.put("JSONString", email.toJSON().toString());
-		
-		ArrayList<File> files = email.getAttachments();
-		
-		HashMap<String, Object> fileBody = new HashMap<String, Object>(files.size());
-		
-		fileBody.put("attachments", files);
+		HashMap<String, Object> fileBody = null;
+		if(email != null)
+		{
+			paramMap.put("JSONString", email.toJSON().toString());
+			
+			ArrayList<File> files = email.getAttachments();
+			
+			if(files != null && files.size() > 0)
+			{
+				fileBody = new HashMap<String, Object>(files.size());
+			
+				fileBody.put("attachments", files);
+			}
+		}
 		
 		
 		String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);	

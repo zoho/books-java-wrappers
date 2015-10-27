@@ -463,14 +463,23 @@ Allowed Values: true and false <br><br>
 			paramMap = new HashMap<String, Object>();
 		}
 		
-		paramMap.put("JSONString", email.toJSON().toString());
+		HashMap<String, Object> fileBody = null;
 		
-		ArrayList<File> files = email.getAttachments();
+		ArrayList<File> files = null;
 		
-		HashMap<String, Object> fileBody = new HashMap<String, Object>(files.size());
-		
-		fileBody.put("attachments", files);
-		
+		if(email != null)
+		{
+			paramMap.put("JSONString", email.toJSON().toString());
+			
+			files = email.getAttachments();
+			
+			if(files != null && files.size() > 0)
+			{
+				fileBody = new HashMap<String, Object>(files.size());
+			
+				fileBody.put("attachments", files);
+			}
+		}
 		
 		String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
 		
@@ -512,15 +521,18 @@ Allowed Values: true and false <br><br>
 		JSONObject jsonObject = new JSONObject();
 		
 		JSONArray contactss = new JSONArray();
-		for(int i = 0; i < contacts.size(); i++)
+		if(contacts != null)
 		{
-			JSONObject contact = new JSONObject();
+			for(int i = 0; i < contacts.size(); i++)
+			{
+				JSONObject contact = new JSONObject();
+				
+				contact.put("contact_id", contacts.get(i).getContactId());
+				contact.put("email", contacts.get(i).isEmail());
+				contact.put("snail_mail", contacts.get(i).isSnailMail());
 			
-			contact.put("contact_id", contacts.get(i).getContactId());
-			contact.put("email", contacts.get(i).isEmail());
-			contact.put("snail_mail", contacts.get(i).isSnailMail());
-		
-			contactss.put(contact);
+				contactss.put(contact);
+			}
 		}
 		
 		jsonObject.put("contacts", contactss);
@@ -603,13 +615,23 @@ Allowed Values: true and false <br><br>
 			paramMap = new HashMap<String, Object>();
 		}
 		
-		paramMap.put("JSONString", email.toJSON().toString());
+		HashMap<String, Object> fileBody = null;
 		
-		ArrayList<File> files = email.getAttachments();
+		ArrayList<File> files = null;
 		
-		HashMap<String, Object> fileBody = new HashMap<String, Object>(files.size());
-		
-		fileBody.put("attachments", files);
+		if(email != null)
+		{
+			paramMap.put("JSONString", email.toJSON().toString());
+			
+			files = email.getAttachments();
+			
+			if(files != null && files.size() > 0)
+			{
+				fileBody = new HashMap<String, Object>(files.size());
+			
+				fileBody.put("attachments", files);
+			}
+		}
 		
 		
 		String response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);

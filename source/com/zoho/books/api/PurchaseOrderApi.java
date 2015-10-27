@@ -323,22 +323,27 @@ public class PurchaseOrderApi extends API
 	{
 		
 		String urlString = url+"/"+purchaseorderId+"/email";	//No I18N
-		
+		String  response = "";
 		if(paramMap == null)
 		{
 		
 			paramMap = new HashMap<String, Object>();
 		}
 		
-		ArrayList<File> attachments = email.getAttachments();
-		
-		paramMap.put("JSONString", email.toJSON().toString());
-		
-		String  response = "";
-		
-		HashMap<String, Object> fileBody = new HashMap<String, Object>();
-		
-		fileBody.put("attachments", attachments);
+		HashMap<String, Object> fileBody = null;
+		if(email != null)
+		{
+			paramMap.put("JSONString", email.toJSON().toString());
+			
+			ArrayList<File> attachments = email.getAttachments();
+			
+			if(attachments != null && attachments.size() > 0)
+			{
+				fileBody = new HashMap<String, Object>();
+			
+				fileBody.put("attachments", attachments);
+			}
+		}
 		
 		response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
 		

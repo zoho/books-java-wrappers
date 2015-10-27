@@ -278,7 +278,10 @@ public class ZohoHTTPClient
 	
 		finally
 		{
-			fStream.close();
+			if(fStream != null)
+			{
+				fStream.close();
+			}
 			dos.flush();
 			dos.close();
 		}
@@ -450,8 +453,10 @@ public class ZohoHTTPClient
 	
 		finally
 		{
-			
-			fStream.close();
+			if(fStream != null)
+			{
+				fStream.close();
+			}
 			dos.flush();
 			dos.close();
 		}
