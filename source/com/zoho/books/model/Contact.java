@@ -1470,7 +1470,7 @@ public class Contact
 			jsonObject.put("default_templates", defaultTemplates.toJSON());
 		}
 		
-		if((Boolean)track1099 != null && track1099 != false)
+		if((Boolean)track1099 != null)
 		{
 			jsonObject.put("track_1099", track1099);
 		}
@@ -1482,12 +1482,9 @@ public class Contact
 		{
 			jsonObject.put("tax_id_value", taxIdValue);
 		}
-		if(track1099)
+		if((Boolean)isTaxable != null)
 		{
-			if((Boolean)isTaxable != null )
-			{
-				jsonObject.put("is_taxable", isTaxable);
-			}
+			jsonObject.put("is_taxable", isTaxable);
 		}
 		if(taxId != null && !taxId.equals(""))
 		{

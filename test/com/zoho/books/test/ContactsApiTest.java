@@ -92,7 +92,7 @@ public class ContactsApiTest
 		contacts.setPaymentTerms(15);
 		contacts.setPaymentTermsLabel("Net 15");	//No I18N
 		contacts.setCurrencyId(currencyId);
-		contacts.setTaxable(true);
+		contacts.setTaxable(false);
 		contacts.setNotes("Thanks for your business.");	//No I18N
 		
 		Address billingAddress = new Address();
