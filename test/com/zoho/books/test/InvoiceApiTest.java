@@ -90,8 +90,9 @@ public class InvoiceApiTest
 		/*hashMap.put("filter_by", "Status.Paid");
 		hashMap.put("sort_column", "invoice_number");*/
 		
-		hashMap.put("can_send_in_mail", "true");
+		//hashMap.put("can_send_in_mail", "true");
 		
+		hashMap.put("ignore_auto_number_generation", "true");
 
 		Invoice newInvoice = new Invoice();
 		
@@ -104,6 +105,7 @@ public class InvoiceApiTest
 		String[] contactPersons = {contactPersonId};
 		newInvoice.setContactPersons(contactPersons);
 		
+		newInvoice.setInvoiceNumber("INV-47");
 		newInvoice.setDate("2014-02-21");
 		newInvoice.setDueDate("2014-02-28");
 		newInvoice.setNotes("Thanks for your business.");	//No I18N
@@ -292,7 +294,7 @@ public class InvoiceApiTest
 			String delete = invoiceApi.delete(invoiceId);
 			
 			
-			//System.out.println(getComments);
+			//System.out.println(createInvoice);
 		
 		}
 		catch(BooksException be)

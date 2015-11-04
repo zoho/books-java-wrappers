@@ -1908,6 +1908,10 @@ public class Invoice
 	{
 		JSONObject jsonObject = new JSONObject();
 		
+		if(invoiceNumber != null && !invoiceNumber.equals(""))
+		{
+			jsonObject.put("invoice_number", invoiceNumber);
+		}
 		if(referenceNumber != null && !referenceNumber.equals(""))
 		{
 			jsonObject.put("reference_number", referenceNumber);
