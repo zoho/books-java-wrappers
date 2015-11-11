@@ -1916,7 +1916,7 @@ public class Invoice
 		{
 			jsonObject.put("reference_number", referenceNumber);
 		}
-		if((Integer)paymentTerms != null && paymentTerms > 0)
+		if((Integer)paymentTerms != null)
 		{
 			jsonObject.put("payment_terms", paymentTerms);
 		}
@@ -1995,7 +1995,7 @@ public class Invoice
 		{
 			jsonObject.put("allow_partial_payments", allowPartialPayments);
 		}
-		if((Double)exchangeRate != null && exchangeRate > 0)
+		if((Double)exchangeRate != null)
 		{
 			jsonObject.put("exchange_rate", exchangeRate);
 		}
@@ -2015,11 +2015,11 @@ public class Invoice
 		{
 			jsonObject.put("discount_type", discountType);
 		}
-		if((Double) shippingCharge != null && shippingCharge > 0)
+		if((Double) shippingCharge != null)
 		{
 			jsonObject.put("shipping_charge", shippingCharge);
 		}
-		if((Double)adjustment != null && adjustment > 0)
+		if((Double)adjustment != null)
 		{
 			jsonObject.put("adjustment", adjustment);
 		}

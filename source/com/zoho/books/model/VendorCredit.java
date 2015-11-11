@@ -606,7 +606,7 @@ public class VendorCredit
 		{
 			jsonObject.put("date", date);
 		}
-		if((Double)exchangeRate != null && exchangeRate > 0)
+		if((Double)exchangeRate != null)
 		{
 			jsonObject.put("exchange_rate", exchangeRate);
 		}

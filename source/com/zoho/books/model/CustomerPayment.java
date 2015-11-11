@@ -672,15 +672,15 @@ public class CustomerPayment
 		{
 			jsonObject.put("reference_number", referenceNumber);
 		}
-		if((Double)exchangeRate != null && exchangeRate > 0)
+		if((Double)exchangeRate != null)
 		{
 			jsonObject.put("exchange_rate", exchangeRate);
 		}
-		if((Double)amount != null && amount > 0)
+		if((Double)amount != null)
 		{
 			jsonObject.put("amount", amount);
 		}
-		if((Double)bankCharges != null && bankCharges > 0)
+		if((Double)bankCharges != null)
 		{
 			jsonObject.put("bank_charges", bankCharges);
 		}

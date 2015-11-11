@@ -1339,7 +1339,10 @@ public class Estimate
 			}
 			jsonObject.put("contact_persons", contactPerson);
 		}
-		
+		if(estimateNumber != null && !estimateNumber.equals(""))
+		{
+			jsonObject.put("estimate_number", estimateNumber);
+		}
 		if(templateId != null && !templateId.equals(""))
 		{
 			jsonObject.put("template_id", templateId);
@@ -1356,11 +1359,11 @@ public class Estimate
 		{
 			jsonObject.put("date", date);
 		}
-		if((Double)exchangeRate != null && exchangeRate > 0)
+		if((Double)exchangeRate != null)
 		{
 			jsonObject.put("exchange_rate", exchangeRate);
 		}
-		if((Double)discount != null && discount > 0)
+		if((Double)discount != null)
 		{
 			jsonObject.put("discount", discount);
 		}
@@ -1368,11 +1371,11 @@ public class Estimate
 		{
 			jsonObject.put("notes", notes);
 		}
-		if((Double)shippingCharge != null && shippingCharge > 0)
+		if((Double)shippingCharge != null)
 		{
 			jsonObject.put("shipping_charge", shippingCharge);
 		}
-		if((Double)adjustment != null && adjustment > 0)
+		if((Double)adjustment != null)
 		{
 			jsonObject.put("adjustment", adjustment);
 		}

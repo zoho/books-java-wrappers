@@ -526,7 +526,7 @@ public class Account
         	{
         		jsonObject.put("debit_or_credit", debitOrCredit);
         	}
-        	if((Double)exchangeRate != null && exchangeRate > 0)
+        	if((Double)exchangeRate != null)
         	{
         		jsonObject.put("exchange_rate", exchangeRate);
         	}
@@ -534,7 +534,7 @@ public class Account
         	{
         		jsonObject.put("currency_id", currencyId);
         	}
-        	if((Double)amount != null && amount > 0)
+        	if((Double)amount != null)
         	{
         		jsonObject.put("amount", amount);
         	}

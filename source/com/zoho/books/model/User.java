@@ -487,11 +487,11 @@ public class User
 		{
 			jsonObject.put("user_role", userRole);
 		}
-		if((Double)rate != null && rate > 0)
+		if((Double)rate != null)
 		{
 			jsonObject.put("rate", rate);	
 		}
-		if((Integer)budgetHours != null && budgetHours > 0)
+		if((Integer)budgetHours != null)
 		{
 			jsonObject.put("budget_hours", budgetHours);	
 		}

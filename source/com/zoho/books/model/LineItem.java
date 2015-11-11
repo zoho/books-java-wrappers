@@ -863,12 +863,12 @@ public class LineItem
 			jsonObject.put("description", description);
 		}
 		
-		if((Integer)itemOrder != null && itemOrder > 0)
+		if((Integer)itemOrder != null)
 		{
 			jsonObject.put("item_order", itemOrder);
 		}
 		
-		if((Double)rate != null && rate > 0)
+		if((Double)rate != null)
 		{
 			jsonObject.put("rate", rate);
 		}
@@ -878,12 +878,12 @@ public class LineItem
 			jsonObject.put("unit", unit);
 		}
 		
-		if((Double)quantity != null && quantity > 0)
+		if((Double)quantity != null)
 		{
 			jsonObject.put("quantity", quantity);
 		}
 		
-		if((Double)discount != null && discount > 0)
+		if((Double)discount != null)
 		{
 			jsonObject.put("discount", discount);
 		}

@@ -390,11 +390,11 @@ public class VendorCreditRefund
 		{
 			jsonObject.put("reference_number", referenceNumber);
 		}
-		if((Double)amount != null && amount > 0)
+		if((Double)amount != null)
 		{
 			jsonObject.put("amount", amount);
 		}
-		if((Double)exchangeRate != null && exchangeRate > 0)
+		if((Double)exchangeRate != null)
 		{
 			jsonObject.put("exchange_rate", exchangeRate);
 		}
