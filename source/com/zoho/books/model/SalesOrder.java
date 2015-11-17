@@ -1177,7 +1177,7 @@ public class SalesOrder
 		{
 			jsonObject.put("discount_type", discountType);
 		}
-		if((Double)exchangeRate != null)
+		if((Double)exchangeRate != null && exchangeRate > 0)
 		{
 			jsonObject.put("exchange_rate", exchangeRate);
 		}

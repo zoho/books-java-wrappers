@@ -995,7 +995,7 @@ public class Expense
 		{
 			jsonObject.put("currency_id", currencyId);
 		}
-		if((Double)exchangeRate != null)
+		if((Double)exchangeRate != null && exchangeRate > 0)
 		{
 			jsonObject.put("exchange_rate", exchangeRate);
 		}
