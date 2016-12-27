@@ -2,11 +2,11 @@
 
 package com.zoho.books.model;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
 
@@ -79,7 +79,7 @@ public class Contact
         private boolean track1099;
         private String taxIdType;
         private String taxIdValue;
-        private boolean isTaxable;
+        private Boolean isTaxable;
         private String taxAuthorityId;
         private String taxExemptionId;
         private String taxId;
@@ -1329,7 +1329,7 @@ public class Contact
 	 * @return Returns true of the contact is taxable else returns false.
 	 */
 
-	public boolean isTaxable() 
+	public Boolean isTaxable()
 	{
 		return isTaxable;
 	}
@@ -1340,7 +1340,7 @@ public class Contact
 	 * @param isTaxable True or false to set the contact is taxable or not.
 	 */
 
-	public void setTaxable(boolean isTaxable) 
+	public void setTaxable(Boolean isTaxable)
 	{
 		this.isTaxable = isTaxable;
 	}
