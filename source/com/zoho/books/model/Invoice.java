@@ -46,7 +46,7 @@ public class Invoice
 	private boolean isDiscountBeforeTax = true;
 	private boolean allowPartialPayments = true;
 	private String recurringInvoiceId = "";
-	private String discount = "";
+	private String discount = null;
 	private double taxTotal = 0.00;
 	private String templateName = "";
 	private String attachmentName = "";
