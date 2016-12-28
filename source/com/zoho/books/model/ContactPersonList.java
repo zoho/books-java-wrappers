@@ -24,7 +24,7 @@ public class ContactPersonList extends ArrayList<ContactPerson>
 	
 	*/
 	
-	public void setPageContext(PageContext pageContext)throws Exception
+	public void setPageContext(PageContext pageContext)
 	{
 		this.pageContext = pageContext;
 	}

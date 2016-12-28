@@ -2,12 +2,12 @@
 
 package com.zoho.books.model;
 
-import java.io.File;
-import java.util.List;
-import java.util.ArrayList;
-
-import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
 
@@ -63,7 +63,7 @@ public class Email
 	
 	*/
 	
-	public void setToMailIds(String[] toMailIds)throws Exception
+	public void setToMailIds(String[] toMailIds)
 	{
 		this.toMailIds = toMailIds;
 	}
@@ -89,7 +89,7 @@ public class Email
 	
 	*/
 	
-	public void setCcMailIds(String[] ccMailIds)throws Exception
+	public void setCcMailIds(String[] ccMailIds)
 	{
 		this.ccMailIds = ccMailIds;
 	}
@@ -359,7 +359,7 @@ public class Email
 	
 	*/
 	
-	public void setEmailtemplates(List<Emailtemplate> emailtemplates)throws Exception
+	public void setEmailtemplates(List<Emailtemplate> emailtemplates)
 	{
 		this.emailtemplates = emailtemplates;
 	}
@@ -388,7 +388,7 @@ public class Email
 	
 	*/
 	
-	public void setToContacts(List<ToContact> toContacts)throws Exception
+	public void setToContacts(List<ToContact> toContacts)
 	{
 		this.toContacts = toContacts;
 	}
@@ -417,7 +417,7 @@ public class Email
 	
 	*/
 	
-	public void setFromEmails(List<FromEmail> fromEmails)throws Exception
+	public void setFromEmails(List<FromEmail> fromEmails)
 	{
 		this.fromEmails = fromEmails;
 	}

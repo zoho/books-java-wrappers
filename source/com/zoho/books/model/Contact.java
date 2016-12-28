@@ -831,7 +831,7 @@ public class Contact
         
         */
         
-        public void setCustomFields(List<CustomField> customFields)throws Exception
+        public void setCustomFields(List<CustomField> customFields)
         {
         	this.customFields = customFields;
         }
@@ -861,7 +861,7 @@ public class Contact
     
     */
 	
-	public void setBillingAddress(Address billingAddress)throws Exception
+	public void setBillingAddress(Address billingAddress)
 	{
 		this.billingAddress = billingAddress;
 	}
@@ -890,7 +890,7 @@ public class Contact
     
     */
 	
-	public void setShippingAddress(Address shippingAddress)throws Exception
+	public void setShippingAddress(Address shippingAddress)
 	{
 		this.shippingAddress = shippingAddress;
 	}
@@ -920,7 +920,7 @@ public class Contact
     
     */
 	
-	public void setContactPersons(List<ContactPerson> contactPerson)throws Exception
+	public void setContactPersons(List<ContactPerson> contactPerson)
 	{
 		this.contactPerson = contactPerson;
 	}
@@ -950,7 +950,7 @@ public class Contact
     
     */
 	
-	public void setDefaultTemplates(DefaultTemplate defaultTemplates)throws Exception
+	public void setDefaultTemplates(DefaultTemplate defaultTemplates)
 	{
 		this.defaultTemplates = defaultTemplates;
 	}
