@@ -32,8 +32,6 @@ public class Contact
         private double outstandingReceivableAmountBcy = 0.00;
         private double unusedCreditsReceivableAmount = 0.00;
         private double unusedCreditsReceivableAmountBcy = 0.00;
-        private double unusedCreditsPayableAmount = 0.00;
-        private double unusedCreditsPayableAmountBcy = 0.00;
         private String status = "";
         private boolean paymentReminderEnabled = false;
         private String notes = "";
@@ -497,58 +495,6 @@ public class Contact
         public double getUnusedCreditsReceivableAmountBcy()
         {
         	return unusedCreditsReceivableAmountBcy;
-        }
-        
-        /**
-        
-        * set the unused credits payable amount.
-        
-        * @param unusedCreditsPayableAmount  unused credits payable amount of the contact.
-        
-        */
-        
-        public void setUnusedCreditsPayableAmount(double unusedCreditsPayableAmount)
-        {
-        	this.unusedCreditsPayableAmount = unusedCreditsPayableAmount;
-        }
-        
-        /**
-        
-        * get the unused credits payable amount.
-        
-        * @return Returns the unused credits payable amount of the contact.
-        
-        */
-        
-        public double getUnusedCreditsPayableAmount()
-        {
-        	return unusedCreditsPayableAmount;
-        }
-        
-        /**
-        
-        * set the unused credits payable amount bcy.
-        
-        * @param unusedCreditsPayableAmountBcy  unused credits payable amount bcy of the contact.
-        
-        */
-        
-        public void setUnusedCreditsPayableAmountBcy(double unusedCreditsPayableAmountBcy)
-        {
-        	this.unusedCreditsPayableAmountBcy = unusedCreditsPayableAmountBcy;
-        }
-        
-        /**
-        
-        * get the unused credits payable amount bcy.
-        
-        * @return Returns the unused credits payable amount bcy of the contact.
-        
-        */
-        
-        public double getUnusedCreditsPayableAmountBcy()
-        {
-        	return unusedCreditsPayableAmountBcy;
         }
         
         /**

@@ -52,8 +52,6 @@ public class ContactParser
 		contacts.setOutstandingReceivableAmountBcy(contact.getDouble("outstanding_receivable_amount_bcy")); 	//No I18N
 		contacts.setUnusedCreditsReceivableAmount(contact.getDouble("unused_credits_receivable_amount")); 	//No I18N
 		contacts.setUnusedCreditsReceivableAmountBcy(contact.getDouble("unused_credits_receivable_amount_bcy"));//No I18N
-		contacts.setUnusedCreditsPayableAmount(contact.getDouble("unused_credits_payable_amount")); 		//No I18N
-		contacts.setUnusedCreditsPayableAmountBcy(contact.getDouble("unused_credits_payable_amount_bcy")); 	//No I18N
 		contacts.setStatus(contact.getString("status"));
 		contacts.setPaymentReminderEnabled(contact.getBoolean("payment_reminder_enabled")); 	//No I18N
 		contacts.setNotes(contact.getString("notes"));
@@ -233,7 +231,6 @@ public class ContactParser
 			contact.setCurrencyCode(jsonArray.getJSONObject(i).getString("currency_code"));
 			contact.setOutstandingReceivableAmount(jsonArray.getJSONObject(i).getDouble("outstanding_receivable_amount")); //No I18N
 			contact.setUnusedCreditsReceivableAmount(jsonArray.getJSONObject(i).getDouble("unused_credits_receivable_amount"));//No I18N
-			contact.setUnusedCreditsPayableAmount(jsonArray.getJSONObject(i).getDouble("unused_credits_payable_amount"));//No I18N
 			contact.setFirstName(jsonArray.getJSONObject(i).getString("first_name"));
 			contact.setLastName(jsonArray.getJSONObject(i).getString("last_name"));
 			contact.setEmail(jsonArray.getJSONObject(i).getString("email"));
