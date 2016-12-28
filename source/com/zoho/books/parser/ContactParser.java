@@ -2,26 +2,12 @@
 
 package com.zoho.books.parser;
 
-import com.zoho.books.model.Contact;
-import com.zoho.books.model.Address;
-import com.zoho.books.model.DefaultTemplate;
-import com.zoho.books.model.Email;
-import com.zoho.books.model.FromEmail;
-import com.zoho.books.model.ToContact;
-import com.zoho.books.model.ContactPerson;
-import com.zoho.books.model.CreditnoteRefund;
-import com.zoho.books.model.Comment;
-import com.zoho.books.model.ContactList;
-import com.zoho.books.model.CommentList;
-import com.zoho.books.model.ContactPersonList;
-import com.zoho.books.model.PageContext;
-import com.zoho.books.model.CreditnoteRefundList;
-
-
-import java.util.*;
-
-import org.json.JSONObject;
+import com.zoho.books.model.*;
 import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
 
@@ -64,8 +50,6 @@ public class ContactParser
 		contacts.setCurrencySymbol(contact.getString("currency_symbol"));
 		contacts.setOutstandingReceivableAmount(contact.getDouble("outstanding_receivable_amount"));		//No I18N
 		contacts.setOutstandingReceivableAmountBcy(contact.getDouble("outstanding_receivable_amount_bcy")); 	//No I18N
-		contacts.setOutstandingPayableAmount(contact.getDouble("outstanding_payable_amount"));			//No I18N
-		contacts.setOutstandingPayableAmountBcy(contact.getDouble("outstanding_payable_amount_bcy")); 		//No I18N
 		contacts.setUnusedCreditsReceivableAmount(contact.getDouble("unused_credits_receivable_amount")); 	//No I18N
 		contacts.setUnusedCreditsReceivableAmountBcy(contact.getDouble("unused_credits_receivable_amount_bcy"));//No I18N
 		contacts.setUnusedCreditsPayableAmount(contact.getDouble("unused_credits_payable_amount")); 		//No I18N
@@ -248,7 +232,6 @@ public class ContactParser
 			contact.setCurrencyId(jsonArray.getJSONObject(i).getString("currency_id"));
 			contact.setCurrencyCode(jsonArray.getJSONObject(i).getString("currency_code"));
 			contact.setOutstandingReceivableAmount(jsonArray.getJSONObject(i).getDouble("outstanding_receivable_amount")); //No I18N
-			contact.setOutstandingPayableAmount(jsonArray.getJSONObject(i).getDouble("outstanding_payable_amount"));	//No I18N
 			contact.setUnusedCreditsReceivableAmount(jsonArray.getJSONObject(i).getDouble("unused_credits_receivable_amount"));//No I18N
 			contact.setUnusedCreditsPayableAmount(jsonArray.getJSONObject(i).getDouble("unused_credits_payable_amount"));//No I18N
 			contact.setFirstName(jsonArray.getJSONObject(i).getString("first_name"));

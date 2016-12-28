@@ -30,8 +30,6 @@ public class Contact
         private String currencySymbol = "";
         private double outstandingReceivableAmount = 0.00;
         private double outstandingReceivableAmountBcy = 0.00;
-        private double outstandingPayableAmount = 0.00;
-        private double outstandingPayableAmountBcy = 0.00;
         private double unusedCreditsReceivableAmount = 0.00;
         private double unusedCreditsReceivableAmountBcy = 0.00;
         private double unusedCreditsPayableAmount = 0.00;
@@ -447,58 +445,6 @@ public class Contact
         public double getOutstandingReceivableAmountBcy()
         {
         	return outstandingReceivableAmountBcy;
-        }
-        
-        /**
-        
-        * set the outstanding payable amount.
-        
-        * @param outstandingPayableAmount  Outstanding payable amount of the contact.
-        
-        */
-        
-        public void setOutstandingPayableAmount(double outstandingPayableAmount)
-        {
-        	this.outstandingPayableAmount = outstandingPayableAmount;
-        }
-        
-        /**
-        
-        * get the outstanding payable amount.
-        
-        * @return Returns the outstanding payable amount of the contact.
-        
-        */
-        
-        public double getOutstandingPayableAmount()
-        {
-        	return outstandingPayableAmount;
-        }
-        
-        /**
-        
-        * set the outstanding payable amount bcy.
-        
-        * @param outstandingPayableAmountBcy  Outstanding payable amount bcy of the contact.
-        
-        */
-        
-        public void setOutstandingPayableAmountBcy(double outstandingPayableAmountBcy)
-        {
-        	this.outstandingPayableAmountBcy = outstandingPayableAmountBcy;
-        }
-        
-        /**
-        
-        * get the outstanding payable amount bcy.
-        
-        * @return Returns the outstanding payable amount bcy of the contact.
-        
-        */
-        
-        public double getOutstandingPayableAmountBcy()
-        {
-        	return outstandingPayableAmountBcy;
         }
         
         /**
