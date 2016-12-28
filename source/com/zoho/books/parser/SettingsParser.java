@@ -141,12 +141,12 @@ public class SettingsParser
 			organization.setContactName(jsonArray.getJSONObject(i).getString("contact_name"));
 			organization.setEmail(jsonArray.getJSONObject(i).getString("email"));
 			organization.setIsDefaultOrg(jsonArray.getJSONObject(i).getBoolean("is_default_org")); //No I18N
-			organization.setPlanType(jsonArray.getJSONObject(i).getString("plan_type"));
+			organization.setPlanType(jsonArray.getJSONObject(i).getInt("plan_type"));
 			organization.setTaxGroupEnabled(jsonArray.getJSONObject(i).getBoolean("tax_group_enabled")); //No I18N
 			organization.setPlanName(jsonArray.getJSONObject(i).getString("plan_name"));
 			organization.setPlanPeriod(jsonArray.getJSONObject(i).getString("plan_period"));
 			organization.setLanguageCode(jsonArray.getJSONObject(i).getString("language_code"));
-			organization.setFiscalYearStartMonth(jsonArray.getJSONObject(i).getString("fiscal_year_start_month"));
+			organization.setFiscalYearStartMonth(jsonArray.getJSONObject(i).getInt("fiscal_year_start_month"));
 			organization.setAccountCreatedDate(jsonArray.getJSONObject(i).getString("account_created_date"));
 			organization.setAccountCreatedDateFormatted(jsonArray.getJSONObject(i).getString("account_created_date_formatted"));
 			organization.setTimeZone(jsonArray.getJSONObject(i).getString("time_zone"));
@@ -189,7 +189,7 @@ public class SettingsParser
 		organizations.setLanguageCode(organization.getString("language_code"));
 		organizations.setDateFormat(organization.getString("date_format"));
 		organizations.setFieldSeparator(organization.getString("field_separator"));
-		organizations.setFiscalYearStartMonth(organization.getString("fiscal_year_start_month"));
+		organizations.setFiscalYearStartMonth(organization.getInt("fiscal_year_start_month"));
 		organizations.setContactName(organization.getString("contact_name"));
 		organizations.setIndustryType(organization.getString("industry_type"));
 		organizations.setIndustrySize(organization.getString("industry_size"));

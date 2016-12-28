@@ -20,7 +20,7 @@ public class Organization
 	private String languageCode = "en"; //No I18N
 	private String dateFormat = "";
 	private String fieldSeparator = "";
-	private String fiscalYearStartMonth = "";
+	private int fiscalYearStartMonth = 0;
 	private String contactName = "";
 	private String industryType = "";
 	private String industrySize = "";
@@ -43,7 +43,7 @@ public class Organization
 	private boolean isOrgActive = false;
 	
 	
-	private String planType = "";
+	private int planType = 0;
 	private boolean taxGroupEnabled = false;
 	private String planName = "";
 	private String planPeriod = "";
@@ -276,7 +276,7 @@ public class Organization
 	
 	*/
 	
-	public void setFiscalYearStartMonth(String fiscalYearStartMonth)
+	public void setFiscalYearStartMonth(int fiscalYearStartMonth)
 	{
 		this.fiscalYearStartMonth = fiscalYearStartMonth;
 	}
@@ -289,7 +289,7 @@ public class Organization
 	
 	*/
 	
-	public String getFiscalYearStartMonth()
+	public int getFiscalYearStartMonth()
 	{
 		return fiscalYearStartMonth;
 	}
@@ -824,7 +824,7 @@ public class Organization
 	
 	*/
 	
-	public void setPlanType(String planType)
+	public void setPlanType(int planType)
 	{
 		this.planType = planType;
 	}
@@ -837,7 +837,7 @@ public class Organization
 	
 	*/
 	
-	public String getPlanType()
+	public int getPlanType()
 	{
 		return planType;
 	}
