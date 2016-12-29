@@ -10,9 +10,9 @@ import java.util.List;
 
 /**
 
-* This class is used to make an object for invoice.
+ * This class is used to make an object for invoice.
 
-*/
+ */
 
 public class Invoice
 {
@@ -41,7 +41,7 @@ public class Invoice
 	private String terms = "";
 	private String unbilledExpensesCount = "";
 	private String templateId = "";
-	private String discountType = "";
+	private String discountType = null;
 	private double shippingCharge = 0.00;
 	private boolean isDiscountBeforeTax = true;
 	private boolean allowPartialPayments = true;
@@ -106,11 +106,11 @@ public class Invoice
 
 	/**
 
-	* set the invoice id.
+	 * set the invoice id.
 
-	* @param invoiceId  ID of the invoice.
+	 * @param invoiceId  ID of the invoice.
 
-	*/
+	 */
 
 	public void setInvoiceId(String invoiceId)
 	{
@@ -119,11 +119,11 @@ public class Invoice
 
 	/**
 
-	* get the invoice id.
+	 * get the invoice id.
 
-	* @return Returns the invoice id.
+	 * @return Returns the invoice id.
 
-	*/
+	 */
 
 	public String getInvoiceId()
 	{
@@ -132,11 +132,11 @@ public class Invoice
 
 	/**
 
-	* set the customer name.
+	 * set the customer name.
 
-	* @param customerName  Name of the customer the invoice has to be created.
+	 * @param customerName  Name of the customer the invoice has to be created.
 
-	*/
+	 */
 
 	public void setCustomerName(String customerName)
 	{
@@ -145,11 +145,11 @@ public class Invoice
 
 	/**
 
-	* get the customer name.
+	 * get the customer name.
 
-	* @return Returns the Name of the customer the invoice has to be created.
+	 * @return Returns the Name of the customer the invoice has to be created.
 
-	*/
+	 */
 
 	public String getCustomerName()
 	{
@@ -158,11 +158,11 @@ public class Invoice
 
 	/**
 
-	* set the customer id.
+	 * set the customer id.
 
-	* @param customerId  ID of the customer the invoice has to be created.
+	 * @param customerId  ID of the customer the invoice has to be created.
 
-	*/
+	 */
 
 	public void setCustomerId(String customerId)
 	{
@@ -171,11 +171,11 @@ public class Invoice
 
 	/**
 
-	* get the customer id.
+	 * get the customer id.
 
-	* @return Returns the id of the customer the invoice has to be created.
+	 * @return Returns the id of the customer the invoice has to be created.
 
-	*/
+	 */
 
 	public String getCustomerId()
 	{
@@ -184,11 +184,11 @@ public class Invoice
 
 	/**
 
-	* set the status.
+	 * set the status.
 
-	* @param status  Status of the invoice.
+	 * @param status  Status of the invoice.
 
-	*/
+	 */
 
 	public void setStatus(String status)
 	{
@@ -197,11 +197,11 @@ public class Invoice
 
 	/**
 
-	* get the status.
+	 * get the status.
 
-	* @return Returns the status of the invoice.
+	 * @return Returns the status of the invoice.
 
-	*/
+	 */
 
 	public String getStatus()
 	{
@@ -210,11 +210,11 @@ public class Invoice
 
 	/**
 
-	* set the invoice number.
+	 * set the invoice number.
 
-	* @param invoiceNumber  Mandatory if auto number generation is disabled.
+	 * @param invoiceNumber  Mandatory if auto number generation is disabled.
 
-	*/
+	 */
 
 	public void setInvoiceNumber(String invoiceNumber)
 	{
@@ -223,11 +223,11 @@ public class Invoice
 
 	/**
 
-	* get the invoice number.
+	 * get the invoice number.
 
-	* @return Returns the number of the invoice.
+	 * @return Returns the number of the invoice.
 
-	*/
+	 */
 
 	public String getInvoiceNumber()
 	{
@@ -236,11 +236,11 @@ public class Invoice
 
 	/**
 
-	* set the reference number.
+	 * set the reference number.
 
-	* @param referenceNumber  Reference number of the invoice.
+	 * @param referenceNumber  Reference number of the invoice.
 
-	*/
+	 */
 
 	public void setReferenceNumber(String referenceNumber)
 	{
@@ -249,11 +249,11 @@ public class Invoice
 
 	/**
 
-	* get the reference number.
+	 * get the reference number.
 
-	* @return Returns the reference number of the invoice.
+	 * @return Returns the reference number of the invoice.
 
-	*/
+	 */
 
 	public String getReferenceNumber()
 	{
@@ -262,11 +262,11 @@ public class Invoice
 
 	/**
 
-	* set the date.
+	 * set the date.
 
-	* @param date  The date the invoice is created.
+	 * @param date  The date the invoice is created.
 
-	*/
+	 */
 
 	public void setDate(String date)
 	{
@@ -275,11 +275,11 @@ public class Invoice
 
 	/**
 
-	* get the date.
+	 * get the date.
 
-	* @return Returns the date the invoice is created.
+	 * @return Returns the date the invoice is created.
 
-	*/
+	 */
 
 	public String getDate()
 	{
@@ -288,11 +288,11 @@ public class Invoice
 
 	/**
 
-	* set the due date.
+	 * set the due date.
 
-	* @param dueDate  Date invoice is due.
+	 * @param dueDate  Date invoice is due.
 
-	*/
+	 */
 
 	public void setDueDate(String dueDate)
 	{
@@ -301,11 +301,11 @@ public class Invoice
 
 	/**
 
-	* get the due date.
+	 * get the due date.
 
-	* @return Returns the date the invoice is due.
+	 * @return Returns the date the invoice is due.
 
-	*/
+	 */
 
 	public String getDueDate()
 	{
@@ -314,11 +314,11 @@ public class Invoice
 
 	/**
 
-	* set the due days.
+	 * set the due days.
 
-	* @param dueDays  Due days of the invoice.
+	 * @param dueDays  Due days of the invoice.
 
-	*/
+	 */
 
 	public void setDueDays(String dueDays)
 	{
@@ -327,11 +327,11 @@ public class Invoice
 
 	/**
 
-	* get the due days.
+	 * get the due days.
 
-	* @return Returns the due days of the invoice.
+	 * @return Returns the due days of the invoice.
 
-	*/
+	 */
 
 	public String getDueDays()
 	{
@@ -340,11 +340,11 @@ public class Invoice
 
 	/**
 
-	* set the currency id.
+	 * set the currency id.
 
-	* @param currencyId  ID of the currency associated with the invoice.
+	 * @param currencyId  ID of the currency associated with the invoice.
 
-	*/
+	 */
 
 	public void setCurrencyId(String currencyId)
 	{
@@ -353,11 +353,11 @@ public class Invoice
 
 	/**
 
-	* get the currency id.
+	 * get the currency id.
 
-	* @return Returns the id of the currency associated with the invoice.
+	 * @return Returns the id of the currency associated with the invoice.
 
-	*/
+	 */
 
 	public String getCurrencyId()
 	{
@@ -366,11 +366,11 @@ public class Invoice
 
 	/**
 
-	* set the currency code.
+	 * set the currency code.
 
-	* @param currencyCode  Standard code to identify the currency.
+	 * @param currencyCode  Standard code to identify the currency.
 
-	*/
+	 */
 
 	public void setCurrencyCode(String currencyCode)
 	{
@@ -379,11 +379,11 @@ public class Invoice
 
 	/**
 
-	* get the currency code.
+	 * get the currency code.
 
-	* @return Returns the code of the currency.
+	 * @return Returns the code of the currency.
 
-	*/
+	 */
 
 	public String getCurrencyCode()
 	{
@@ -392,11 +392,11 @@ public class Invoice
 
 	/**
 
-	* set the total.
+	 * set the total.
 
-	* @param total  Total of the invoice.
+	 * @param total  Total of the invoice.
 
-	*/
+	 */
 
 	public void setTotal(double total)
 	{
@@ -405,11 +405,11 @@ public class Invoice
 
 	/**
 
-	* get the total.
+	 * get the total.
 
-	* @return Returns the total of the invoice.
+	 * @return Returns the total of the invoice.
 
-	*/
+	 */
 
 	public double getTotal()
 	{
@@ -418,11 +418,11 @@ public class Invoice
 
 	/**
 
-	* set the balance.
+	 * set the balance.
 
-	* @param balance  Balance of the invoice.
+	 * @param balance  Balance of the invoice.
 
-	*/
+	 */
 
 	public void setBalance(double balance)
 	{
@@ -431,11 +431,11 @@ public class Invoice
 
 	/**
 
-	* get the balance.
+	 * get the balance.
 
-	* @return Returns the balance of the invoice.
+	 * @return Returns the balance of the invoice.
 
-	*/
+	 */
 
 	public double getBalance()
 	{
@@ -444,11 +444,11 @@ public class Invoice
 
 	/**
 
-	* set is emailed.
+	 * set is emailed.
 
-	* @param isEmailed  To specify the invoice is emailed or not.
+	 * @param isEmailed  To specify the invoice is emailed or not.
 
-	*/
+	 */
 
 	public void setIsEmailed(boolean isEmailed)
 	{
@@ -457,11 +457,11 @@ public class Invoice
 
 	/**
 
-	* get is emailed.
+	 * get is emailed.
 
-	* @return Returns true if the invoice is emailed else return false.
+	 * @return Returns true if the invoice is emailed else return false.
 
-	*/
+	 */
 
 	public boolean isEmailed()
 	{
@@ -470,11 +470,11 @@ public class Invoice
 
 	/**
 
-	* set the reminders sent.
+	 * set the reminders sent.
 
-	* @param remindersSent  Number of invoices sent to the customer.
+	 * @param remindersSent  Number of invoices sent to the customer.
 
-	*/
+	 */
 
 	public void setRemindersSent(int remindersSent)
 	{
@@ -483,11 +483,11 @@ public class Invoice
 
 	/**
 
-	* get the reminders sent.
+	 * get the reminders sent.
 
-	* @return Returns the number of invoices sent to the customer.
+	 * @return Returns the number of invoices sent to the customer.
 
-	*/
+	 */
 
 	public int getRemindersSent()
 	{
@@ -496,11 +496,11 @@ public class Invoice
 
 	/**
 
-	* set the payment expected date.
+	 * set the payment expected date.
 
-	* @param paymentExpectedDate  Payment expected date for the invoice.
+	 * @param paymentExpectedDate  Payment expected date for the invoice.
 
-	*/
+	 */
 
 	public void setPaymentExpectedDate(String paymentExpectedDate)
 	{
@@ -509,11 +509,11 @@ public class Invoice
 
 	/**
 
-	* get the payment expected date.
+	 * get the payment expected date.
 
-	* @return Returns the payment expected date of the invoice.
+	 * @return Returns the payment expected date of the invoice.
 
-	*/
+	 */
 
 	public String getPaymentExpectedDate()
 	{
@@ -522,11 +522,11 @@ public class Invoice
 
 	/**
 
-	* set the last payment date.
+	 * set the last payment date.
 
-	* @param lastPaymentDate  Last payment date for the invoice.
+	 * @param lastPaymentDate  Last payment date for the invoice.
 
-	*/
+	 */
 
 	public void setLastPaymentDate(String lastPaymentDate)
 	{
@@ -535,11 +535,11 @@ public class Invoice
 
 	/**
 
-	* get the last payment date.
+	 * get the last payment date.
 
-	* @return Returns the last payment date of the invoice.
+	 * @return Returns the last payment date of the invoice.
 
-	*/
+	 */
 
 	public String getLastPaymentDate()
 	{
@@ -550,11 +550,11 @@ public class Invoice
 
 	/**
 
-	* set the payment terms.
+	 * set the payment terms.
 
-	* @param paymentTerms  Payment terms in days e.g. 15, 30, 60. Invoice due date will be calculated based on this.
+	 * @param paymentTerms  Payment terms in days e.g. 15, 30, 60. Invoice due date will be calculated based on this.
 
-	*/
+	 */
 
 	public void setPaymentTerms(int paymentTerms)
 	{
@@ -563,11 +563,11 @@ public class Invoice
 
 	/**
 
-	* get the payment terms.
+	 * get the payment terms.
 
-	* @return Returns the Payment terms in days.
+	 * @return Returns the Payment terms in days.
 
-	*/
+	 */
 
 	public int getPaymentTerms()
 	{
@@ -576,11 +576,11 @@ public class Invoice
 
 	/**
 
-	* set the payment terms label.
+	 * set the payment terms label.
 
-	* @param paymentTermsLabel  Used to override the default payment terms label. Default value for 15 days is "Net 15 Days".
+	 * @param paymentTermsLabel  Used to override the default payment terms label. Default value for 15 days is "Net 15 Days".
 
-	*/
+	 */
 
 	public void setPaymentTermsLabel(String paymentTermsLabel)
 	{
@@ -589,11 +589,11 @@ public class Invoice
 
 	/**
 
-	* get the payment terms label.
+	 * get the payment terms label.
 
-	* @return Returns the default payment terms label.
+	 * @return Returns the default payment terms label.
 
-	*/
+	 */
 
 	public String getPaymentTermsLabel()
 	{
@@ -602,11 +602,11 @@ public class Invoice
 
 	/**
 
-	* set the terms.
+	 * set the terms.
 
-	* @param terms  Terms and conditions.
+	 * @param terms  Terms and conditions.
 
-	*/
+	 */
 
 	public void setTerms(String terms)
 	{
@@ -615,11 +615,11 @@ public class Invoice
 
 	/**
 
-	* get the terms.
+	 * get the terms.
 
-	* @return Returns the terms and conditions.
+	 * @return Returns the terms and conditions.
 
-	*/
+	 */
 
 	public String getTerms()
 	{
@@ -628,11 +628,11 @@ public class Invoice
 
 	/**
 
-	* set the unbilled expense count.
+	 * set the unbilled expense count.
 
-	* @param unbilledExpensesCount  Unbilled expense count for the invoice.
+	 * @param unbilledExpensesCount  Unbilled expense count for the invoice.
 
-	*/
+	 */
 
 	public void setUnbilledExpensesCount(String unbilledExpensesCount)
 	{
@@ -641,11 +641,11 @@ public class Invoice
 
 	/**
 
-	* get the unbilled expense count.
+	 * get the unbilled expense count.
 
-	* @return Returns the unbilled expense count for the invoice.
+	 * @return Returns the unbilled expense count for the invoice.
 
-	*/
+	 */
 
 	public String getUnbilledExpensesCount()
 	{
@@ -654,11 +654,11 @@ public class Invoice
 
 	/**
 
-	* set the template id.
+	 * set the template id.
 
-	* @param templateId  ID of the pdf template associated with the invoice.
+	 * @param templateId  ID of the pdf template associated with the invoice.
 
-	*/
+	 */
 
 	public void setTemplateId(String templateId)
 	{
@@ -667,11 +667,11 @@ public class Invoice
 
 	/**
 
-	* get the template id.
+	 * get the template id.
 
-	* @return Returns the id of the pdf template associated with the invoice.
+	 * @return Returns the id of the pdf template associated with the invoice.
 
-	*/
+	 */
 
 	public String getTemplateId()
 	{
@@ -680,11 +680,11 @@ public class Invoice
 
 	/**
 
-	* set the discount type.
+	 * set the discount type.
 
-	* @param discountType  How the discount is specified. Allowed values are entity_level or item_level.
+	 * @param discountType  How the discount is specified. Allowed values are entity_level or item_level.
 
-	*/
+	 */
 
 	public void setDiscountType(String discountType)
 	{
@@ -693,11 +693,11 @@ public class Invoice
 
 	/**
 
-	* get the discount type.
+	 * get the discount type.
 
-	* @return Returns the discount type specified with the invoice.
+	 * @return Returns the discount type specified with the invoice.
 
-	*/
+	 */
 
 	public String getDiscountType()
 	{
@@ -706,11 +706,11 @@ public class Invoice
 
 	/**
 
-	* set the shipping charge.
+	 * set the shipping charge.
 
-	* @param shippingCharge  Shipping charges applied to the invoice.
+	 * @param shippingCharge  Shipping charges applied to the invoice.
 
-	*/
+	 */
 
 	public void setShippingCharge(double shippingCharge)
 	{
@@ -719,11 +719,11 @@ public class Invoice
 
 	/**
 
-	* get the shipping charge.
+	 * get the shipping charge.
 
-	* @return Returns the shipping charges applied to the invoice.
+	 * @return Returns the shipping charges applied to the invoice.
 
-	*/
+	 */
 
 	public double getShippingCharge()
 	{
@@ -732,11 +732,11 @@ public class Invoice
 
 	/**
 
-	* set is discount before tax.
+	 * set is discount before tax.
 
-	* @param isDiscountBeforeTax  Used to specify how the discount has to applied. Either before or after the calculation of tax.
+	 * @param isDiscountBeforeTax  Used to specify how the discount has to applied. Either before or after the calculation of tax.
 
-	*/
+	 */
 
 	public void setIsDiscountBeforeTax(boolean isDiscountBeforeTax)
 	{
@@ -745,11 +745,11 @@ public class Invoice
 
 	/**
 
-	* get is discount before tax.
+	 * get is discount before tax.
 
-	* @return Returns true if the invoice is discount before tax else returns false.
+	 * @return Returns true if the invoice is discount before tax else returns false.
 
-	*/
+	 */
 
 	public boolean isDiscountBeforeTax()
 	{
@@ -758,11 +758,11 @@ public class Invoice
 
 	/**
 
-	* set allow partial payments.
+	 * set allow partial payments.
 
-	* @param allowPartialPayments  Can the payment be made partially for this invoice.
+	 * @param allowPartialPayments  Can the payment be made partially for this invoice.
 
-	*/
+	 */
 
 	public void setAllowPartialPayments(boolean allowPartialPayments)
 	{
@@ -771,11 +771,11 @@ public class Invoice
 
 	/**
 
-	* get allow partial payments.
+	 * get allow partial payments.
 
-	* @return Returns true if the invoice allow partial payments else returns false.
+	 * @return Returns true if the invoice allow partial payments else returns false.
 
-	*/
+	 */
 
 	public boolean allowPartialPayments()
 	{
@@ -784,11 +784,11 @@ public class Invoice
 
 	/**
 
-	* set the recurring invoice id.
+	 * set the recurring invoice id.
 
-	* @param recurringInvoiceId  ID of the recurring invoice from which the invoice is created.
+	 * @param recurringInvoiceId  ID of the recurring invoice from which the invoice is created.
 
-	*/
+	 */
 
 	public void setRecurringInvoiceId(String recurringInvoiceId)
 	{
@@ -797,11 +797,11 @@ public class Invoice
 
 	/**
 
-	* get the recurring invoice id.
+	 * get the recurring invoice id.
 
-	* @return Returns the id of the recurring invoice from which the invoice is created.
+	 * @return Returns the id of the recurring invoice from which the invoice is created.
 
-	*/
+	 */
 
 	public String getRecurringInvoiceId()
 	{
@@ -810,11 +810,11 @@ public class Invoice
 
 	/**
 
-	* set the discount.
+	 * set the discount.
 
-	* @param discount  Discount applied to the invoice. It can be either in % or in amount. e.g. 12.5% or 190.
+	 * @param discount  Discount applied to the invoice. It can be either in % or in amount. e.g. 12.5% or 190.
 
-	*/
+	 */
 
 	public void setDiscount(String discount)
 	{
@@ -823,11 +823,11 @@ public class Invoice
 
 	/**
 
-	* get the discount.
+	 * get the discount.
 
-	* @return Returns the discount applied to the invoice.
+	 * @return Returns the discount applied to the invoice.
 
-	*/
+	 */
 
 	public String getDiscount()
 	{
@@ -836,11 +836,11 @@ public class Invoice
 
 	/**
 
-	* set the tax total.
+	 * set the tax total.
 
-	* @param taxTotal  Total of the tax or tax group applied to the line item.
+	 * @param taxTotal  Total of the tax or tax group applied to the line item.
 
-	*/
+	 */
 
 	public void setTaxTotal(double taxTotal)
 	{
@@ -849,11 +849,11 @@ public class Invoice
 
 	/**
 
-	* get the tax total.
+	 * get the tax total.
 
-	* @return Returns the total of the tax or tax group applied to the line item.
+	 * @return Returns the total of the tax or tax group applied to the line item.
 
-	*/
+	 */
 
 	public double getTaxTotal()
 	{
@@ -862,11 +862,11 @@ public class Invoice
 
 	/**
 
-	* set the template name.
+	 * set the template name.
 
-	* @param templateName  Name of the pdf template associated with the invoice.
+	 * @param templateName  Name of the pdf template associated with the invoice.
 
-	*/
+	 */
 
 	public void setTemplateName(String templateName)
 	{
@@ -875,11 +875,11 @@ public class Invoice
 
 	/**
 
-	* get the template name.
+	 * get the template name.
 
-	* @return Returns the name of the pdf template associated with the invoice.
+	 * @return Returns the name of the pdf template associated with the invoice.
 
-	*/
+	 */
 
 	public String getTemplateName()
 	{
@@ -888,11 +888,11 @@ public class Invoice
 
 	/**
 
-	* set the attachment name.
+	 * set the attachment name.
 
-	* @param attachmentName  Name of the attached file associated with the invoice.
+	 * @param attachmentName  Name of the attached file associated with the invoice.
 
-	*/
+	 */
 
 	public void setAttachmentName(String attachmentName)
 	{
@@ -901,11 +901,11 @@ public class Invoice
 
 	/**
 
-	* get the attachment name.
+	 * get the attachment name.
 
-	* @return Returns the name of the attached file associated with the invoice.
+	 * @return Returns the name of the attached file associated with the invoice.
 
-	*/
+	 */
 
 	public String getAttachmentName()
 	{
@@ -914,11 +914,11 @@ public class Invoice
 
 	/**
 
-	* set the last reminder sent date.
+	 * set the last reminder sent date.
 
-	* @param lastReminderSentDate  Last reminder sent date for the invoice.
+	 * @param lastReminderSentDate  Last reminder sent date for the invoice.
 
-	*/
+	 */
 
 	public void setLastReminderSentDate(String lastReminderSentDate)
 	{
@@ -927,11 +927,11 @@ public class Invoice
 
 	/**
 
-	* get the last reminder sent date.
+	 * get the last reminder sent date.
 
-	* @return Returns the last reminder sent date for the invoice.
+	 * @return Returns the last reminder sent date for the invoice.
 
-	*/
+	 */
 
 	public String getLastReminderSentDate()
 	{
@@ -940,11 +940,11 @@ public class Invoice
 
 	/**
 
-	* set the price precision.
+	 * set the price precision.
 
-	* @param pricePrecision  Price Precision of the invoice.
+	 * @param pricePrecision  Price Precision of the invoice.
 
-	*/
+	 */
 
 	public void setPricePrecision(int pricePrecision)
 	{
@@ -953,11 +953,11 @@ public class Invoice
 
 	/**
 
-	* get the price precision.
+	 * get the price precision.
 
-	* @return Returns the price precision of the invoice.
+	 * @return Returns the price precision of the invoice.
 
-	*/
+	 */
 
 	public int getPricePrecision()
 	{
@@ -966,11 +966,11 @@ public class Invoice
 
 	/**
 
-	* set the adjustment description.
+	 * set the adjustment description.
 
-	* @param adjustmentDescription  Customize the adjustment description. E.g. Rounding off.
+	 * @param adjustmentDescription  Customize the adjustment description. E.g. Rounding off.
 
-	*/
+	 */
 
 	public void setAdjustmentDescription(String adjustmentDescription)
 	{
@@ -979,11 +979,11 @@ public class Invoice
 
 	/**
 
-	* get the adjustment description.
+	 * get the adjustment description.
 
-	* @return Returns the customize the adjustment description.
+	 * @return Returns the customize the adjustment description.
 
-	*/
+	 */
 
 	public String getAdjustmentDescription()
 	{
@@ -992,11 +992,11 @@ public class Invoice
 
 	/**
 
-	* set the salesperson name.
+	 * set the salesperson name.
 
-	* @param salespersonName  Name of the sales person.
+	 * @param salespersonName  Name of the sales person.
 
-	*/
+	 */
 
 	public void setSalespersonName(String salespersonName)
 	{
@@ -1005,11 +1005,11 @@ public class Invoice
 
 	/**
 
-	* get the salesperson name.
+	 * get the salesperson name.
 
-	* @return Returns the name of the sales person.
+	 * @return Returns the name of the sales person.
 
-	*/
+	 */
 
 	public String getSalespersonName()
 	{
@@ -1018,11 +1018,11 @@ public class Invoice
 
 	/**
 
-	* set the adjustment.
+	 * set the adjustment.
 
-	* @param adjustment  Adjustments made to the invoice.
+	 * @param adjustment  Adjustments made to the invoice.
 
-	*/
+	 */
 
 	public void setAdjustment(double adjustment)
 	{
@@ -1031,11 +1031,11 @@ public class Invoice
 
 	/**
 
-	* get the adjustment.
+	 * get the adjustment.
 
-	* @return Returns the adjustment made to the invoice.
+	 * @return Returns the adjustment made to the invoice.
 
-	*/
+	 */
 
 	public double getAdjustment()
 	{
@@ -1044,11 +1044,11 @@ public class Invoice
 
 	/**
 
-	* set the expected payment date.
+	 * set the expected payment date.
 
-	* @param expectedPaymentDate  Expected payment date for the invoice.
+	 * @param expectedPaymentDate  Expected payment date for the invoice.
 
-	*/
+	 */
 
 	public void setExpectedPaymentDate(String expectedPaymentDate)
 	{
@@ -1057,11 +1057,11 @@ public class Invoice
 
 	/**
 
-	* get the expected payment date.
+	 * get the expected payment date.
 
-	* @return Returns the expected payment date for the invoice.
+	 * @return Returns the expected payment date for the invoice.
 
-	*/
+	 */
 
 	public String getExpectedPaymentDate()
 	{
@@ -1070,11 +1070,11 @@ public class Invoice
 
 	/**
 
-	* set the write off amount.
+	 * set the write off amount.
 
-	* @param writeOffAmount  Write off amount for the invoice.
+	 * @param writeOffAmount  Write off amount for the invoice.
 
-	*/
+	 */
 
 	public void setWriteOffAmount(double writeOffAmount)
 	{
@@ -1083,11 +1083,11 @@ public class Invoice
 
 	/**
 
-	* get the write off amount.
+	 * get the write off amount.
 
-	* @return Returns the write off amount for the invoice.
+	 * @return Returns the write off amount for the invoice.
 
-	*/
+	 */
 
 	public double getWriteOffAmount()
 	{
@@ -1096,11 +1096,11 @@ public class Invoice
 
 	/**
 
-	* set the salesperson id.
+	 * set the salesperson id.
 
-	* @param salespersonId  ID of the sales person.
+	 * @param salespersonId  ID of the sales person.
 
-	*/
+	 */
 
 	public void setSalespersonId(String salespersonId)
 	{
@@ -1109,11 +1109,11 @@ public class Invoice
 
 	/**
 
-	* get the salesperson id.
+	 * get the salesperson id.
 
-	* @return Returns the id of the sales person.
+	 * @return Returns the id of the sales person.
 
-	*/
+	 */
 
 	public String getSalespersonId()
 	{
@@ -1122,11 +1122,11 @@ public class Invoice
 
 	/**
 
-	* set the exchange rate.
+	 * set the exchange rate.
 
-	* @param exchangeRate  Exchange rate of the currency.
+	 * @param exchangeRate  Exchange rate of the currency.
 
-	*/
+	 */
 
 	public void setExchangeRate(double exchangeRate)
 	{
@@ -1135,11 +1135,11 @@ public class Invoice
 
 	/**
 
-	* get the exchange rate.
+	 * get the exchange rate.
 
-	* @return Returns the exchange rate of the currency.
+	 * @return Returns the exchange rate of the currency.
 
-	*/
+	 */
 
 	public double getExchangeRate()
 	{
@@ -1148,11 +1148,11 @@ public class Invoice
 
 	/**
 
-	* set the sub total.
+	 * set the sub total.
 
-	* @param subTotal  Sub total of the invoice.
+	 * @param subTotal  Sub total of the invoice.
 
-	*/
+	 */
 
 	public void setSubTotal(double subTotal)
 	{
@@ -1161,11 +1161,11 @@ public class Invoice
 
 	/**
 
-	* get the sub total.
+	 * get the sub total.
 
-	* @return Returns the sub total of the invoice.
+	 * @return Returns the sub total of the invoice.
 
-	*/
+	 */
 
 	public double getSubTotal()
 	{
@@ -1174,11 +1174,11 @@ public class Invoice
 
 	/**
 
-	* set payment reminder enabled.
+	 * set payment reminder enabled.
 
-	* @param paymentReminderEnabled  To specify the payment reminder is enabled or disabled.
+	 * @param paymentReminderEnabled  To specify the payment reminder is enabled or disabled.
 
-	*/
+	 */
 
 	public void setPaymentReminderEnabled(boolean paymentReminderEnabled)
 	{
@@ -1187,11 +1187,11 @@ public class Invoice
 
 	/**
 
-	* get payment reminder enabled.
+	 * get payment reminder enabled.
 
-	* @return Returns true if the payment reminder is enabled for the invoice else return false.
+	 * @return Returns true if the payment reminder is enabled for the invoice else return false.
 
-	*/
+	 */
 
 	public boolean isPaymentReminderEnabled()
 	{
@@ -1200,11 +1200,11 @@ public class Invoice
 
 	/**
 
-	* set can send in mail.
+	 * set can send in mail.
 
-	* @param canSendInMail  To specify the email is sent to the invoice or not.
+	 * @param canSendInMail  To specify the email is sent to the invoice or not.
 
-	*/
+	 */
 
 	public void setCanSendInMail(boolean canSendInMail)
 	{
@@ -1213,11 +1213,11 @@ public class Invoice
 
 	/**
 
-	* get can send in mail.
+	 * get can send in mail.
 
-	* @return Returns true if the email has been sent for the invoice else return false.
+	 * @return Returns true if the email has been sent for the invoice else return false.
 
-	*/
+	 */
 
 	public boolean canSendInMail()
 	{
@@ -1226,11 +1226,11 @@ public class Invoice
 
 	/**
 
-	* set the last modified time.
+	 * set the last modified time.
 
-	* @param lastModifiedTime  Last modified time for the invoice.
+	 * @param lastModifiedTime  Last modified time for the invoice.
 
-	*/
+	 */
 
 	public void setLastModifiedTime(String lastModifiedTime)
 	{
@@ -1239,11 +1239,11 @@ public class Invoice
 
 	/**
 
-	* get the last modified time.
+	 * get the last modified time.
 
-	* @return Returns the last modified time for the invoice.
+	 * @return Returns the last modified time for the invoice.
 
-	*/
+	 */
 
 	public String getLastModifiedTime()
 	{
@@ -1252,11 +1252,11 @@ public class Invoice
 
 	/**
 
-	* set the notes.
+	 * set the notes.
 
-	* @param notes  Notes to the customer.
+	 * @param notes  Notes to the customer.
 
-	*/
+	 */
 
 	public void setNotes(String notes)
 	{
@@ -1265,11 +1265,11 @@ public class Invoice
 
 	/**
 
-	* get the notes.
+	 * get the notes.
 
-	* @return Returns the notes to the customer.
+	 * @return Returns the notes to the customer.
 
-	*/
+	 */
 
 	public String getNotes()
 	{
@@ -1278,11 +1278,11 @@ public class Invoice
 
 	/**
 
-	* set the created time.
+	 * set the created time.
 
-	* @param createdTime  Created time for the invoice.
+	 * @param createdTime  Created time for the invoice.
 
-	*/
+	 */
 
 	public void setCreatedTime(String createdTime)
 	{
@@ -1291,11 +1291,11 @@ public class Invoice
 
 	/**
 
-	* get the created time.
+	 * get the created time.
 
-	* @return Returns the created time of the invoice.
+	 * @return Returns the created time of the invoice.
 
-	*/
+	 */
 
 	public String getCreatedTime()
 	{
@@ -1304,11 +1304,11 @@ public class Invoice
 
 	/**
 
-	* set the payment made.
+	 * set the payment made.
 
-	* @param paymentMade  Payment made for the invoice.
+	 * @param paymentMade  Payment made for the invoice.
 
-	*/
+	 */
 
 	public void setPaymentMade(double paymentMade)
 	{
@@ -1317,11 +1317,11 @@ public class Invoice
 
 	/**
 
-	* get the payment made.
+	 * get the payment made.
 
-	* @return Returns the payment made for the invoice.
+	 * @return Returns the payment made for the invoice.
 
-	*/
+	 */
 
 	public double getPaymentMade()
 	{
@@ -1330,11 +1330,11 @@ public class Invoice
 
 	/**
 
-	* set the credits applied.
+	 * set the credits applied.
 
-	* @param creditsApplied  Credits applied to the invoice.
+	 * @param creditsApplied  Credits applied to the invoice.
 
-	*/
+	 */
 
 	public void setCreditsApplied(double creditsApplied)
 	{
@@ -1343,11 +1343,11 @@ public class Invoice
 
 	/**
 
-	* get the credits applied.
+	 * get the credits applied.
 
-	* @return Returns the credits applied to the invoice.
+	 * @return Returns the credits applied to the invoice.
 
-	*/
+	 */
 
 	public double getCreditsApplied()
 	{
@@ -1356,11 +1356,11 @@ public class Invoice
 
 	/**
 
-	* set the tax amount withheld.
+	 * set the tax amount withheld.
 
-	* @param taxAmountWithheld  Tax amount withheld for the invoice.
+	 * @param taxAmountWithheld  Tax amount withheld for the invoice.
 
-	*/
+	 */
 
 	public void setTaxAmountWithheld(double taxAmountWithheld)
 	{
@@ -1369,11 +1369,11 @@ public class Invoice
 
 	/**
 
-	* get the tax amount withheld.
+	 * get the tax amount withheld.
 
-	* @return Returns the tax amount withheld for the invoice.
+	 * @return Returns the tax amount withheld for the invoice.
 
-	*/
+	 */
 
 	public double getTaxAmountWithheld()
 	{
@@ -1382,11 +1382,11 @@ public class Invoice
 
 	/**
 
-	* set the amount applied.
+	 * set the amount applied.
 
-	* @param amountApplied  Amount applied for the invoice.
+	 * @param amountApplied  Amount applied for the invoice.
 
-	*/
+	 */
 
 	public void setAmountApplied(double amountApplied)
 	{
@@ -1395,11 +1395,11 @@ public class Invoice
 
 	/**
 
-	* get the amount applied.
+	 * get the amount applied.
 
-	* @return Returns the amount applied for the invoice.
+	 * @return Returns the amount applied for the invoice.
 
-	*/
+	 */
 
 	public double getAmountApplied()
 	{
@@ -1412,11 +1412,11 @@ public class Invoice
 
 	/**
 
-	* set the invoice payment id.
+	 * set the invoice payment id.
 
-	* @param invoicePaymentId  ID of the invoice payment.
+	 * @param invoicePaymentId  ID of the invoice payment.
 
-	*/
+	 */
 
 	public void setInvoicePaymentId(String invoicePaymentId)
 	{
@@ -1425,11 +1425,11 @@ public class Invoice
 
 	/**
 
-	* get the invoice payment id.
+	 * get the invoice payment id.
 
-	* @return Returns the id of the invoice payment.
+	 * @return Returns the id of the invoice payment.
 
-	*/
+	 */
 
 	public String getInvoicePaymentId()
 	{
@@ -1440,11 +1440,11 @@ public class Invoice
 
 	/**
 
-	* set the name.
+	 * set the name.
 
-	* @param name  Default name of the invoice.
+	 * @param name  Default name of the invoice.
 
-	*/
+	 */
 
 	public void setName(String name)
 	{
@@ -1453,11 +1453,11 @@ public class Invoice
 
 	/**
 
-	* get the name.
+	 * get the name.
 
-	* @return Returns the default name of the invoice.
+	 * @return Returns the default name of the invoice.
 
-	*/
+	 */
 
 	public String getName()
 	{
@@ -1466,11 +1466,11 @@ public class Invoice
 
 	/**
 
-	* set the value.
+	 * set the value.
 
-	* @param value  Default value of the invoice.
+	 * @param value  Default value of the invoice.
 
-	*/
+	 */
 
 	public void setValue(String value)
 	{
@@ -1479,11 +1479,11 @@ public class Invoice
 
 	/**
 
-	* get the value.
+	 * get the value.
 
-	* @return Returns the default value of the invoice.
+	 * @return Returns the default value of the invoice.
 
-	*/
+	 */
 
 	public String getValue()
 	{
@@ -1494,11 +1494,11 @@ public class Invoice
 
 	/**
 
-	* set the contact persons.
+	 * set the contact persons.
 
-	* @param contactPersons  Array of contact person(s) for whom invoice has to be sent.
+	 * @param contactPersons  Array of contact person(s) for whom invoice has to be sent.
 
-	*/
+	 */
 
 	public void setContactPersons(String[] contactPersons)
 	{
@@ -1507,11 +1507,11 @@ public class Invoice
 
 	/**
 
-	* get the contact persons.
+	 * get the contact persons.
 
-	* @return Returns the  array of contact person(s) for whom invoice has to be sent.
+	 * @return Returns the  array of contact person(s) for whom invoice has to be sent.
 
-	*/
+	 */
 
 	public String[] getContactPersons()
 	{
@@ -1524,11 +1524,11 @@ public class Invoice
 
 	/**
 
-	* set the line items.
+	 * set the line items.
 
-	* @param lineItems  Line items of an invoice.
+	 * @param lineItems  Line items of an invoice.
 
-	*/
+	 */
 
 	public void setLineItems(List<LineItem> lineItems)
 	{
@@ -1537,11 +1537,11 @@ public class Invoice
 
 	/**
 
-	* get the line items.
+	 * get the line items.
 
-	* @return Returns list of LineItem object.
+	 * @return Returns list of LineItem object.
 
-	*/
+	 */
 
 	public List<LineItem> getLineItems()
 	{
@@ -1552,11 +1552,11 @@ public class Invoice
 
 	/**
 
-	* set the taxes.
+	 * set the taxes.
 
-	* @param taxes  Taxes of an invoice.
+	 * @param taxes  Taxes of an invoice.
 
-	*/
+	 */
 
 	public void setTaxes(List<Tax> taxes)
 	{
@@ -1565,11 +1565,11 @@ public class Invoice
 
 	/**
 
-	* get the Taxes.
+	 * get the Taxes.
 
-	* @return Returns list of Tax object.
+	 * @return Returns list of Tax object.
 
-	*/
+	 */
 
 	public List<Tax> getTaxes()
 	{
@@ -1581,11 +1581,11 @@ public class Invoice
 
 	/**
 
-	* set the billing address.
+	 * set the billing address.
 
-	* @param billingAddress  Billing address of an invoice.
+	 * @param billingAddress  Billing address of an invoice.
 
-	*/
+	 */
 
 	public void setBillingAddress(Address billingAddress)
 	{
@@ -1594,11 +1594,11 @@ public class Invoice
 
 	/**
 
-	* get the billing address.
+	 * get the billing address.
 
-	* @return Returns a BillingAddress object.
+	 * @return Returns a BillingAddress object.
 
-	*/
+	 */
 
 	public Address getBillingAddress()
 	{
@@ -1611,11 +1611,11 @@ public class Invoice
 
 	/**
 
-	* set the shipping address.
+	 * set the shipping address.
 
-	* @param shippingAddress  Shipping address of an invoice.
+	 * @param shippingAddress  Shipping address of an invoice.
 
-	*/
+	 */
 
 	public void setShippingAddress(Address shippingAddress)
 	{
@@ -1624,11 +1624,11 @@ public class Invoice
 
 	/**
 
-	* get the shipping address.
+	 * get the shipping address.
 
-	* @return Returns a ShippingAddress object.
+	 * @return Returns a ShippingAddress object.
 
-	*/
+	 */
 
 	public Address getShippingAddress()
 	{
@@ -1640,11 +1640,11 @@ public class Invoice
 
 	/**
 
-	* set the payment gateways.
+	 * set the payment gateways.
 
-	* @param paymentGateways  Online payment gateways through which payment can be made.
+	 * @param paymentGateways  Online payment gateways through which payment can be made.
 
-	*/
+	 */
 
 	public void setPaymentGateways(List<PaymentGateway> paymentGateways)
 	{
@@ -1653,11 +1653,11 @@ public class Invoice
 
 	/**
 
-	* get the payment gateways.
+	 * get the payment gateways.
 
-	* @return Returns list of PaymentGateway object.
+	 * @return Returns list of PaymentGateway object.
 
-	*/
+	 */
 
 	public List<PaymentGateway> getPaymentGateways()
 	{
@@ -1669,11 +1669,11 @@ public class Invoice
 
 	/**
 
-	* set the custom fields.
+	 * set the custom fields.
 
-	* @param customFields  Custom fields for an invoice.
+	 * @param customFields  Custom fields for an invoice.
 
-	*/
+	 */
 
 	public void setCustomFields(List<CustomField> customFields)
 	{
@@ -1682,11 +1682,11 @@ public class Invoice
 
 	/**
 
-	* get the custom fields.
+	 * get the custom fields.
 
-	* @return Returns list of CustomField object.
+	 * @return Returns list of CustomField object.
 
-	*/
+	 */
 
 	public List<CustomField> getCustomFields()
 	{
@@ -1898,11 +1898,11 @@ public class Invoice
 
 	/**
 
-	* Convert Invoice object into JSONObject.
+	 * Convert Invoice object into JSONObject.
 
-	* @return Returns a JSONObject.
+	 * @return Returns a JSONObject.
 
-	*/
+	 */
 
 	public JSONObject toJSON()throws Exception
 	{
@@ -2009,7 +2009,7 @@ public class Invoice
 		}
 		if(discount != null && !discount.equals(""))
 		{
-			jsonObject.put("discount", discount);
+			jsonObject.put("discount", discount + "%");
 		}
 		if(discountType != null && !discountType.equals(""))
 		{
