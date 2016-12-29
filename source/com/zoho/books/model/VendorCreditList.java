@@ -6,39 +6,34 @@ import java.util.ArrayList;
 
 /**
  * VendorCreditList class is used to create an object for list of vendor credits.
- * 
- * @author ramesh-2099
  *
+ * @author ramesh-2099
  */
 
-public class VendorCreditList extends ArrayList<VendorCredit>
-{
-	
-	private PageContext pageContext;
+public class VendorCreditList extends ArrayList<VendorCredit> {
 
-	
-	/**
-	 * Get the page context.
-	 * 
-	 * @return Returns the PageContext object.
-	 */
-	
-	public PageContext getPageContext() 
-	{
-		return pageContext;
-	}
-	
-	/**
-	 * Set the page context.
-	 * 
-	 * @param pageContext PageContext object.
-	 */
+    private PageContext pageContext;
 
-	public void setPageContext(PageContext pageContext)
-	{
-		this.pageContext = pageContext;
-	}
-	
-	
+
+    /**
+     * Get the page context.
+     *
+     * @return Returns the PageContext object.
+     */
+
+    public PageContext getPageContext() {
+        return pageContext;
+    }
+
+    /**
+     * Set the page context.
+     *
+     * @param pageContext PageContext object.
+     */
+
+    public void setPageContext(PageContext pageContext) {
+        this.pageContext = pageContext;
+    }
+
 
 }
