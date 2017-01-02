@@ -261,6 +261,11 @@ public class ContactPerson {
             jsonObject.put("contact_id", contactId);
         }
 
+        if(contactPersonId != null && !contactPersonId.equals(""))
+        {
+            jsonObject.put("contact_person_id", contactPersonId);
+        }
+
         if (salutation != null) {
             jsonObject.put("salutation", salutation);
         }
