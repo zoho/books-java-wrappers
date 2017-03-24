@@ -16,7 +16,7 @@ public class API {
      * This is the API base URL for Zoho Books service.
      */
 
-    public static String baseURL = "https://invoice.zoho.com/api/v3";    //No I18N
+    public static String baseURL = "https://books.zoho.com/api/v3";    //No I18N
 
     protected String authToken;
 
