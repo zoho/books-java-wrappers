@@ -40,7 +40,10 @@ public class ProjectParser {
             project.setDescription(jsonArray.getJSONObject(i).getString("description"));
             project.setStatus(jsonArray.getJSONObject(i).getString("status"));
             project.setBillingType(jsonArray.getJSONObject(i).getString("billing_type"));
-            project.setRate(jsonArray.getJSONObject(i).getDouble("rate"));            //No I18N
+			if (jsonArray.getJSONObject(i).has("rate")) {
+				project.setRate(jsonArray.getJSONObject(i).getDouble("rate")); // No
+																				// I18N
+			}
             project.setCreatedTime(jsonArray.getJSONObject(i).getString("created_time"));
 
             projectList.add(project);
