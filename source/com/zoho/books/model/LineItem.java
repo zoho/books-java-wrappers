@@ -2,6 +2,7 @@
 
 package com.zoho.books.model;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -709,6 +710,15 @@ public class LineItem {
         if (taxId != null) {
             jsonObject.put("tax_id", taxId);
         }
+        if (timeEntryIds != null) {
+        	String[] splitted = timeEntryIds.split(",");
+            JSONArray timeEntryIdsArray = new JSONArray();
+            for (int j = 0; j < splitted.length; j++) {
+            	timeEntryIdsArray.put(splitted[j]);
+            }
+            jsonObject.put("time_entry_ids", timeEntryIdsArray);
+        }
+
 
         if (debitOrCredit != null && !debitOrCredit.equals("")) {
             jsonObject.put("debit_or_credit", debitOrCredit);
