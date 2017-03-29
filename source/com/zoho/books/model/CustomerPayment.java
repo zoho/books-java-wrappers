@@ -516,6 +516,9 @@ public class CustomerPayment {
         if (paymentMode != null && !paymentMode.equals("")) {
             jsonObject.put("payment_mode", paymentMode);
         }
+        if (paymentNumber != null && !paymentNumber.equals("")) {
+            jsonObject.put("payment_number", paymentNumber);
+        }
         if (date != null && !date.equals("")) {
             jsonObject.put("date", date);
         }
