@@ -185,7 +185,11 @@ public class ProjectParser {
             task.setBilledHours(jsonArray.getJSONObject(i).getString("billed_hours"));
             task.setLogTime(jsonArray.getJSONObject(i).getString("log_time"));
             task.setUnBilledHours(jsonArray.getJSONObject(i).getString("un_billed_hours"));
-            task.setRate(jsonArray.getJSONObject(i).getDouble("rate"));        //No I18N
+            try {
+            	task.setRate(jsonArray.getJSONObject(i).getDouble("rate"));        //No I18N
+            } catch (Exception e) {
+            	
+            }
 
             taskList.add(task);
         }
