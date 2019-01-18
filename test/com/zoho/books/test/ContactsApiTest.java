@@ -97,10 +97,10 @@ public class ContactsApiTest
 		
 		Address billingAddress = new Address();
 		
-		billingAddress.setAddress("3/2, North Street, RammathaPuram");	//No I18N
-		billingAddress.setCity("Tirunelveli");	//No I18N
-		billingAddress.setState("TamilNadu");	//No I18N
-		billingAddress.setZip("627 654");
+		billingAddress.setAddress("Puram");	//No I18N
+		billingAddress.setCity("nei");	//No I18N
+		billingAddress.setState("Nadu");	//No I18N
+		billingAddress.setZip("323234");
 		billingAddress.setCountry("India");	//No I18N
 		billingAddress.setFax("");
 		
@@ -108,10 +108,10 @@ public class ContactsApiTest
 		
 		Address shippingAddress = new Address();
 		
-		shippingAddress.setAddress("3/2, North Street, RammathaPuram");	//No I18N
-		shippingAddress.setCity("Tirunelveli");	//No I18N
-		shippingAddress.setState("TamilNadu");	//No I18N
-		shippingAddress.setZip("627 654");
+		shippingAddress.setAddress("Puram");	//No I18N
+		shippingAddress.setCity("nei");	//No I18N
+		shippingAddress.setState("Nadu");	//No I18N
+		shippingAddress.setZip("452435");
 		shippingAddress.setCountry("India");	//No I18N
 		shippingAddress.setFax("");
 		
@@ -121,7 +121,7 @@ public class ContactsApiTest
 		contactPerson.setSalutation("Mr.");	//No I18N
 		contactPerson.setFirstName("Sahaya");	//No I18N
 		contactPerson.setLastName("Ramesh");	//No I18N
-		contactPerson.setEmail("sahaya.ramesh91@gmail.com");	//No I18N
+		contactPerson.setEmail("");	//No I18N
 		contactPerson.setPhone("044471612");
 		contactPerson.setMobile("8056200970");
 		contactPerson.setIsPrimaryContact(true);
@@ -147,13 +147,13 @@ public class ContactsApiTest
 		contactPersons1.setSalutation("Mr.");	//No I18N
 		contactPersons1.setFirstName("Ramesh");	//No I18N
 		contactPersons1.setLastName("Sahaya");	//No I18N
-		contactPersons1.setEmail("ramesh.saha91@gmail.com");	//No I18N
+		contactPersons1.setEmail("");	//No I18N
 		contactPersons1.setPhone("044881721");
 		contactPersons1.setMobile("2714567215");
 		
 		
 		Email email = new Email();
-		String[] str = {"sahaya.ramesh@zohocorp.com"};	//No I18N
+		String[] str = {""};	//No I18N
 		
 		email.setToMailIds(str);
 		email.setSubject("Payment reminder for Invoice (Invoice#: INV-24)");	//No I18N
