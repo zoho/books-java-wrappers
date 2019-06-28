@@ -146,7 +146,7 @@ public class InvoiceParser
 		invoice.setReferenceNumber(invoiceDetails.getString("reference_number"));
 		invoice.setCurrencyCode(invoiceDetails.getString("currency_code"));
 		invoice.setExchangeRate(invoiceDetails.getDouble("exchange_rate")); //No I18N
-		invoice.setDiscount(invoiceDetails.getString("discount"));
+		invoice.setDiscount(invoiceDetails.getDouble("discount"));
 		invoice.setIsDiscountBeforeTax(invoiceDetails.getBoolean("is_discount_before_tax")); //No I18N
 		invoice.setDiscountType(invoiceDetails.getString("discount_type"));
 		invoice.setRecurringInvoiceId(invoiceDetails.getString("recurring_invoice_id"));
