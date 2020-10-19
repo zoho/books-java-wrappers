@@ -91,7 +91,7 @@ public class RecurringExpensesApi extends API
 		
 		requestBody.put("JSONString", recurringExpense.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return recurringExpenseParser.getRecurringExpense(response);
 		
@@ -117,7 +117,7 @@ public class RecurringExpensesApi extends API
 		
 		String urlString = url+"/"+recurringExpenseId;
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		RecurringExpense recurringExpense = recurringExpenseParser.getRecurringExpense(response);
 		
@@ -150,7 +150,7 @@ public class RecurringExpensesApi extends API
 		
 		requestBody.put("JSONString", recurringExpense.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return recurringExpenseParser.getRecurringExpense(response);
 	}
@@ -177,7 +177,7 @@ public class RecurringExpensesApi extends API
 		
 		String urlString = url+"/"+recurringExpenseId;
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = recurringExpenseParser.getMessage(response);
 		
@@ -253,7 +253,7 @@ Allowed Values: <i>recurrence_name, last_created_date, next_expense_date, accoun
 	public RecurringExpenseList getRecurringExpenses(HashMap<String, Object> queryMap)throws Exception
 	{
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 		
 		RecurringExpenseList recurringExpenseList = recurringExpenseParser.getRecurringExpenses(response);
 		
@@ -282,7 +282,7 @@ Allowed Values: <i>recurrence_name, last_created_date, next_expense_date, accoun
 		
 		String urlString = url+"/"+recurringExpenseId+"/status/resume"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String success = recurringExpenseParser.getMessage(response);
 		
@@ -311,7 +311,7 @@ Allowed Values: <i>recurrence_name, last_created_date, next_expense_date, accoun
 		
 		String urlString = url+"/"+recurringExpenseId+"/status/stop"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String success = recurringExpenseParser.getMessage(response);
 		
@@ -351,7 +351,7 @@ Allowed Values: <i>date, account_name, vendor_name, paid_through_account_name, c
 		
 		String urlString = url+"/"+recurringExpenseId+"/expenses"; //No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 		
 		ExpenseList expenseList = recurringExpenseParser.getExpensehistory(response);
 		
@@ -378,7 +378,7 @@ Allowed Values: <i>date, account_name, vendor_name, paid_through_account_name, c
 		
 		String urlString = url+"/"+recurringExpenseId+"/comments"; //No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		CommentList commentList = recurringExpenseParser.getComments(response);
 		

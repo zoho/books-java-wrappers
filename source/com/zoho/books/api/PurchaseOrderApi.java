@@ -108,7 +108,7 @@ public class PurchaseOrderApi extends API
 	public PurchaseOrderList getPurchaseOrders(HashMap<String, Object> queryMap)throws Exception
 	{
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 		
 		return purchaseOrderParser.getPurchaseOrders(response);
 	}
@@ -128,7 +128,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/"+purchaseorderId;	//No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		return purchaseOrderParser.getPurchaseOrder(response);
 		
@@ -164,14 +164,14 @@ public class PurchaseOrderApi extends API
 			
 			fileBody.put("attachment", file);
 		
-			response = ZohoHTTPClient.post(url, getQueryMap(paramMap), requestBody, fileBody);
+			response = ZohoHTTPClient.post(url, getQueryMap(paramMap), requestBody, fileBody, accessToken);
 		}
 		
 		HashMap<String, Object>	requestBody = getQueryMap(paramMap);
 		
 		requestBody.put("JSONString", purchaseOrder.toJSON().toString());
 		
-		response = ZohoHTTPClient.post(url, requestBody);
+		response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return purchaseOrderParser.getPurchaseOrder(response);
 		
@@ -208,14 +208,14 @@ public class PurchaseOrderApi extends API
 			
 			fileBody.put("attachment", file);
 		
-			response = ZohoHTTPClient.put(urlString, getQueryMap(paramMap), requestBody, fileBody);
+			response = ZohoHTTPClient.put(urlString, getQueryMap(paramMap), requestBody, fileBody, accessToken);
 		}
 		
 		HashMap<String, Object>	requestBody = getQueryMap(paramMap);
 		
 		requestBody.put("JSONString", purchaseOrder.toJSON().toString());
 		
-		response = ZohoHTTPClient.put(urlString, requestBody);
+		response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return purchaseOrderParser.getPurchaseOrder(response);
 		
@@ -236,7 +236,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/"+purchaseorderId;	//No I18N
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		return purchaseOrderParser.getMessage(response);
 	}
@@ -256,7 +256,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/"+purchaseorderId+"/status/open";	//No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		return purchaseOrderParser.getMessage(response);
 		
@@ -277,7 +277,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/"+puchaseorderId+"/status/billed";	//No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		return purchaseOrderParser.getMessage(response);
 		
@@ -298,7 +298,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/"+purchaseorderId+"/status/cancelled";	//No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		return purchaseOrderParser.getMessage(response);
 		
@@ -345,7 +345,7 @@ public class PurchaseOrderApi extends API
 			}
 		}
 		
-		response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody);
+		response = ZohoHTTPClient.post(urlString, getQueryMap(), paramMap, fileBody, accessToken);
 		
 		return purchaseOrderParser.getMessage(response);
 	}
@@ -367,7 +367,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/"+purchaseorderId+"/email";	//No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 		
 		return purchaseOrderParser.getEmailContent(response);
 	}
@@ -393,7 +393,7 @@ public class PurchaseOrderApi extends API
 		
 		requestBody.put("JSONString", address.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return purchaseOrderParser.getMessage(response);
 		
@@ -412,7 +412,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/templates";	//No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		return purchaseOrderParser.getTemplates(response);
 		
@@ -435,7 +435,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/"+purchaseorderId+"/templates/"+templateId;	//No I18N
 		
-		String response = ZohoHTTPClient.put(urlString, getQueryMap());
+		String response = ZohoHTTPClient.put(urlString, getQueryMap(), accessToken);
 		
 		return purchaseOrderParser.getMessage(response);
 		
@@ -488,7 +488,7 @@ public class PurchaseOrderApi extends API
 		HashMap<String, Object> fileBody = new HashMap<String, Object>();
 		fileBody.put("attachment", file);
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap(), null, fileBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), null, fileBody, accessToken);
 		
 		return purchaseOrderParser.getMessage(response);
 		
@@ -511,7 +511,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/"+purchaseorderId+"/attachment";	//No I18N
 		
-		String response = ZohoHTTPClient.put(urlString, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.put(urlString, getQueryMap(queryMap), accessToken);
 		
 		return purchaseOrderParser.getMessage(response);
 		
@@ -532,7 +532,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/"+purchaseorderId+"/attachment";	//No I18N
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		return purchaseOrderParser.getMessage(response);
 		
@@ -557,7 +557,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/"+purchaseorderId+"/comments";	//No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		return purchaseOrderParser.getComments(response);
 		
@@ -589,7 +589,7 @@ public class PurchaseOrderApi extends API
 		HashMap<String, Object> requestBody = getQueryMap();
 		requestBody.put("JSONString", jsonObject.toString());
 		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 		
 		return purchaseOrderParser.getComment(response);
 		
@@ -623,7 +623,7 @@ public class PurchaseOrderApi extends API
 		HashMap<String, Object> requestBody = getQueryMap();
 		requestBody.put("JSONString", jsonObject.toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return purchaseOrderParser.getComment(response);
 	}
@@ -645,7 +645,7 @@ public class PurchaseOrderApi extends API
 		
 		String urlString = url+"/"+purchaseorderId+"/comments/"+commentId;	//No I18N
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		return purchaseOrderParser.getMessage(response);
 	}

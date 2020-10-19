@@ -59,7 +59,7 @@ public class OrganizationsApi extends API
 	public OrganizationList getOrganizations()throws Exception
 	{
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap());
+		String response = ZohoHTTPClient.get(url, getQueryMap(), accessToken);
 		
 		OrganizationList organizationList = settingsParser.getOrganizations(response);
 		
@@ -86,7 +86,7 @@ public class OrganizationsApi extends API
 		
 		String urlString = url+"/"+organizationid;
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		Organization organization = settingsParser.getOrganization(response);
 		
@@ -117,7 +117,7 @@ public class OrganizationsApi extends API
 		
 		requestBody.put("JSONString", organization.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return settingsParser.getOrganization(response);
 	}
@@ -148,7 +148,7 @@ public class OrganizationsApi extends API
 		
 		requestBody.put("JSONString", organization.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return settingsParser.getOrganization(response);
 	}

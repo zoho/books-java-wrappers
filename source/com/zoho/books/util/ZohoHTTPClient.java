@@ -40,12 +40,13 @@ public class ZohoHTTPClient
 	* @param url Service URL passed by the user.
 	
 	* @param queryMap This queryMap contains the query string parameters in the form of key, value pair.
-	
-	* @return Returns the JSON response String.
+
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
 	
 	*/
 	
-	public static String get(String url, HashMap<String, Object> queryMap)throws Exception
+	public static String get(String url, HashMap<String, Object> queryMap, String accessToken) throws Exception
 	{
 		URL urlCon = new URL(url+formQueryString(queryMap));
 		
@@ -53,7 +54,8 @@ public class ZohoHTTPClient
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
-		
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
+
 		HttpsURLConnection httpGet = getConnection(urlCon, "GET", header);	//No I18N
 		
   		String response = getResponse(httpGet);
@@ -97,13 +99,14 @@ public class ZohoHTTPClient
 	* @param url Service URL passed by the user.
 	
 	* @param requestBody This map contains the request body for the POST request.
-	
-	* @return Returns the JSON response String.
+
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
 	
 	*/
 	
 	
-	public static String post(String url, HashMap<String, Object> requestBody)throws Exception
+	public static String post(String url, HashMap<String, Object> requestBody, String accessToken) throws Exception
 	{
 	
 		URL urlCon = new URL(url);
@@ -112,7 +115,8 @@ public class ZohoHTTPClient
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
-		
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
+
 		HttpsURLConnection httpPost = getConnection(urlCon, "POST", header);	//No I18N
 		
 		StringBuffer requestParams = new StringBuffer();
@@ -168,12 +172,13 @@ public class ZohoHTTPClient
 	* @param requestBody This requestBody contains the form data for the POST request.
 	
 	* @param fileBody This fileBody contains the attachment files for the POST request.
-	
-	* @return Returns the JSON response String.
+
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
 	
 	*/
 	
-	public static String post(String url, HashMap<String, Object> queryMap, HashMap<String, Object> requestBody, HashMap<String, Object> fileBody)throws Exception
+	public static String post(String url, HashMap<String, Object> queryMap, HashMap<String, Object> requestBody, HashMap<String, Object> fileBody, String accessToken) throws Exception
 	{
 	
 		URL urlCon = new URL(url+formQueryString(queryMap));
@@ -186,7 +191,8 @@ public class ZohoHTTPClient
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "multipart/form-data; boundary="+ boundary);	//No I18N
-		
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
+
 		HttpsURLConnection httpPost = getConnection(urlCon, "POST", header);	//No I18N
       		
 		DataOutputStream dos = new DataOutputStream(httpPost.getOutputStream());
@@ -300,13 +306,14 @@ public class ZohoHTTPClient
 	* @param url Service URL passed by the user.
 	
 	* @param requestBody This requestBody contains the form data for the PUT request.
-	
-	* @return Returns the JSON response String.
+
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
 	
 	*/
 	
 	
-	public static String put(String url, HashMap<String, Object> requestBody)throws Exception
+	public static String put(String url, HashMap<String, Object> requestBody, String accessToken) throws Exception
 	{
 		URL urlCon = new URL(url);
 		
@@ -314,7 +321,8 @@ public class ZohoHTTPClient
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
-		
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
+
 		HttpsURLConnection httpPut = getConnection(urlCon, "PUT", header);	//No I18N
 		
 		StringBuffer requestParams = new StringBuffer();
@@ -372,12 +380,13 @@ public class ZohoHTTPClient
 	* @param requestBody This requestBody contains the form data for the PUT request.
 	
 	* @param fileBody This fileBody contains the attachment files for the PUT request.
-	
-	* @return Returns the JSON response String.
+
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
 	
 	*/
 	
-	public static String put(String url, HashMap<String, Object> queryMap, HashMap<String, Object> requestBody, HashMap<String, Object> fileBody)throws Exception
+	public static String put(String url, HashMap<String, Object> queryMap, HashMap<String, Object> requestBody, HashMap<String, Object> fileBody, String accessToken) throws Exception
 	{
 	
 		URL urlCon = new URL(url+formQueryString(queryMap));
@@ -390,7 +399,8 @@ public class ZohoHTTPClient
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "multipart/form-data; boundary="+ boundary);	//No I18N
-		
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
+
 		HttpsURLConnection httpPut = getConnection(urlCon, "PUT", header);	//No I18N
       		
   		FileInputStream fStream = null; 
@@ -474,13 +484,14 @@ public class ZohoHTTPClient
 	* @param url Service URL passed by the user.
 	
 	* @param queryMap This queryMap contains the query string parameters in the form of key, value pair.
-	
-	* @return Returns the JSON response String.
-	
+
+	* @param accessToken The OAuth access token
+	 * @return Returns the JSON response String.
+
 	*/
-	
-	
-	public static String delete(String url, HashMap<String, Object> queryMap)throws Exception
+
+
+	public static String delete(String url, HashMap<String, Object> queryMap, String accessToken) throws Exception
 	{
 		
 		URL urlCon = new URL(url+formQueryString(queryMap));
@@ -489,7 +500,8 @@ public class ZohoHTTPClient
 		
 		header.put("Accept", "application/json");	//No I18N
 		header.put("Content-Type", "application/x-www-form-urlencoded");	//No I18N
-		
+		header.put("Authorization", "Zoho-oauthtoken " + accessToken);
+
 		HttpsURLConnection httpDelete = getConnection(urlCon, "DELETE", header);	//No I18N
 		
 		String response = getResponse(httpDelete);

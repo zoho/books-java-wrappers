@@ -79,7 +79,7 @@ public class VendorPaymentsApi extends API
 		
 		requestBody.put("JSONString", vendorPayment.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return vendorPaymentParser.getVendorPayment(response);
 	}
@@ -104,7 +104,7 @@ public class VendorPaymentsApi extends API
 		
 		String urlString = url+"/"+paymentId;
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		VendorPayment vendorPayment = vendorPaymentParser.getVendorPayment(response);
 		
@@ -137,7 +137,7 @@ public class VendorPaymentsApi extends API
 		
 		requestBody.put("JSONString", vendorPayment.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return vendorPaymentParser.getVendorPayment(response);
 	}
@@ -164,7 +164,7 @@ public class VendorPaymentsApi extends API
 		
 		String urlString = url+"/"+paymentId;
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = vendorPaymentParser.getMessage(response);
 		
@@ -229,7 +229,7 @@ Allowed Values: <i>vendor_name, date, reference_number, amount and balance</i></
 	public VendorPaymentList getVendorPayments(HashMap<String, Object> queryMap)throws Exception
 	{
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 		
 		VendorPaymentList vendorPaymentList = vendorPaymentParser.getVendorPayments(response);
 		

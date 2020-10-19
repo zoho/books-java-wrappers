@@ -78,7 +78,7 @@ public class JournalsApi extends API
 		
 		requestBody.put("JSONString", journal.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return journalParser.getJournal(response);
 	}
@@ -103,7 +103,7 @@ public class JournalsApi extends API
 		
 		String urlString = url+"/"+journalId;
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		Journal journal = journalParser.getJournal(response);
 		
@@ -136,7 +136,7 @@ public class JournalsApi extends API
 		
 		requestBody.put("JSONString", journal.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return journalParser.getJournal(response);
 	}
@@ -163,7 +163,7 @@ public class JournalsApi extends API
 		
 		String urlString = url+"/"+journalId;
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = journalParser.getMessage(response);
 		
@@ -216,7 +216,7 @@ Allowed Values: <i>journal_date, entry_number, reference_number</i> and <i>total
 	public JournalList getJournals(HashMap<String, Object> queryMap)throws Exception
 	{
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 		
 		JournalList journalList = journalParser.getJournals(response);
 		

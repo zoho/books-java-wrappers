@@ -107,7 +107,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 	public ItemList getItems(HashMap<String, Object> queryMap)throws Exception
 	{
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 		
 		ItemList itemList = settingsParser.getItems(response);
 		
@@ -134,7 +134,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		String urlString = url+"/"+itemId;
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		Item item = settingsParser.getItem(response);
 		
@@ -165,7 +165,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		requestBody.put("JSONString", item.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return settingsParser.getItem(response);
 	}
@@ -196,7 +196,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		requestBody.put("JSONString", item.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return settingsParser.getItem(response);
 	}
@@ -223,7 +223,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		String urlString = url+"/"+itemId;
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -252,7 +252,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		String urlString = url+"/"+itemId+"/active"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -281,7 +281,7 @@ Allowed Values: <i>name, rate</i> and <i>tax_name</i></td></tr>
 		
 		String urlString = url+"/"+itemId+"/inactive"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String success = settingsParser.getMessage(response);
 		
