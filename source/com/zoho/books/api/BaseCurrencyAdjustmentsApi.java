@@ -35,18 +35,18 @@ public class BaseCurrencyAdjustmentsApi extends API
 
 	/**
 	
-	* Construct a new BaseCurrencyAdjustmentsApi using user's authtoken and organizationid.
+	* Construct a new BaseCurrencyAdjustmentsApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public BaseCurrencyAdjustmentsApi(String authToken, String organizationId)
+	public BaseCurrencyAdjustmentsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	

@@ -105,18 +105,18 @@ public class CreditNotesApi extends API
 
 	/**
 	
-	* Construct a new CreditNotesApi using user's authtoken and organizationid.
+	* Construct a new CreditNotesApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public CreditNotesApi(String authToken, String organizationId)
+	public CreditNotesApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	

@@ -35,18 +35,18 @@ public class JournalsApi extends API
 	
 	/**
 	
-	* Construct a new JournalsApi using user's authtoken and organizationid.
+	* Construct a new JournalsApi using user's accessToken and organizationid.
 	
-	* @param authToken User's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId User's organization id.
 	
 	*/
 
-	public JournalsApi(String authToken, String organizationId)
+	public JournalsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	

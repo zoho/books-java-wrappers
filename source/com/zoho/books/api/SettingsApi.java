@@ -116,18 +116,18 @@ public class SettingsApi extends API
 	
 	/**
 	
-	* Construct a new SettingsApi using user's authtoken and organizationid.
+	* Construct a new SettingsApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public SettingsApi(String authToken, String organizationId)
+	public SettingsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	

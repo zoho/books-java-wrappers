@@ -70,12 +70,12 @@ Once you're done with importing the requisite classes, you'll have to proceed to
 
 Now, there are two ways of creating an instance of OrganisationsApi.
 
-1.) Pass the AuthToken and create a new OrganisationsApi instance. 
+1.) Pass the access token and create a new OrganisationsApi instance. 
 
 Sample code:
 
-			OrganizationsApi organizationsApi = new OrganizationsApi(authtoken);
-2.) Pass the AuthToken and organisations id to first create an instance of ZohoBooks, and then proceed to get the instance of Organisations API. 
+			OrganizationsApi organizationsApi = new OrganizationsApi(accessToken);
+2.) Pass the access token and organisations id to first create an instance of ZohoBooks, and then proceed to get the instance of Organisations API. 
 
 Sample code:
 

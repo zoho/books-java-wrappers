@@ -50,18 +50,18 @@ public class ChartOfAccountsApi extends API
 
 	/**
 	
-	* Construct a new ChartOfAccountsApi using user's authtoken and organizationid.
+	* Construct a new ChartOfAccountsApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public ChartOfAccountsApi(String authToken, String organizationId)
+	public ChartOfAccountsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	

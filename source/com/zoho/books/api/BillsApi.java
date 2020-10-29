@@ -78,18 +78,18 @@ public class BillsApi extends API
 
 	/**
 	
-	* Construct a new BillsApi using user's authtoken and organizationid.
+	* Construct a new BillsApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/	
 
-	public BillsApi(String authToken, String organizationId)
+	public BillsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	

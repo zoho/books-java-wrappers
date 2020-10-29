@@ -74,18 +74,18 @@ public class BankTransactionsApi extends API
 	
 	/**
 	
-	* Construct a new BankTransactionsApi using user's authtoken and organization id.
+	* Construct a new BankTransactionsApi using user's accessToken and organization id.
 	
-	* @param authToken user's authtoken.
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public BankTransactionsApi(String authToken, String organizationId)
+	public BankTransactionsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	

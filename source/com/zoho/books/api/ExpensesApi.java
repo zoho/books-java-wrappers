@@ -49,18 +49,18 @@ public class ExpensesApi extends API
 	
 	/**
 	
-	* Construct a new ExpensesApi using user's authtoken and organizationid.
+	* Construct a new ExpensesApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public ExpensesApi(String authToken, String organizationId)
+	public ExpensesApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	

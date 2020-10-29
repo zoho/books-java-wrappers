@@ -78,16 +78,16 @@ public class PurchaseOrderApi extends API
 	
 	
 	/**
-	 * Construct a new PurchaseOrderApi using user's authToken and organizationId.
+	 * Construct a new PurchaseOrderApi using user's accessToken and organizationId.
 	 *  
-	 * @param authToken User's authToken.
+	 * @param accessToken User's accessToken.
 	 * 
 	 * @param organizationId User's organizationId
 	 */
 	
-	public PurchaseOrderApi(String authToken, String organizationId)
+	public PurchaseOrderApi(String accessToken, String organizationId)
 	{
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 	}
 	
 	// PurchaseOrderParser is used to parse the JSON response and make it into the respective objects.

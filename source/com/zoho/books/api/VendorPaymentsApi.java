@@ -36,18 +36,18 @@ public class VendorPaymentsApi extends API
 	
 	/**
 	
-	* Construct a new VendorPaymentsApi using user's authtoken and organizationid.
+	* Construct a new VendorPaymentsApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public VendorPaymentsApi(String authToken, String organizationId)
+	public VendorPaymentsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	

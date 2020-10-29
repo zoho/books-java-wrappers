@@ -78,16 +78,16 @@ public class SalesOrderApi extends API
 	
 	
 	/**
-	 * Construct a new SalesOrderApi using user's authToken and organizationId.
+	 * Construct a new SalesOrderApi using user's accessToken and organizationId.
 	 * 
-	 * @param authToken User's authToken.
+	 * @param accessToken User's accessToken.
 	 * 
 	 * @param organizationId User's organizationId.
 	 */
 	
-	public SalesOrderApi(String authToken, String organizationId)
+	public SalesOrderApi(String accessToken, String organizationId)
 	{
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 	}
 	
 	

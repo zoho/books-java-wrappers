@@ -33,18 +33,18 @@ public class ContactPersonsApi extends API
 
 	/**
 	
-	* Construct a new ContactPersonsApi using user's authtoken and organizationid.
+	* Construct a new ContactPersonsApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public ContactPersonsApi(String authToken, String organizationId)
+	public ContactPersonsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	

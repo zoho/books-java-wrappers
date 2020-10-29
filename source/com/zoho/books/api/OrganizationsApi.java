@@ -29,16 +29,16 @@ public class OrganizationsApi extends API
 	
 	/**
 	
-	* Construct a new OrganizationsApi using user's authtoken.
+	* Construct a new OrganizationsApi using user's accessToken.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	*/
 
-	public OrganizationsApi(String authToken)
+	public OrganizationsApi(String accessToken)
 	{
 		
-		super(authToken, "");
+		super(accessToken, "");
 		
 	}
 	
