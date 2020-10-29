@@ -22,7 +22,7 @@ public class SalesOrderTest
 	public static void main(String[] args)throws Exception 
 	{
 		
-		SalesOrderApi salesOrderApi = new SalesOrderApi("{auth_token}", "{organization_id}");	//No I18N
+		SalesOrderApi salesOrderApi = new SalesOrderApi("{access_token}", "{organization_id}");	//No I18N
 		
 		try
 		{

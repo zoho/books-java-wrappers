@@ -22,7 +22,7 @@ public class CustomerPaymentsApiTest
 	{
 		
 		ZohoBooks service = new ZohoBooks();
-		service.initialize("{auth_token}", "{organization_id}");	//No I18N
+		service.initialize("{access_token}", "{organization_id}");	//No I18N
 	
 		CustomerPaymentsApi customerPaymentsApi = service.getCustomerPaymentsApi();	
 		

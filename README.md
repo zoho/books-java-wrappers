@@ -80,7 +80,7 @@ Sample code:
 Sample code:
 
 			ZohoBooks service = new ZohoBooks();        
-			service.initialize("{auth_token}", "{organization_id}");        
+			service.initialize("{access_token}", "{organization_id}");
 			OrganizationsApi organizationsApi = service.getOrganizationsApi();
 
 ## Create a new organization:			

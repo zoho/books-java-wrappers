@@ -28,7 +28,7 @@ public class EstimatesApiTest
 	{
 	
 		ZohoBooks service = new ZohoBooks();
-		service.initialize("{auth_token}", "{organization_id}"); //No I18N
+		service.initialize("{access_token}", "{organization_id}"); //No I18N
 	
 		EstimatesApi estimatesApi = service.getEstimatesApi();
 		
