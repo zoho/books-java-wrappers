@@ -78,18 +78,18 @@ public class BillsApi extends API
 
 	/**
 	
-	* Construct a new BillsApi using user's authtoken and organizationid.
+	* Construct a new BillsApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/	
 
-	public BillsApi(String authToken, String organizationId)
+	public BillsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	
@@ -141,7 +141,7 @@ public class BillsApi extends API
 		
 		requestBody.put("JSONString", billObj.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		Bill bill = billParser.getBill(response);
 		
@@ -172,7 +172,7 @@ public class BillsApi extends API
 		
 		requestBody.put("JSONString", bill.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return billParser.getBill(response);
 		
@@ -207,7 +207,7 @@ public class BillsApi extends API
 		HashMap<String, Object> fileBody = new HashMap<String, Object>();
 		fileBody.put("attachment", file);
 		
-		String response = ZohoHTTPClient.post(url, getQueryMap(), requestBody, fileBody);
+		String response = ZohoHTTPClient.post(url, getQueryMap(), requestBody, fileBody, accessToken);
 		
 		return billParser.getBill(response);
 		
@@ -233,7 +233,7 @@ public class BillsApi extends API
 		
 		String urlString = url+"/"+billId; 
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		Bill bill = billParser.getBill(response);
 		
@@ -266,7 +266,7 @@ public class BillsApi extends API
 		
 		requestBody.put("JSONString", bill.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return billParser.getBill(response);
 	}
@@ -303,7 +303,7 @@ public class BillsApi extends API
 		
 		fileBody.put("attachment", file);
 		
-		String response = ZohoHTTPClient.put(urlString, getQueryMap(), requestBody, fileBody);
+		String response = ZohoHTTPClient.put(urlString, getQueryMap(), requestBody, fileBody, accessToken);
 		
 		return billParser.getBill(response);
 	}
@@ -330,7 +330,7 @@ public class BillsApi extends API
 		
 		String urlString = url+"/"+billId; 
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = billParser.getMessage(response);
 		
@@ -398,7 +398,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 	{
 		
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 		
 		BillList billList = billParser.getBills(response);
 		
@@ -427,7 +427,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/status/void";  //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String success = billParser.getMessage(response);
 		
@@ -456,7 +456,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/status/open";  //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String success = billParser.getMessage(response);
 		
@@ -491,7 +491,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		requestBody.put("JSONString", billingAddress.toJSON().put("is_update_customer", billingAddress.isUpdateCustomer()).toString());
 	
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		String success = billParser.getMessage(response);
 		
@@ -523,7 +523,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/payments";  //No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		PaymentList payments = billParser.getPayments(response);
 		
@@ -576,7 +576,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		requestBody.put("JSONString", jsonObject.toString());
 		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 		
 		String success = billParser.getMessage(response);
 		
@@ -607,7 +607,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/payments/"+billPaymentId;  //No I18N
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = billParser.getMessage(response);
 		
@@ -672,7 +672,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		fileBody.put("attachment", file);
 		
 
-		String response = ZohoHTTPClient.post(urlString, getQueryMap(), null, fileBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), null, fileBody, accessToken);
 
 		String success = billParser.getMessage(response);
 		
@@ -702,7 +702,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/attachment";  //No I18N
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = billParser.getMessage(response);
 		
@@ -734,7 +734,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/comments";  //No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		CommentList commentList = billParser.getComments(response);
 		
@@ -771,7 +771,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		requestBody.put("JSONString", jsonObject.toString());
 		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 		
 		Comment comment = billParser.getComment(response);
 		
@@ -802,7 +802,7 @@ Allowed Values: <i>vendor_name, bill_number, date, due_date, total, balance</i> 
 		
 		String urlString = url+"/"+billId+"/comments"+commentId;  //No I18N
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = billParser.getMessage(response);
 		

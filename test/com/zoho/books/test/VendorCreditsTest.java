@@ -21,7 +21,7 @@ public class VendorCreditsTest
 	public static void main(String[] args)throws Exception
 	{
 		
-		VendorCreditsApi vendorCreditsApi = new VendorCreditsApi("{auth_token}", "{organization_id}");	//No I18N
+		VendorCreditsApi vendorCreditsApi = new VendorCreditsApi("{access_token}", "{organization_id}");	//No I18N
 		
 		try
 		{

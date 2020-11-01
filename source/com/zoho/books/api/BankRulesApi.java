@@ -37,18 +37,18 @@ public class BankRulesApi extends API
 	
 	/**
 	
-	* Construct a new BankRulesApi using user's authtoken and organizationid.
+	* Construct a new BankRulesApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 	
-	public BankRulesApi(String authToken, String organizationId)
+	public BankRulesApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	
@@ -80,7 +80,7 @@ public class BankRulesApi extends API
 			queryMap.put("account_id", accountId);
 		} 
 		
-		String response = ZohoHTTPClient.get(url, queryMap);
+		String response = ZohoHTTPClient.get(url, queryMap, accessToken);
 		
 		RuleList ruleList = bankRuleParser.getRules(response); 
 		
@@ -106,7 +106,7 @@ public class BankRulesApi extends API
 	{
 		String urlString = url+"/"+ruleId;
 	
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		Rule rule = bankRuleParser.getRule(response); 
 		
@@ -136,7 +136,7 @@ public class BankRulesApi extends API
 		
 		requestBody.put("JSONString", rule.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return bankRuleParser.getRule(response);
 	}
@@ -166,7 +166,7 @@ public class BankRulesApi extends API
 		
 		requestBody.put("JSONString", rule.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return bankRuleParser.getRule(response);
 	}
@@ -192,7 +192,7 @@ public class BankRulesApi extends API
 	{
 		String urlString = url+"/"+ruleId;
 	
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String message = bankRuleParser.getMessage(response); 
 		

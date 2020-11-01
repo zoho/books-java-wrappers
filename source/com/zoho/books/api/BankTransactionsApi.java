@@ -74,18 +74,18 @@ public class BankTransactionsApi extends API
 	
 	/**
 	
-	* Construct a new BankTransactionsApi using user's authtoken and organization id.
+	* Construct a new BankTransactionsApi using user's accessToken and organization id.
 	
-	* @param authToken user's authtoken.
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public BankTransactionsApi(String authToken, String organizationId)
+	public BankTransactionsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	
@@ -134,7 +134,7 @@ Allowed Values: <i>date</i></td></tr>
 	public TransactionList getTransactions(HashMap<String, Object> queryMap)throws Exception
 	{
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 		
 		TransactionList transactionsList = bankTransactionParser.getTransactions(response); 
 		
@@ -160,7 +160,7 @@ Allowed Values: <i>date</i></td></tr>
 	{
 		String urlString = url+"/"+transactionId; 
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		Transaction transaction = bankTransactionParser.getTransaction(response); 
 		
@@ -190,7 +190,7 @@ Allowed Values: <i>date</i></td></tr>
 		
 		requestBody.put("JSONString", transaction.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return bankTransactionParser.getTransaction(response);
 	}
@@ -221,7 +221,7 @@ Allowed Values: <i>date</i></td></tr>
 		
 		requestBody.put("JSONString", transaction.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return bankTransactionParser.getTransaction(response);
 	}
@@ -247,7 +247,7 @@ Allowed Values: <i>date</i></td></tr>
 	{
 		String urlString = url+"/"+transactionId; //No I18N
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String message = bankTransactionParser.getMessage(response); 
 		
@@ -293,7 +293,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	{
 		String urlString = url+"/uncategorized/"+transactionId+"/match"; //No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 		
 		TransactionList transactionsList = bankTransactionParser.getTransactions(response); 
 		
@@ -345,7 +345,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 		
 		requestBody.put("JSONString", jsonObject.toString());
 		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 		
 		String message = bankTransactionParser.getMessage(response); 
 		
@@ -373,7 +373,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	{
 		String urlString = url+"/"+transactionId+"/unmatch"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String message = bankTransactionParser.getMessage(response); 
 		
@@ -408,7 +408,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 			queryMap.put("sort_column", sortColumn);
 		}
 		
-		String response = ZohoHTTPClient.get(urlString, queryMap);
+		String response = ZohoHTTPClient.get(urlString, queryMap, accessToken);
 		
 		Transaction transaction = bankTransactionParser.getAssociateTransaction(response); 
 		
@@ -436,7 +436,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	{
 		String urlString = url+"/uncategorized/"+transactionId+"/exclude"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String message = bankTransactionParser.getMessage(response); 
 		
@@ -464,7 +464,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	{
 		String urlString = url+"/uncategorized/"+transactionId+"/restore"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String message = bankTransactionParser.getMessage(response); 
 		
@@ -502,7 +502,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 		
 		requestBody.put("JSONString", transaction.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 		
 		return bankTransactionParser.getTransaction(response);
 	}
@@ -534,7 +534,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 		
 		requestBody.put("JSONString", creditnoteRefund.toJSON().put("creditnote_id", creditnoteRefund.getCreditnoteId()).toString());
 		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 		
 		//String message = bankTransactionParser.getMessage(response); 
 		
@@ -568,7 +568,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 		
 		requestBody.put("JSONString", vendorPayment.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 		
 		return new VendorPaymentParser().getVendorPayment(response);
 	}
@@ -600,7 +600,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 		
 		requestBody.put("JSONString", customerPayment.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(urlString, requestBody);
+		String response = ZohoHTTPClient.post(urlString, requestBody, accessToken);
 		
 		return new CustomerPaymentParser().getCustomerPayment(response);
 	}
@@ -638,7 +638,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 		
 		fileBody.put("receipt", file);
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap(), requestBody, fileBody);
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), requestBody, fileBody, accessToken);
 		
 		return new ExpenseParser().getExpense(response);
 	}
@@ -664,7 +664,7 @@ Variants: <i>amount_start</i> and <i>amount_end</i></td></tr>
 	{
 		String urlString = url+"/"+transactionId+"/uncategorize"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String message = bankTransactionParser.getMessage(response); 
 		

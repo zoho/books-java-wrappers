@@ -37,24 +37,24 @@ import com.zoho.books.api.ItemsApi;
 public class ZohoBooks
 {
 	
-	private String authToken;
+	private String accessToken;
 	
 	private String organizationId;
 	
 	/**
 	
-	* Initialize ZohoBooks using user's authtoken and organization id.
+	* Initialize ZohoBooks using user's accessToken and organization id.
 	
-	* @param authToken User's authtoken.
+	* @param accessToken User's accessToken.
 	
 	* @param organizationId ID of the organization. 
 	
 	*/
 
-	public void initialize(String authToken, String organizationId)
+	public void initialize(String accessToken, String organizationId)
 	{
 	
-		this.authToken = authToken;
+		this.accessToken = accessToken;
 		this.organizationId = organizationId;
 		
 	}
@@ -72,7 +72,7 @@ public class ZohoBooks
 	
 	public InvoicesApi getInvoicesApi()
 	{
-		InvoicesApi invoicesApi = new InvoicesApi(authToken, organizationId);
+		InvoicesApi invoicesApi = new InvoicesApi(accessToken, organizationId);
 		
 		return invoicesApi;
 	}
@@ -88,7 +88,7 @@ public class ZohoBooks
 	
 	public RecurringInvoicesApi getRecurringInvoicesApi()
 	{
-		RecurringInvoicesApi recurringInvoicesApi = new RecurringInvoicesApi(authToken, organizationId);
+		RecurringInvoicesApi recurringInvoicesApi = new RecurringInvoicesApi(accessToken, organizationId);
 		
 		return recurringInvoicesApi;
 	}
@@ -105,7 +105,7 @@ public class ZohoBooks
 	
 	public CreditNotesApi getCreditNotesApi()
 	{
-		CreditNotesApi creditNotesApi = new CreditNotesApi(authToken, organizationId);
+		CreditNotesApi creditNotesApi = new CreditNotesApi(accessToken, organizationId);
 		
 		return creditNotesApi;
 	}
@@ -124,7 +124,7 @@ public class ZohoBooks
 	
 	public EstimatesApi getEstimatesApi()
 	{
-		EstimatesApi estimatesApi = new EstimatesApi(authToken, organizationId);
+		EstimatesApi estimatesApi = new EstimatesApi(accessToken, organizationId);
 		
 		return estimatesApi;
 	}
@@ -142,7 +142,7 @@ public class ZohoBooks
 	
 	public CustomerPaymentsApi getCustomerPaymentsApi()
 	{
-		CustomerPaymentsApi customerPaymentsApi = new CustomerPaymentsApi(authToken, organizationId);
+		CustomerPaymentsApi customerPaymentsApi = new CustomerPaymentsApi(accessToken, organizationId);
 		
 		return customerPaymentsApi;
 	}
@@ -159,7 +159,7 @@ public class ZohoBooks
 	
 	public ExpensesApi getExpensesApi()
 	{
-		ExpensesApi expensesApi = new ExpensesApi(authToken, organizationId);
+		ExpensesApi expensesApi = new ExpensesApi(accessToken, organizationId);
 		
 		return expensesApi;
 	}
@@ -177,7 +177,7 @@ public class ZohoBooks
 	
 	public RecurringExpensesApi getRecurringExpensesApi()
 	{
-		RecurringExpensesApi recurringExpensesApi = new RecurringExpensesApi(authToken, organizationId);
+		RecurringExpensesApi recurringExpensesApi = new RecurringExpensesApi(accessToken, organizationId);
 		
 		return recurringExpensesApi;
 	}
@@ -194,7 +194,7 @@ public class ZohoBooks
 	
 	public ChartOfAccountsApi getChartOfAccountsApi()
 	{
-		ChartOfAccountsApi chartOfAccountsApi = new ChartOfAccountsApi(authToken, organizationId);
+		ChartOfAccountsApi chartOfAccountsApi = new ChartOfAccountsApi(accessToken, organizationId);
 		
 		return chartOfAccountsApi;
 	}
@@ -211,7 +211,7 @@ public class ZohoBooks
 	
 	public JournalsApi getJournalsApi()
 	{
-		JournalsApi journalsApi = new JournalsApi(authToken, organizationId);
+		JournalsApi journalsApi = new JournalsApi(accessToken, organizationId);
 		
 		return journalsApi;
 	}
@@ -228,7 +228,7 @@ public class ZohoBooks
 	
 	public BaseCurrencyAdjustmentsApi getBaseCurrencyAdjustmentsApi()
 	{
-		BaseCurrencyAdjustmentsApi baseCurrencyAdjustmentsApi = new BaseCurrencyAdjustmentsApi(authToken, organizationId);
+		BaseCurrencyAdjustmentsApi baseCurrencyAdjustmentsApi = new BaseCurrencyAdjustmentsApi(accessToken, organizationId);
 		
 		return baseCurrencyAdjustmentsApi;
 	}
@@ -245,7 +245,7 @@ public class ZohoBooks
 	
 	public ContactsApi getContactsApi()
 	{
-		ContactsApi contactsApi = new ContactsApi(authToken, organizationId);
+		ContactsApi contactsApi = new ContactsApi(accessToken, organizationId);
 		
 		return contactsApi;
 	}
@@ -260,7 +260,7 @@ public class ZohoBooks
 	
 	public ContactPersonsApi getContactPersonsApi()
 	{
-		ContactPersonsApi contactPersonsApi = new ContactPersonsApi(authToken, organizationId);
+		ContactPersonsApi contactPersonsApi = new ContactPersonsApi(accessToken, organizationId);
 		
 		return contactPersonsApi;
 	}
@@ -277,7 +277,7 @@ public class ZohoBooks
 	
 	public VendorPaymentsApi getVendorPaymentsApi()
 	{
-		VendorPaymentsApi vendorPaymentsApi = new VendorPaymentsApi(authToken, organizationId);
+		VendorPaymentsApi vendorPaymentsApi = new VendorPaymentsApi(accessToken, organizationId);
 		
 		return vendorPaymentsApi;
 	}
@@ -292,7 +292,7 @@ public class ZohoBooks
 	
 	public BankAccountsApi getBankAccountsApi()
 	{	
-		BankAccountsApi bankAccountsApi = new BankAccountsApi(authToken, organizationId);
+		BankAccountsApi bankAccountsApi = new BankAccountsApi(accessToken, organizationId);
 		
 		return bankAccountsApi;
 	}
@@ -308,7 +308,7 @@ public class ZohoBooks
 	
 	public BankTransactionsApi getBankTransactionsApi()
 	{	
-		BankTransactionsApi bankTransactionsApi = new BankTransactionsApi(authToken, organizationId);
+		BankTransactionsApi bankTransactionsApi = new BankTransactionsApi(accessToken, organizationId);
 		
 		return bankTransactionsApi;
 	}
@@ -324,7 +324,7 @@ public class ZohoBooks
 	
 	public BankRulesApi getBankRulesApi()
 	{	
-		BankRulesApi bankRulesApi = new BankRulesApi(authToken, organizationId);
+		BankRulesApi bankRulesApi = new BankRulesApi(accessToken, organizationId);
 		
 		return bankRulesApi;
 	}
@@ -340,7 +340,7 @@ public class ZohoBooks
 	
 	public BillsApi getBillsApi()
 	{
-		BillsApi billsApi = new BillsApi(authToken, organizationId);
+		BillsApi billsApi = new BillsApi(accessToken, organizationId);
 		
 		return billsApi;
 	}
@@ -359,7 +359,7 @@ public class ZohoBooks
 	
 	public ProjectsApi getProjectsApi()
 	{
-		ProjectsApi projectsApi = new ProjectsApi(authToken, organizationId);
+		ProjectsApi projectsApi = new ProjectsApi(accessToken, organizationId);
 		
 		return projectsApi;
 	}
@@ -376,7 +376,7 @@ public class ZohoBooks
 	
 	public SettingsApi getSettingsApi()
 	{
-		SettingsApi settingsApi = new SettingsApi(authToken, organizationId);
+		SettingsApi settingsApi = new SettingsApi(accessToken, organizationId);
 		
 		return settingsApi;
 	}
@@ -391,7 +391,7 @@ public class ZohoBooks
 	
 	public OrganizationsApi getOrganizationsApi()
 	{
-		OrganizationsApi organizationsApi = new OrganizationsApi(authToken);
+		OrganizationsApi organizationsApi = new OrganizationsApi(accessToken);
 		
 		return organizationsApi;
 	}
@@ -406,7 +406,7 @@ public class ZohoBooks
 	
 	public UsersApi getUsersApi()
 	{
-		UsersApi usersApi = new UsersApi(authToken, organizationId);
+		UsersApi usersApi = new UsersApi(accessToken, organizationId);
 		
 		return usersApi;
 	}
@@ -421,7 +421,7 @@ public class ZohoBooks
 	
 	public ItemsApi getItemsApi()
 	{
-		ItemsApi itemsApi = new ItemsApi(authToken, organizationId);
+		ItemsApi itemsApi = new ItemsApi(accessToken, organizationId);
 		
 		return itemsApi;
 	}
@@ -435,7 +435,7 @@ public class ZohoBooks
 	public SalesOrderApi getSalesOrderApi()
 	{
 		
-		SalesOrderApi salesOrderApi = new SalesOrderApi(authToken, organizationId);
+		SalesOrderApi salesOrderApi = new SalesOrderApi(accessToken, organizationId);
 		
 		return salesOrderApi;
 		
@@ -450,7 +450,7 @@ public class ZohoBooks
 	public PurchaseOrderApi getPurchaseOrderApi()
 	{
 		
-		PurchaseOrderApi purchaseOrderApi = new PurchaseOrderApi(authToken, organizationId);
+		PurchaseOrderApi purchaseOrderApi = new PurchaseOrderApi(accessToken, organizationId);
 		
 		return purchaseOrderApi;
 		
@@ -465,7 +465,7 @@ public class ZohoBooks
 	public VendorCreditsApi getVendorCreditsApi()
 	{
 		
-		VendorCreditsApi vendorCreditsApi = new VendorCreditsApi(authToken, organizationId);
+		VendorCreditsApi vendorCreditsApi = new VendorCreditsApi(accessToken, organizationId);
 		
 		return vendorCreditsApi;
 		

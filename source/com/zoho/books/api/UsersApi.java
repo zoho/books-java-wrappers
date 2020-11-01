@@ -40,18 +40,18 @@ public class UsersApi extends API
 	
 	/**
 	
-	* Construct a new UsersApi using user's authtoken and organizationid.
+	* Construct a new UsersApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public UsersApi(String authToken, String organizationId)
+	public UsersApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	
@@ -91,7 +91,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 	public UserList getUsers(HashMap<String, Object> queryMap)throws Exception
 	{
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 		
 		UserList userList = settingsParser.getUsers(response);
 		
@@ -118,7 +118,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+userId;
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		User user = settingsParser.getUser(response);
 		
@@ -143,7 +143,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/me"; //No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		User user = settingsParser.getUser(response);
 		
@@ -174,7 +174,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		requestBody.put("JSONString", user.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return settingsParser.getUser(response);
 	}
@@ -205,7 +205,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		requestBody.put("JSONString", user.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return settingsParser.getUser(response);
 	}
@@ -232,7 +232,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+userId;
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -261,7 +261,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+userId+"/invite"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -290,7 +290,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+userId+"/active"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String success = settingsParser.getMessage(response);
 		
@@ -319,7 +319,7 @@ Allowed Values: <i>name, email, user_role</i> and <i>status</i></td></tr>
 		
 		String urlString = url+"/"+userId+"/inactive"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String success = settingsParser.getMessage(response);
 		

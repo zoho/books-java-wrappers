@@ -20,28 +20,28 @@ public class API
 	
 		public static String baseURL = "https://books.zoho.com/api/v3";	//No I18N
 	
-		protected String authToken;
+		protected String accessToken;
 		
 		protected String organizationId;
 		
 		/**
-		 * Construct a new API using user's authToken and organizationId.
+		 * Construct a new API using access token and organization ID.
 		 * 
-		 * @param authToken User's authToken.
+		 * @param accessToken OAuth access token.
 		 * 
 		 * @param organizationId User's organizationId.
 		 */
 	
-		public API(String authToken, String organizationId)
+		public API(String accessToken, String organizationId)
 		{
-				this.authToken = authToken;
+				this.accessToken = accessToken;
 				
 				this.organizationId = organizationId;
 		}
 		
 		
 		/**
-		 * Construct a queryMap using user's authToken and organizationId.
+		 * Construct a queryMap containing organization_id.
 		 * 
 		 * @return Returns a HashMap.
 		 */
@@ -51,7 +51,6 @@ public class API
 			
 				HashMap<String, Object> queryMap = new HashMap<String, Object>();
 				
-				queryMap.put("authtoken", authToken);
 				queryMap.put("organization_id", organizationId);
 				
 				return queryMap;
@@ -60,7 +59,7 @@ public class API
 		
 		
 		/**
-		 * Construct a queryMap using user's authToken, organizationId and query string parameters.
+		 * Construct a queryMap with the provided query string parameters, and add organization_id.
 		 *  
 		 * @param queryMap This queryMap contains the query string parameters.
 		 * 
@@ -75,7 +74,6 @@ public class API
 						queryMap = new HashMap<String, Object>();
 				}
 				
-				queryMap.put("authtoken", authToken);
 				queryMap.put("organization_id", organizationId);
 				
 				return queryMap;

@@ -35,18 +35,18 @@ public class BaseCurrencyAdjustmentsApi extends API
 
 	/**
 	
-	* Construct a new BaseCurrencyAdjustmentsApi using user's authtoken and organizationid.
+	* Construct a new BaseCurrencyAdjustmentsApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public BaseCurrencyAdjustmentsApi(String authToken, String organizationId)
+	public BaseCurrencyAdjustmentsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	
@@ -87,7 +87,7 @@ public class BaseCurrencyAdjustmentsApi extends API
 		
 		String urlString = url+"/accounts"; //No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 		
 		BaseCurrencyAdjustment baseCurrencyAdjustment = baseCurrencyAdjustmentParser.getBaseCurrencyAdjustment(response);
 		
@@ -129,7 +129,7 @@ public class BaseCurrencyAdjustmentsApi extends API
 		
 		requestBody.put("JSONString", baseCurrencyAdjustment.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return baseCurrencyAdjustmentParser.getBaseCurrencyAdjustment(response);
 	}
@@ -154,7 +154,7 @@ public class BaseCurrencyAdjustmentsApi extends API
 		
 		String urlString = url+"/"+baseCurrencyAdjustmentId;
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		BaseCurrencyAdjustment baseCurrencyAdjustment = baseCurrencyAdjustmentParser.getBaseCurrencyAdjustment(response);
 		
@@ -183,7 +183,7 @@ public class BaseCurrencyAdjustmentsApi extends API
 		
 		String urlString = url+"/"+baseCurrencyAdjustmentId;
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = baseCurrencyAdjustmentParser.getMessage(response);
 		
@@ -221,7 +221,7 @@ Allowed Values: <i>adjustment_date, exchange_rate, currency_code, debit_or_credi
 	public BaseCurrencyAdjustmentList getBaseCurrencyAdjustments(HashMap<String, Object> queryMap)throws Exception
 	{
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 		
 		BaseCurrencyAdjustmentList baseCurrencyAdjustmentList = baseCurrencyAdjustmentParser.getBaseCurrencyAdjustments(response);
 		

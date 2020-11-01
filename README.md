@@ -30,11 +30,11 @@ In order to access the Zoho Books APIs, users need to have a valid Zoho account 
 
 For setting up a Zoho account, access the Zoho Books [Sign Up](https://www.zoho.com/books/signup) page and enter the requisite details - email address and password.
  
-## Generate Auth Token:
+## Generate OAuth Token:
 
 - - -
  
-To generate the Auth Token, you need to send an authentication request to Zoho Accounts in a prescribed URL format. [Refer here](https://www.zoho.com/books/api/v3/index.html) 
+To generate the OAuth Token, you need to send an authentication request to Zoho Accounts in a prescribed URL format. [Refer here](https://www.zoho.com/books/api/v3/#oauth) 
 
 
 ## **Java Wrappers - Sample**
@@ -70,17 +70,17 @@ Once you're done with importing the requisite classes, you'll have to proceed to
 
 Now, there are two ways of creating an instance of OrganisationsApi.
 
-1.) Pass the AuthToken and create a new OrganisationsApi instance. 
+1.) Pass the access token and create a new OrganisationsApi instance. 
 
 Sample code:
 
-			OrganizationsApi organizationsApi = new OrganizationsApi(authtoken);
-2.) Pass the AuthToken and organisations id to first create an instance of ZohoBooks, and then proceed to get the instance of Organisations API. 
+			OrganizationsApi organizationsApi = new OrganizationsApi(accessToken);
+2.) Pass the access token and organisations id to first create an instance of ZohoBooks, and then proceed to get the instance of Organisations API. 
 
 Sample code:
 
 			ZohoBooks service = new ZohoBooks();        
-			service.initialize("{auth_token}", "{organization_id}");        
+			service.initialize("{access_token}", "{organization_id}");
 			OrganizationsApi organizationsApi = service.getOrganizationsApi();
 
 ## Create a new organization:			

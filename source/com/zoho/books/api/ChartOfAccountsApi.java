@@ -50,18 +50,18 @@ public class ChartOfAccountsApi extends API
 
 	/**
 	
-	* Construct a new ChartOfAccountsApi using user's authtoken and organizationid.
+	* Construct a new ChartOfAccountsApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public ChartOfAccountsApi(String authToken, String organizationId)
+	public ChartOfAccountsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	
@@ -93,7 +93,7 @@ public class ChartOfAccountsApi extends API
 		
 		requestBody.put("JSONString", chartOfAccount.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return chartOfAccountParser.getChartOfAccount(response);
 		
@@ -119,7 +119,7 @@ public class ChartOfAccountsApi extends API
 		
 		String urlString = url+"/"+accountId;
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		ChartOfAccount chartOfAccount = chartOfAccountParser.getChartOfAccount(response);
 		
@@ -152,7 +152,7 @@ public class ChartOfAccountsApi extends API
 		
 		requestBody.put("JSONString", chartOfAccount.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return chartOfAccountParser.getChartOfAccount(response);
 		
@@ -180,7 +180,7 @@ public class ChartOfAccountsApi extends API
 		
 		String urlString = url+"/"+accountId;
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = chartOfAccountParser.getMessage(response);
 		
@@ -209,7 +209,7 @@ public class ChartOfAccountsApi extends API
 		
 		String urlString = url+"/"+accountId+"/inactive"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String success = chartOfAccountParser.getMessage(response);
 		
@@ -238,7 +238,7 @@ public class ChartOfAccountsApi extends API
 		
 		String urlString = url+"/"+accountId+"/active"; //No I18N
 		
-		String response = ZohoHTTPClient.post(urlString, getQueryMap());
+		String response = ZohoHTTPClient.post(urlString, getQueryMap(), accessToken);
 		
 		String success = chartOfAccountParser.getMessage(response);
 		
@@ -276,7 +276,7 @@ Allowed Values: <i>account_name</i> and <i>account_type</i></td></tr>
 	public ChartOfAccountList getChartOfAccounts(HashMap<String, Object> queryMap)throws Exception
 	{
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 		
 		ChartOfAccountList chartOfAccountList = chartOfAccountParser.getChartOfAccounts(response);
 		
@@ -327,7 +327,7 @@ Allowed Values: <i>transaction_date, payee, glname, transaction_type_formatted, 
 		
 		String urlString = url+"/transactions"; //No I18N
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(queryMap), accessToken);
 		
 		TransactionList transactionList = chartOfAccountParser.getTransactions(response);
 		
@@ -356,7 +356,7 @@ Allowed Values: <i>transaction_date, payee, glname, transaction_type_formatted, 
 		
 		String urlString = url+"/transactions/"+transactionId; //No I18N
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		String success = chartOfAccountParser.getMessage(response);
 		

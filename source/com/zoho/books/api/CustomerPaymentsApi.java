@@ -35,18 +35,18 @@ public class CustomerPaymentsApi extends API
 
 	/**
 	
-	* Construct a new CustomerPaymentsApi using user's authtoken and organizationid.
+	* Construct a new CustomerPaymentsApi using user's accessToken and organizationid.
 	
-	* @param authToken user's authToken. 
+	* @param accessToken user's accessToken.
 	
 	* @param organizationId user's organization id.
 	
 	*/
 
-	public CustomerPaymentsApi(String authToken, String organizationId)
+	public CustomerPaymentsApi(String accessToken, String organizationId)
 	{
 		
-		super(authToken, organizationId);
+		super(accessToken, organizationId);
 		
 	}
 	
@@ -79,7 +79,7 @@ public class CustomerPaymentsApi extends API
 		
 		requestBody.put("JSONString", customerPayment.toJSON().toString());
 		
-		String response = ZohoHTTPClient.post(url, requestBody);
+		String response = ZohoHTTPClient.post(url, requestBody, accessToken);
 		
 		return customerPaymentParser.getCustomerPayment(response);
 	}
@@ -104,7 +104,7 @@ public class CustomerPaymentsApi extends API
 		
 		String urlString = url+"/"+paymentId;
 		
-		String response = ZohoHTTPClient.get(urlString, getQueryMap());
+		String response = ZohoHTTPClient.get(urlString, getQueryMap(), accessToken);
 		
 		CustomerPayment customerPayment = customerPaymentParser.getCustomerPayment(response);
 		
@@ -136,7 +136,7 @@ public class CustomerPaymentsApi extends API
 		
 		requestBody.put("JSONString", customerPayment.toJSON().toString());
 		
-		String response = ZohoHTTPClient.put(urlString, requestBody);
+		String response = ZohoHTTPClient.put(urlString, requestBody, accessToken);
 		
 		return customerPaymentParser.getCustomerPayment(response);
 	}
@@ -163,7 +163,7 @@ public class CustomerPaymentsApi extends API
 		
 		String urlString = url+"/"+paymentId;
 		
-		String response = ZohoHTTPClient.delete(urlString, getQueryMap());
+		String response = ZohoHTTPClient.delete(urlString, getQueryMap(), accessToken);
 		
 		JSONObject jsonObject = new JSONObject(response.trim());
 		
@@ -230,7 +230,7 @@ Allowed Values: <i>customer_name, unused_amount, amount, bcy_amount, date, refer
 	public CustomerPaymentList getCustomerPayments(HashMap<String, Object> queryMap)throws Exception
 	{
 		
-		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap));
+		String response = ZohoHTTPClient.get(url, getQueryMap(queryMap), accessToken);
 		
 		CustomerPaymentList customerPaymentList = customerPaymentParser.getCustomerPayments(response);
 		

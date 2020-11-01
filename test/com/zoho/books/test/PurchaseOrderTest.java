@@ -23,7 +23,7 @@ public class PurchaseOrderTest
 	public static void main(String[] args)throws Exception
 	{
 		
-		PurchaseOrderApi purchaseOrderApi = new PurchaseOrderApi("{auth_token}", "{organization_id}");	//No I18N
+		PurchaseOrderApi purchaseOrderApi = new PurchaseOrderApi("{access_token}", "{organization_id}");	//No I18N
 		
 		try 
 		{

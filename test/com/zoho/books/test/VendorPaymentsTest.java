@@ -22,7 +22,7 @@ public class VendorPaymentsTest
 	public static void main(String[] args)throws Exception
 	{
 		ZohoBooks service = new ZohoBooks();
-		service.initialize("{auth_token}", "{organization_id}");	//No I18N
+		service.initialize("{access_token}", "{organization_id}");	//No I18N
 	
 		VendorPaymentsApi vendorPaymentsApi = service.getVendorPaymentsApi();
 		

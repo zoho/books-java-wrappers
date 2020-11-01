@@ -47,7 +47,7 @@ public class ContactsApiTest
 	public static void main(String[] args)throws Exception
 	{
 		ZohoBooks service = new ZohoBooks();
-		service.initialize("{auth_token}", "{organization_id}");	//No I18N
+		service.initialize("{access_token}", "{organization_id}");	//No I18N
 	
 		ContactsApi contactsApi = service.getContactsApi();
 		
