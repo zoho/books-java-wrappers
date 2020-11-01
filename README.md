@@ -30,11 +30,11 @@ In order to access the Zoho Books APIs, users need to have a valid Zoho account 
 
 For setting up a Zoho account, access the Zoho Books [Sign Up](https://www.zoho.com/books/signup) page and enter the requisite details - email address and password.
  
-## Generate Auth Token:
+## Generate OAuth Token:
 
 - - -
  
-To generate the Auth Token, you need to send an authentication request to Zoho Accounts in a prescribed URL format. [Refer here](https://www.zoho.com/books/api/v3/index.html) 
+To generate the OAuth Token, you need to send an authentication request to Zoho Accounts in a prescribed URL format. [Refer here](https://www.zoho.com/books/api/v3/#oauth) 
 
 
 ## **Java Wrappers - Sample**
